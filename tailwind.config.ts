@@ -13,7 +13,7 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-          art : 'url("/img/62fb5a0685be150d73280955_the checklist manifesto.png")'
+          art : 'url("/img/60.customer-satisfaction-survey-concept-businessman-touching-smiley-face-icon-with-yellow-five-stars-correct-mark-evaluate-product-service_50039-2495.jpg")'
       },
       fontFamily : {
         "yekan" : "yekan"

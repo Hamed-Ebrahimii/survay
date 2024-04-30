@@ -8,7 +8,7 @@ import QueryProvider from "@/provider/reactQuery";
 export default async function Home() {
   const survays = await getAllSurvay()
   return (
-    <div className="bg-art w-screen h-screen flex items-center justify-center px-5 bg-no-repeat bg-right">
+    <div className="bg-art w-screen h-screen flex items-center justify-center px-5 bg-no-repeat bg-cover bg-right">
       <QueryProvider>
           <BoxForm surveys={survays.data}/>
       </QueryProvider>

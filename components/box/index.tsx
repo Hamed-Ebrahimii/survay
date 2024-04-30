@@ -16,7 +16,7 @@ const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
     setValue(newValue);
   };
   return (
-    <div className="glass w-1/4 px-4 py-5 rounded-xl">
+    <div className="glass w-1/4 px-4 py-5 rounded-xl min-h-[561px]">
       <div className="w-full flex items-center gap-2">
         <Image
           src="/img/avatar.png"
@@ -41,7 +41,7 @@ const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
           >
             {surveys.map((item) => (
               <Tab
-                style={{ fontFamily: "yekan", fontWeight: "bold" }}
+                style={{ fontFamily: "yekan", fontWeight: "bold" , color : 'white' }}
                 key={item.id}
                 label={item.title}
                 value={`${item.id + 1}`}
