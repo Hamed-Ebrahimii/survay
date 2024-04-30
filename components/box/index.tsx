@@ -82,6 +82,11 @@ const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
         <Button
           color="info"
           variant="contained"
+          sx={
+            {
+              fontFamily : "yekan"
+            }
+          }
           onClick={() => pagination(value - 1)}
         >
           سوال قبلی
@@ -89,6 +94,9 @@ const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
         <Button
           color="info"
           variant="contained"
+          sx={{
+            fontFamily : 'yekan'
+          }}
           onClick={() => pagination(value + 1)}
           disabled={surveys[value]?.requierd}
         >
