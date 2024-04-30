@@ -22,7 +22,8 @@
           "answer": "بعد صبحانه"
         }
       ],
-      "requierd" : false
+      "requierd" : false,
+      "type" : "button"
     },
     {
       "id": 1,
@@ -46,7 +47,8 @@
           "answer": "بیشتر از بار"
         }
       ],
-      "requierd" : true
+      "requierd" : true,
+      "type" : "radioButton"
     },
     {
       "id": 2,
@@ -61,7 +63,8 @@
           "answer": "خیر"
         }
       ],
-      "requierd" : false
+      "requierd" : false,
+      "type" : "text"
     },
     {
       "id": 3,
@@ -76,7 +79,8 @@
           "answer": "خیر"
         }
       ],
-      "requierd" : true
+      "requierd" : true,
+      "type" : "text"
     },
     {
       "id": 4,
@@ -96,7 +100,8 @@
           "answer": "نحوه ارسال"
         }
       ],
-      "requierd" : true
+      "requierd" : true,
+      "type" : "text"
     }
   ]
 }

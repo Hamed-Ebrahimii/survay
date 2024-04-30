@@ -13,7 +13,7 @@ const Form = ({answers , id , question , title , handleAnswer} : Iprops ) =>{
             </p>
             <div className="w-full grid grid-cols-1 gap-5 mt-12">
                 {
-                    answers.map(item => <Btn key={item.id} answer={item.answer} id={item.id} handleClick={handleAnswer}/>)
+                    answers?.map(item => <Btn key={item.id} answer={item.answer} id={item.id} handleClick={handleAnswer}/>)
                 }
             </div>
         </form>

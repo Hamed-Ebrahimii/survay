@@ -5,7 +5,7 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Survay } from "@/types/survay";
 import Form from "../form";
