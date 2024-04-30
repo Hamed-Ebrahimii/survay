@@ -7,5 +7,5 @@ export interface Survay {
             "id" : number ,
             "answer" : string
         }[]
-    
+        requierd : boolean
 }

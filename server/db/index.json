@@ -21,7 +21,8 @@
           "id": 3,
           "answer": "بعد صبحانه"
         }
-      ]
+      ],
+      "requierd" : false
     },
     {
       "id": 1,
@@ -44,7 +45,8 @@
           "id": 3,
           "answer": "بیشتر از بار"
         }
-      ]
+      ],
+      "requierd" : true
     },
     {
       "id": 2,
@@ -58,7 +60,8 @@
           "id": 1,
           "answer": "خیر"
         }
-      ]
+      ],
+      "requierd" : false
     },
     {
       "id": 3,
@@ -72,7 +75,8 @@
           "id": 1,
           "answer": "خیر"
         }
-      ]
+      ],
+      "requierd" : true
     },
     {
       "id": 4,
@@ -91,7 +95,8 @@
           "id": 2,
           "answer": "نحوه ارسال"
         }
-      ]
+      ],
+      "requierd" : true
     }
   ]
 }
