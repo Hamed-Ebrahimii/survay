@@ -12,18 +12,17 @@ import Form from "../form";
 import { Button } from "@mui/material";
 const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
   const [value, setValue] = useState<number>(0);
-  const [answers , setAnswers ] = useState<number[]>([]) 
+  const [answers, setAnswers] = useState<number[]>([]);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
-    
   };
-  const handleAnswer = (id : number) =>{
-    setAnswers([...answers , id])
-    setValue(value + 1)
-  }
-  const pagination = (value : number) =>{
-    setValue(value)
-  }
+  const handleAnswer = (id: number) => {
+    setAnswers([...answers, id]);
+    setValue(value + 1);
+  };
+  const pagination = (value: number) => {
+    setValue(value);
+  };
   return (
     <div className="glass w-1/4 px-4 py-5 rounded-xl min-h-[561px] relative">
       <div className="w-full flex items-center gap-2 absolute -top-9">
@@ -38,14 +37,14 @@ const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
           <p className="text-white font-medium font-mono">hamed ebrahimi</p>
         </div>
       </div>
-        <div className="my-7 w-full">
-              <h1 className="text-xl font-medium text-white flex items-center justify-center">
-                  نظرسنجی محصول موبایل
-              </h1>
-        </div>
+      <div className="my-7 w-full">
+        <h1 className="text-xl font-medium text-white flex items-center justify-center">
+          نظرسنجی محصول موبایل
+        </h1>
+      </div>
       <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }} >
-          <TabList 
+        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <TabList
             onChange={handleChange}
             aria-label="lab API tabs example"
             variant="scrollable"
@@ -55,7 +54,12 @@ const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
           >
             {surveys.map((item) => (
               <Tab
-                style={{ fontFamily: "yekan", fontWeight: "bold" , color : 'white' }}
+                style={{
+                  fontFamily: "yekan",
+                  fontWeight: "bold",
+                  color: "white",
+                }}
+                disabled={surveys[value]?.requierd}
                 key={item.id}
                 label={item.title}
                 value={item.id}
@@ -70,17 +74,26 @@ const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
             // @ts-ignore: Unreachable code error
             value={item.id}
           >
-            <Form handleAnswer={handleAnswer} {...item}/>
+            <Form handleAnswer={handleAnswer} {...item} />
           </TabPanel>
         ))}
       </TabContext>
       <div className="w-full flex items-center justify-between my-4">
-          <Button color="info" variant="contained" onClick={()=> pagination(value - 1)} >
-              سوال قبلی
-          </Button>
-          <Button color="info" variant="contained" onClick={()=> pagination(value + 1)} disabled={surveys[value]?.requierd}>
-              سوال بعدی
-          </Button>
+        <Button
+          color="info"
+          variant="contained"
+          onClick={() => pagination(value - 1)}
+        >
+          سوال قبلی
+        </Button>
+        <Button
+          color="info"
+          variant="contained"
+          onClick={() => pagination(value + 1)}
+          disabled={surveys[value]?.requierd}
+        >
+          سوال بعدی
+        </Button>
       </div>
     </div>
   );
