@@ -3,9 +3,10 @@ import Btn from "./components/btn";
 import { MenuItem, Select } from "@mui/material";
 import Input from "../input";
 import { Controller, useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Context, InitialState } from "@/context/inedx";
 interface Iprops extends Survay {
-  handleAnswer: (value: number) => void;
+  handleAnswer: (value: string) => void;
   handleDisabled: (value: boolean) => void;
 }
 interface Answer {
@@ -20,6 +21,7 @@ const Form = ({
   type,
   handleDisabled,
 }: Iprops) => {
+    
   const [onChange, setOnChange] = useState(false);
   const {
     control,
@@ -32,6 +34,8 @@ const Form = ({
   useEffect(() => {
     if (getValues("answer")) {
       handleDisabled(false);
+      console.log(getValues('answer'));
+      
     }
   }, [onChange]);
   return (
@@ -48,7 +52,7 @@ const Form = ({
               key={item.id}
               answer={item.answer}
               id={String(item.id)}
-              onClick={() => handleAnswer(id)}
+              onClick={() => handleAnswer(item.answer)}
             />
           ))}
         {type === "drowpDown" && (
@@ -81,7 +85,7 @@ const Form = ({
         )}
         {type !== "drowpDown" &&
           type !== "button" &&
-          type !== 'textarea' &&
+          type !== "textarea" &&
           answers?.map((item) => (
             <div className="flex gap-2 items-center w-full" key={item.id}>
               <label

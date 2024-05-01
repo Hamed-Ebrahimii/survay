@@ -5,7 +5,7 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Survay } from "@/types/survay";
 import Form from "../form";
@@ -14,15 +14,20 @@ import Btn from "../form/components/btn";
 import { useRouter } from "next/navigation";
 
 import { Answers } from "@/types/answers";
+import { Context, InitialState } from "@/context/inedx";
 const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
   const [value, setValue] = useState<number>(0);
   const [answers, setAnswers] = useState<Answers[]>([]);
   const [disabled, setDisabled] = useState(true);
+  //@ts-ignore
+  const {setState , state} : InitialState = useContext(Context)
   const router = useRouter();
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-  const handleAnswer = (id: number) => {
+  const handleAnswer = (answer: string) => {
+    console.log(state);
+    
     if (value + 1 > surveys.length) {
       toast("ممنون بابت مشارکت شما ", {
         type: "info",
@@ -36,11 +41,23 @@ const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
     setAnswers([
       ...answers,
       {
-        answerId: id,
+        answer: answer,
         questionId: surveys[value].id,
       },
     ]);
     setValue(Number(value + 1));
+    setState([
+      ...state,
+      {
+        answer: answer,
+        questionId: surveys[value].id,
+      }
+    ])
+    console.log({
+      answer: answer,
+      questionId: surveys[value].id,
+    });
+    
   };
   const pagination = (value: number) => {
     if (value + 1 > surveys.length) {
@@ -67,7 +84,7 @@ const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
   return (
     <>
       <ToastContainer rtl />
-      <div className="glass w-1/4 px-4 py-5 rounded-xl min-h-[561px] relative">
+      <div className="glass w-1/4 px-4 py-5 rounded-xl min-h-[561px] relative flex flex-col">
         <div className="w-full flex items-center gap-2 absolute -top-9">
           <Image
             src="/img/avatar.png"
@@ -85,48 +102,48 @@ const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
             نظرسنجی محصول موبایل
           </h1>
         </div>
-        <TabContext value={Number(value)}>
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <TabList
-              onChange={handleChange}
-              aria-label="lab API tabs example"
-              variant="scrollable"
-              indicatorColor="primary"
-              scrollButtons={false}
-              textColor="inherit"
-            >
-              {surveys.map((item) => (
-                <Tab
-                  style={{
-                    fontFamily: "yekan",
-                    fontWeight: "bold",
-                    color: "white",
-                  }}
-                  disabled={
-                    true
-                  }
-                  key={item.id}
-                  label={item.title}
-                  value={item.id}
+        <div className="flex-1">
+          <TabContext value={Number(value)}>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <TabList
+                onChange={handleChange}
+                aria-label="lab API tabs example"
+                variant="scrollable"
+                indicatorColor="primary"
+                scrollButtons={false}
+                textColor="inherit"
+              >
+                {surveys.map((item) => (
+                  <Tab
+                    style={{
+                      fontFamily: "yekan",
+                      fontWeight: "bold",
+                      color: "white",
+                    }}
+                    disabled={true}
+                    key={item.id}
+                    label={item.title}
+                    value={item.id}
+                  />
+                ))}
+              </TabList>
+            </Box>
+            {surveys.map((item) => (
+              <TabPanel
+                key={item.id}
+                defaultChecked={item.id == 0}
+                // @ts-ignore: Unreachable code error
+                value={item.id}
+              >
+                <Form
+                  handleAnswer={handleAnswer}
+                  {...item}
+                  handleDisabled={setDisabled}
                 />
-              ))}
-            </TabList>
-          </Box>
-          {surveys.map((item) => (
-            <TabPanel
-              key={item.id}
-              defaultChecked={item.id == 0}
-              // @ts-ignore: Unreachable code error
-              value={item.id}
-            >
-              <Form
-                handleAnswer={handleAnswer}
-                {...item}
-                handleDisabled={setDisabled}
-              />
-            </TabPanel>
-          ))}
-        </TabContext>
+              </TabPanel>
+            ))}
+          </TabContext>
+        </div>
         <div className="w-full flex items-center justify-between my-4">
           <div>
             <Btn onClick={() => pagination(value - 1)}>سوال قبلی</Btn>
