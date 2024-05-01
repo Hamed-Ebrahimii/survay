@@ -131,7 +131,7 @@ const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
           <div>
             <Btn onClick={() => pagination(value - 1)}>سوال قبلی</Btn>
           </div>
-          <div>
+          <div className="min-w-[118px]">
             <Btn
               onClick={() => pagination(value + 1)}
               disabled={handleDisableBtn()}

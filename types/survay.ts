@@ -2,7 +2,7 @@ export interface Survay {
     "id" : number ,
     "title" : string ,
     "question" : string,
-    "type" : "text" | "button" | "radio" | "checkbox" | "drowpDown"
+    "type" : "text" | "button" | "radio" | "checkbox" | "drowpDown" | "textarea"
     "answers"? : 
         {
             "id" : number ,
