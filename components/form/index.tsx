@@ -1,12 +1,13 @@
 import { Survay } from "@/types/survay";
 import Btn from "./components/btn";
-import { MenuItem, Select } from "@mui/material";
+import { Button, MenuItem, Select } from "@mui/material";
 import Input from "../input";
 import { Controller, useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { debounce } from "@/tools/debounce";
+import { Context, InitialState } from "@/context/inedx";
 interface Iprops extends Survay {
-  handleAnswer: (value: string) => void;
+  handleTabs: (value: number) => void;
   handleDisabled: (value: boolean) => void;
 }
 interface Answer {
@@ -17,53 +18,55 @@ const Form = ({
   id,
   question,
   title,
-  handleAnswer,
+  handleTabs,
   type,
   handleDisabled,
 }: Iprops) => {
   const [onChange, setOnChange] = useState(false);
+  // @ts-ignore
+  const { state, setState }: InitialState = useContext(Context);
   const {
     control,
-    getValues,
     handleSubmit,
     formState: { errors },
   } = useForm<Answer>({
     mode: "all",
   });
+  const onSubmit = (data: Answer) => {
+    const findeIndex = state.findIndex((item) => item.id === id);
+    const find = state.find((item) => item.id === id);
+    find!.userAnswer = data.answer;
+    find && state.splice(findeIndex, 1, find);
+    setState([...state]);
+
+    handleTabs(1);
+  };
   useEffect(() => {
-    if (getValues("answer")) {
-      handleDisabled(false);
-      handleAnswer(getValues("answer"));
-    }
-  }, [onChange]);
+    console.log(errors.answer?.message);
+  }, [errors.answer]);
   return (
-    <form
-      onSubmit={handleSubmit(() => {})}
-      className="w-full"
-      onChange={() => setOnChange(!onChange)}
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full">
       <p className="text-xl font-medium text-white font-yekan">{question}</p>
       <div className="w-full grid grid-cols-1 gap-5 mt-12">
         {type === "button" &&
           answers?.map((item) => (
             <Controller
-            control={control}
-            name="answer"
-            key={item.id}
-            render={({field})=>(
+              control={control}
+              name="answer"
+              key={item.id}
+              render={({ field }) => (
                 <input
-            className="w-full btn btn-info  rounded-lg py-3 px-5 text-white font-medium text-lg focus:border-2"
-            type="button"
-            
-              value={item.answer}
-              id={String(item.id)}
-              onClick={(e) => {
-                  //@ts-ignore
-                  setOnChange(!onChange)
-              
-                field.onChange(e.target.value)}}
-            />
-            )}
+                  className="w-full btn btn-info  rounded-lg py-3 px-5 text-white font-medium text-lg focus:border-2"
+                  type="button"
+                  value={item.answer}
+                  id={String(item.id)}
+                  onClick={(e) => {
+                    //@ts-ignore
+                    field.onChange(e.target.value);
+                    console.log(errors);
+                  }}
+                />
+              )}
             />
           ))}
         {type === "drowpDown" && (
@@ -78,7 +81,10 @@ const Form = ({
                   color: "#666",
                   fontFamily: "yekan",
                 }}
-                {...field}
+                onChange={(e) => {
+                  setOnChange(!onChange);
+                  field.onChange(e.target.value);
+                }}
               >
                 {answers?.map((item, index) => (
                   <MenuItem
@@ -112,15 +118,14 @@ const Form = ({
                   <Input
                     type={type}
                     onChange={(e) => {
-                      if (type === "text") {
-                        debounce(3000 , ()=> field.onChange(e.target.value))
-                        return
-                      }
-                      field.onChange(e.target.value)
+                    console.log(e.target.value);
+                    
+                      field.onChange(e.target.value);
                     }}
                     placeholder={item.answer}
                     value={type !== "text" ? item.answer : undefined}
                     id={item.answer}
+                    name="answer"
                   />
                 )}
               />
@@ -132,14 +137,17 @@ const Form = ({
             name="answer"
             render={({ field }) => (
               <textarea
-                onChange={(e)=>{
-                    debounce(3000 , ()=> field.onChange(e.target.value))
+                onChange={(e) => {
+                  debounce(3000, () => field.onChange(e.target.value));
                 }}
                 className="textarea textarea-info font-yekan"
               ></textarea>
             )}
           />
         )}
+      </div>
+      <div className="w-1/6 my-5">
+        <Btn type="submit">تایید</Btn>
       </div>
     </form>
   );

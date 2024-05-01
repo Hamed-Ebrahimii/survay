@@ -19,13 +19,11 @@ const BoxForm = () => {
   const [disabled, setDisabled] = useState(true);
   //@ts-ignore
   const { setState, state: surveys }: InitialState = useContext(Context);
-  const router = useRouter();
+  
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-  const handleAnswer = (answer: string) => {
-    
-    
+  const handleAnswer = (value : number) => {
     if (value + 1 > surveys.length) {
       toast("ممنون بابت مشارکت شما ", {
         type: "info",
@@ -116,9 +114,7 @@ const BoxForm = () => {
               >
                 {/* @ts-ignore: Unreachable code error */}
                 <Form
-                  question={""}
-                  type={"button"}
-                  handleAnswer={handleAnswer}
+                  handleTabs={handleAnswer}
                   {...item}
                   handleDisabled={setDisabled}
                 />
@@ -128,7 +124,7 @@ const BoxForm = () => {
         </div>
         <div className="w-full flex items-center justify-between my-4">
           <div>
-            <Btn onClick={() => pagination(value - 1)}>سوال قبلی</Btn>
+            <Btn disabled={value <= 0} onClick={() => pagination(value - 1)}>سوال قبلی</Btn>
           </div>
           <div className="min-w-[118px]">
             <Btn

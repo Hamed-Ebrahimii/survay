@@ -4,8 +4,8 @@ import { Answers } from "@/types/answers";
 import { Survay } from "@/types/survay";
 import { Dispatch, ReactNode, SetStateAction, createContext, useState } from "react";
 export interface InitialState  {
-    state: Answers[],
-    setState:  Dispatch<SetStateAction<Answers[]>>,
+    state: Survay[],
+    setState:  Dispatch<SetStateAction<Survay[]>>,
   };
 export const Context = createContext({});
 const ContextProvider = ({ children , survey }: { children: ReactNode , survey : Survay[] }) => {
