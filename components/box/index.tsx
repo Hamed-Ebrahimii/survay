@@ -16,7 +16,6 @@ import { Answers } from "@/types/answers";
 import { Context, InitialState } from "@/context/inedx";
 const BoxForm = () => {
   const [value, setValue] = useState<number>(0);
-
   const [disabled, setDisabled] = useState(true);
   //@ts-ignore
   const { setState, state: surveys }: InitialState = useContext(Context);
@@ -25,6 +24,8 @@ const BoxForm = () => {
     setValue(newValue);
   };
   const handleAnswer = (answer: string) => {
+    
+    
     if (value + 1 > surveys.length) {
       toast("ممنون بابت مشارکت شما ", {
         type: "info",
@@ -35,6 +36,7 @@ const BoxForm = () => {
       });
       return;
     }
+    setValue(value + 1)
   };
   const pagination = (value: number) => {
     if (value + 1 > surveys.length) {
@@ -112,7 +114,10 @@ const BoxForm = () => {
                 // @ts-ignore: Unreachable code error
                 value={item.id}
               >
+                {/* @ts-ignore: Unreachable code error */}
                 <Form
+                  question={""}
+                  type={"button"}
                   handleAnswer={handleAnswer}
                   {...item}
                   handleDisabled={setDisabled}

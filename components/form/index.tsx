@@ -46,11 +46,24 @@ const Form = ({
       <div className="w-full grid grid-cols-1 gap-5 mt-12">
         {type === "button" &&
           answers?.map((item) => (
-            <Btn
-              key={item.id}
-              answer={item.answer}
+            <Controller
+            control={control}
+            name="answer"
+            key={item.id}
+            render={({field})=>(
+                <input
+            className="w-full btn btn-info  rounded-lg py-3 px-5 text-white font-medium text-lg focus:border-2"
+            type="button"
+            
+              value={item.answer}
               id={String(item.id)}
-              onClick={() => handleAnswer(item.answer)}
+              onClick={(e) => {
+                  //@ts-ignore
+                  setOnChange(!onChange)
+              
+                field.onChange(e.target.value)}}
+            />
+            )}
             />
           ))}
         {type === "drowpDown" && (

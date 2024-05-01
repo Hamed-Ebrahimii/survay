@@ -10,7 +10,7 @@ export default async function Home() {
   return (
     <div className="bg-art w-screen h-screen flex items-center justify-center px-5 bg-no-repeat bg-cover bg-right">
       <QueryProvider>
-        <ContextProvider>
+        <ContextProvider survey={survays.data}>
           <BoxForm  />
         </ContextProvider>
       </QueryProvider>
