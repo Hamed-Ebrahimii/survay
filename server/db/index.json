@@ -48,7 +48,7 @@
         }
       ],
       "requierd" : true,
-      "type" : "radioButton"
+      "type" : "radio"
     },
     {
       "id": 2,
@@ -64,7 +64,7 @@
         }
       ],
       "requierd" : false,
-      "type" : "text"
+      "type" : "radio"
     },
     {
       "id": 3,
@@ -80,7 +80,7 @@
         }
       ],
       "requierd" : true,
-      "type" : "text"
+      "type" : "drowpDown"
     },
     {
       "id": 4,
@@ -101,7 +101,7 @@
         }
       ],
       "requierd" : true,
-      "type" : "text"
+      "type" : "checkbox"
     }
   ]
 }

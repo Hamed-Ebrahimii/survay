@@ -11,7 +11,7 @@ const Btn = ( props : Iprops) => {
             {
                 fontFamily : 'yekan'
             }
-        } type="button" variant="contained" color="info" className="w-full border border-slate-200 rounded-lg py-3 px-5 text-white font-medium text-lg" onClick={props.onClick}>
+        } type="button" disabled={props.disabled} variant="contained" color="info" className="w-full border border-slate-200 rounded-lg py-3 px-5 text-white font-medium text-lg" onClick={props.onClick}>
                 {props.answer || props.children}
         </Button>
     )

@@ -12,16 +12,18 @@ import Form from "../form";
 import "react-toastify/dist/ReactToastify.css";
 import Btn from "../form/components/btn";
 import { useRouter } from "next/navigation";
-import { log } from "console";
+
+import { Answers } from "@/types/answers";
 const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
   const [value, setValue] = useState<number>(0);
-  const [answers, setAnswers] = useState<number[]>([]);
+  const [answers, setAnswers] = useState<Answers[]>([]);
+  const [disabled, setDisabled] = useState(true);
   const router = useRouter();
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
   const handleAnswer = (id: number) => {
-    if (value + 1 >= surveys.length) {
+    if (value + 1 > surveys.length) {
       toast("ممنون بابت مشارکت شما ", {
         type: "info",
         position: "top-right",
@@ -31,11 +33,17 @@ const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
       });
       return;
     }
-    setAnswers([...answers, id]);
+    setAnswers([
+      ...answers,
+      {
+        answerId: id,
+        questionId: surveys[value].id,
+      },
+    ]);
     setValue(Number(value + 1));
   };
   const pagination = (value: number) => {
-    if (value + 1 >= surveys.length) {
+    if (value + 1 > surveys.length) {
       toast("ممنون بابت مشارکت شما ", {
         type: "info",
         position: "top-right",
@@ -46,6 +54,15 @@ const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
       return;
     }
     setValue(value);
+  };
+  const handleDisableBtn = () => {
+    if (surveys[value].requierd) {
+      if (disabled) {
+        return true;
+      }
+      return false;
+    }
+    return false;
   };
   return (
     <>
@@ -68,7 +85,7 @@ const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
             نظرسنجی محصول موبایل
           </h1>
         </div>
-        <TabContext value={String(value)}>
+        <TabContext value={Number(value)}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList
               onChange={handleChange}
@@ -102,7 +119,11 @@ const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
               // @ts-ignore: Unreachable code error
               value={item.id}
             >
-              <Form handleAnswer={handleAnswer} {...item} />
+              <Form
+                handleAnswer={handleAnswer}
+                {...item}
+                handleDisabled={setDisabled}
+              />
             </TabPanel>
           ))}
         </TabContext>
@@ -113,7 +134,7 @@ const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
           <div>
             <Btn
               onClick={() => pagination(value + 1)}
-              disabled={surveys[value]?.requierd}
+              disabled={handleDisableBtn()}
             >
               {value + 1 >= surveys.length ? "پایان" : "  سوال بعدی"}
             </Btn>
