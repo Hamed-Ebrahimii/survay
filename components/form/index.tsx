@@ -3,8 +3,8 @@ import Btn from "./components/btn";
 import { MenuItem, Select } from "@mui/material";
 import Input from "../input";
 import { Controller, useForm } from "react-hook-form";
-import { useContext, useEffect, useState } from "react";
-import { Context, InitialState } from "@/context/inedx";
+import { useEffect, useState } from "react";
+import { debounce } from "@/tools/debounce";
 interface Iprops extends Survay {
   handleAnswer: (value: string) => void;
   handleDisabled: (value: boolean) => void;
@@ -21,7 +21,6 @@ const Form = ({
   type,
   handleDisabled,
 }: Iprops) => {
-    
   const [onChange, setOnChange] = useState(false);
   const {
     control,
@@ -34,8 +33,7 @@ const Form = ({
   useEffect(() => {
     if (getValues("answer")) {
       handleDisabled(false);
-      console.log(getValues('answer'));
-      
+      handleAnswer(getValues("answer"));
     }
   }, [onChange]);
   return (
@@ -100,7 +98,13 @@ const Form = ({
                 render={({ field }) => (
                   <Input
                     type={type}
-                    {...field}
+                    onChange={(e) => {
+                      if (type === "text") {
+                        debounce(3000 , ()=> field.onChange(e.target.value))
+                        return
+                      }
+                      field.onChange(e.target.value)
+                    }}
                     placeholder={item.answer}
                     value={type !== "text" ? item.answer : undefined}
                     id={item.answer}
@@ -115,7 +119,9 @@ const Form = ({
             name="answer"
             render={({ field }) => (
               <textarea
-                {...field}
+                onChange={(e)=>{
+                    debounce(3000 , ()=> field.onChange(e.target.value))
+                }}
                 className="textarea textarea-info font-yekan"
               ></textarea>
             )}

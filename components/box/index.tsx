@@ -12,22 +12,19 @@ import Form from "../form";
 import "react-toastify/dist/ReactToastify.css";
 import Btn from "../form/components/btn";
 import { useRouter } from "next/navigation";
-
 import { Answers } from "@/types/answers";
 import { Context, InitialState } from "@/context/inedx";
-const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
+const BoxForm = () => {
   const [value, setValue] = useState<number>(0);
-  const [answers, setAnswers] = useState<Answers[]>([]);
+
   const [disabled, setDisabled] = useState(true);
   //@ts-ignore
-  const {setState , state} : InitialState = useContext(Context)
+  const { setState, state: surveys }: InitialState = useContext(Context);
   const router = useRouter();
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
   const handleAnswer = (answer: string) => {
-    console.log(state);
-    
     if (value + 1 > surveys.length) {
       toast("ممنون بابت مشارکت شما ", {
         type: "info",
@@ -38,26 +35,6 @@ const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
       });
       return;
     }
-    setAnswers([
-      ...answers,
-      {
-        answer: answer,
-        questionId: surveys[value].id,
-      },
-    ]);
-    setValue(Number(value + 1));
-    setState([
-      ...state,
-      {
-        answer: answer,
-        questionId: surveys[value].id,
-      }
-    ])
-    console.log({
-      answer: answer,
-      questionId: surveys[value].id,
-    });
-    
   };
   const pagination = (value: number) => {
     if (value + 1 > surveys.length) {
@@ -73,7 +50,7 @@ const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
     setValue(value);
   };
   const handleDisableBtn = () => {
-    if (surveys[value].requierd) {
+    if (surveys[value]?.requierd) {
       if (disabled) {
         return true;
       }
