@@ -103,7 +103,7 @@ const BoxForm = ({ surveys }: { surveys: Survay[] }) => {
                     color: "white",
                   }}
                   disabled={
-                    surveys[value]?.requierd && surveys[value].id <= item.id
+                    true
                   }
                   key={item.id}
                   label={item.title}

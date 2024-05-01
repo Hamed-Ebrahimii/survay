@@ -17,7 +17,7 @@ const Form = ({ answers, id, question, title, handleAnswer, type , handleDisable
             mode : 'all'
    })
    useEffect(()=>{
-       console.log(getValues('answer') , errors  );
+      
     if(getValues('answer')){
         handleDisabled(false)
     }
@@ -42,10 +42,11 @@ const Form = ({ answers, id, question, title, handleAnswer, type , handleDisable
           render={({field})=>(
             <Select dir="rtl" sx={{
                 backgroundColor : 'white',
-                color : '#666'
+                color : '#666',
+                fontFamily : 'yekan'
             }} {...field}>
             {
-                answers?.map((item , index) => <MenuItem defaultChecked={index ===1} value={item.answer} key={item.id}>{item.answer}</MenuItem>)
+                answers?.map((item , index) => <MenuItem defaultChecked={index ===1} style={{fontFamily : 'yekan'}} value={item.answer} key={item.id}>{item.answer}</MenuItem>)
             }
           </Select>
           )}
