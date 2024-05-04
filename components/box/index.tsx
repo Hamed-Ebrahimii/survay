@@ -5,26 +5,22 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import { Survay } from "@/types/survay";
 import Form from "../form";
 import "react-toastify/dist/ReactToastify.css";
 import Btn from "../form/components/btn";
-import { useRouter } from "next/navigation";
-import { Answers } from "@/types/answers";
 import { Context, InitialState } from "@/context/inedx";
 const BoxForm = () => {
   const [value, setValue] = useState<number>(0);
-  const [disabled, setDisabled] = useState(true);
   //@ts-ignore
   const { setState, state: surveys }: InitialState = useContext(Context);
   
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-  const handleAnswer = (value : number) => {
-    if (value + 1 > surveys.length) {
+  const pagination = (page: number) => {
+    if (page + 1 > surveys.length) {
       toast("ممنون بابت مشارکت شما ", {
         type: "info",
         position: "top-right",
@@ -34,37 +30,26 @@ const BoxForm = () => {
       });
       return;
     }
-    setValue(value + 1)
-  };
-  const pagination = (value: number) => {
-    if (value + 1 > surveys.length) {
-      toast("ممنون بابت مشارکت شما ", {
-        type: "info",
-        position: "top-right",
-        style: {
-          flexDirection: "row-reverse",
-        },
-      });
-      return;
-    }
-    setValue(value);
+    setValue(value + page);
   };
   const handleDisableBtn = () => {
-    if (surveys[value]?.requierd) {
-      if (disabled) {
+    if (surveys[value + 1]?.requierd) {
+      if (!surveys.find(item => item.id === value)?.userAnswer) {
         return true;
       }
       return false;
     }
     return false;
   };
+  useEffect(()=>{console.log(value);
+  } , [value])
   return (
     <>
       <ToastContainer rtl />
       <div className="glass w-1/4 px-4 py-5 rounded-xl min-h-[561px] relative flex flex-col">
         <div className="w-full flex items-center gap-2 absolute -top-9">
           <Image
-            src="/img/avatar.png"
+            src="/img/user.png"
             alt="avatar"
             width={50}
             height={50}
@@ -80,7 +65,7 @@ const BoxForm = () => {
           </h1>
         </div>
         <div className="flex-1">
-          <TabContext value={Number(value)}>
+          <TabContext value={String(value)}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
               <TabList
                 onChange={handleChange}
@@ -114,9 +99,9 @@ const BoxForm = () => {
               >
                 {/* @ts-ignore: Unreachable code error */}
                 <Form
-                  handleTabs={handleAnswer}
+                  handleTabs={pagination}
                   {...item}
-                  handleDisabled={setDisabled}
+                  
                 />
               </TabPanel>
             ))}

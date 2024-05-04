@@ -38,12 +38,8 @@ const Form = ({
     find!.userAnswer = data.answer;
     find && state.splice(findeIndex, 1, find);
     setState([...state]);
-
     handleTabs(1);
   };
-  useEffect(() => {
-    console.log(errors.answer?.message);
-  }, [errors.answer]);
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full">
       <p className="text-xl font-medium text-white font-yekan">{question}</p>
@@ -57,7 +53,7 @@ const Form = ({
               render={({ field }) => (
                 <input
                   className="w-full btn btn-info  rounded-lg py-3 px-5 text-white font-medium text-lg focus:border-2"
-                  type="button"
+                  type="submit"
                   value={item.answer}
                   id={String(item.id)}
                   onClick={(e) => {
@@ -81,10 +77,7 @@ const Form = ({
                   color: "#666",
                   fontFamily: "yekan",
                 }}
-                onChange={(e) => {
-                  setOnChange(!onChange);
-                  field.onChange(e.target.value);
-                }}
+                {...field}
               >
                 {answers?.map((item, index) => (
                   <MenuItem
@@ -146,9 +139,12 @@ const Form = ({
           />
         )}
       </div>
+      {
+        type === 'textarea' || type === "text" || type === 'drowpDown' &&
       <div className="w-1/6 my-5">
         <Btn type="submit">تایید</Btn>
       </div>
+      }
     </form>
   );
 };
