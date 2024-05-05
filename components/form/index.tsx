@@ -64,10 +64,10 @@ const Form = ({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full flex flex-col h-full"
+      className="w-full flex flex-col h-full !min-h-[450px]"
     >
       <p className="text-xl font-medium text-white font-yekan">{question}</p>
-      <div className="w-full grid grid-cols-1 gap-5 mt-12 flex-1 ">
+      <div className="w-full space-y-4  mt-12 flex-1 ">
         {type === "button" &&
           answers?.map((item) => (
             <Controller
@@ -123,11 +123,8 @@ const Form = ({
                   <Input
                     type={type}
                     onChange={(e) => {
-                      console.log(e.target.value);
-
                       field.onChange(e.target.value);
                     }}
-                   
                     defaultChecked={item.answer === userAnswer || undefined}
                     placeholder={item.answer}
                     value={type !== "text" ? item.answer : undefined}
@@ -146,13 +143,13 @@ const Form = ({
             render={({ field }) => (
               <textarea
                 {...field}
-                className="textarea textarea-info font-yekan"
+                className="textarea textarea-info font-yekan w-full"
               ></textarea>
             )}
           />
         )}
       </div>
-      <div className="w-full flex items-center justify-between my-4">
+      <div className="w-full flex items-center justify-between my-4 ">
         <div>
           <Btn
             type="button"

@@ -18,7 +18,6 @@ const BoxForm = () => {
     setTabIndex(newValue);
   };
   const pagination = (page: number) => {
-    
     if (tabIndex + 1 >= surveys.length && page > 0) {
       toast("ممنون بابت مشارکت شما ", {
         type: "info",
@@ -34,7 +33,7 @@ const BoxForm = () => {
   return (
     <>
       <ToastContainer rtl />
-      <div className="glass w-1/4 px-4 py-5 rounded-xl min-h-[561px] relative flex flex-col">
+      <div className="glass w-1/4 px-4 py-5 rounded-xl min-h-[660px] relative flex flex-col">
         <div className="w-full flex items-center gap-2 absolute -top-9">
           <Image
             src="/img/user.png"
@@ -84,6 +83,10 @@ const BoxForm = () => {
                 defaultChecked={item.id == 0}
                 // @ts-ignore: Unreachable code error
                 value={item.id}
+                sx={{
+                  height: "100%",
+                }}
+                className="!h-full"
               >
                 <Form
                   pagination={pagination}
