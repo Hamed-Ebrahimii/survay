@@ -1,4 +1,4 @@
-import { Survay } from "@/types/survay";
+import { Survay, questionTypesTexts } from "@/types/survay";
 import Btn from "./components/btn";
 import Input from "../input";
 import { Controller, useForm } from "react-hook-form";
@@ -15,15 +15,17 @@ interface Answer {
   answer: string;
 }
 const Form = ({
-  answers,
-  id,
-  question,
-  pagination,
-  type,
-  requierd,
-  userAnswer,
+  QuestionType,
   tabIndex,
   numberSurvey,
+  pagination,
+  QuestionRequired,
+  QuestionRules,
+  QuestionText,
+  QuestionAnwseredValue,
+  QuestionDesc,
+  QuestionID
+  
 }: FormProps) => {
   // @ts-ignore
   const { state, setState }: InitialState = useContext(Context);
@@ -34,7 +36,7 @@ const Form = ({
   } = useForm<Answer>({
     mode: "all",
     defaultValues: {
-      answer: userAnswer,
+      answer: QuestionAnwseredValue ,
     },
   });
   useEffect(() => {
@@ -44,16 +46,25 @@ const Form = ({
       });
     }
   }, [errors.answer?.message]);
+  const questionRules = QuestionRules.split(',')
   const onSubmit = (data: Answer) => {
-    const findeIndex = state.findIndex((item) => item.id === id);
-    const find = state.find((item) => item.id === id);
-    find!.userAnswer = data.answer;
-    find && state.splice(findeIndex, 1, find);
-    setState([...state]);
+    const newState : Survay = 
+      {
+        QuestionType,
+       QuestionDesc,
+       QuestionID ,
+        QuestionRequired,
+        QuestionRules,
+        QuestionText,
+        QuestionAnwseredValue : data.answer
+      }
+      const QuestionFindIndex = state.findIndex(item => item.QuestionID === QuestionID)
+      state.splice(QuestionFindIndex , 1 , newState)
+    setState(state);
     pagination(1);
   };
   const checkDisabled = () => {
-    if (requierd) {
+    if (QuestionRequired) {
       if (isDirty || isValid) {
         return false;
       }
@@ -66,33 +77,24 @@ const Form = ({
       onSubmit={handleSubmit(onSubmit)}
       className="w-full flex flex-col h-full !min-h-[450px]"
     >
-      <p className="text-xl font-medium text-white font-yekan">{question}</p>
+      <p className="text-xl font-medium text-white font-yekan">{QuestionText}</p>
       <div className="w-full space-y-4  mt-12 flex-1 ">
-        {type === "button" &&
-          answers?.map((item) => (
+        {QuestionType === 0 &&
+          QuestionRules.split(',')?.map((item) => (
             <Controller
-              rules={{ required: requierd && "پر کردن این بخش اجباری است" }}
+              rules={{ required: QuestionRequired === 1 && "پر کردن این بخش اجباری است" }}
               control={control}
               name="answer"
-              key={item.id}
+              key={item}
               render={({ field }) => (
-                <input
-                  className="w-full btn btn-info  rounded-lg py-3 px-5 text-white font-medium text-lg focus:border-2"
-                  type="submit"
-                  value={item.answer}
-                  id={String(item.id)}
-                  onClick={(e) => {
-                    //@ts-ignore
-                    field.onChange(e.target.value);
-                  }}
-                />
+               <Input type="text" {...field} />
               )}
             />
           ))}
-        {type === "drowpDown" && (
+        {QuestionType === 7 && (
           <Controller
             control={control}
-            rules={{ required: requierd && "پر کردن این بخش اجباری است" }}
+            rules={{ required: QuestionRequired ==1  && "پر کردن این بخش اجباری است" }}
             name="answer"
             render={({ field }) => (
               <DropDown
@@ -105,47 +107,88 @@ const Form = ({
             )}
           />
         )}
-        {type !== "drowpDown" &&
-          type !== "button" &&
-          type !== "textarea" &&
-          answers?.map((item) => (
-            <div className="flex gap-2 items-center w-full" key={item.id}>
+        {QuestionType === 3 &&
+          
+          questionRules?.map((item) => (
+            <div className="flex gap-2 items-center w-full" key={item}>
               <label
-                htmlFor={item.answer}
+                htmlFor={item}
                 className="text-lg font-yekan font-medium text-white"
               >
-                {item.answer}
+                {item}
               </label>
               <Controller
                 name="answer"
-                rules={{ required: requierd && "پر کردن این بخش اجباری است" }}
+                rules={{ required: QuestionRequired === 1 && "پر کردن این بخش اجباری است" }}
                 control={control}
                 render={({ field }) => (
                   <Input
-                    type={type}
+                    type={'radio'}
                     onChange={(e) => {
                       field.onChange(e.target.value);
                     }}
-                    defaultChecked={item.answer === userAnswer || undefined}
-                    placeholder={item.answer}
-                    value={type !== "text" ? item.answer : undefined}
-                    id={item.answer}
+                    defaultChecked={item === QuestionAnwseredValue || undefined}
+                    placeholder={item}
+                    value={item}
+                    id={item}
                     name="answer"
                   />
                 )}
               />
             </div>
           ))}
-        {type === "textarea" && (
+        {QuestionType === 1 && (
           <Controller
             control={control}
-            rules={{ required: requierd && "پر کردن این بخش اجباری است" }}
+            rules={{ required: QuestionRequired === 1 && "پر کردن این بخش اجباری است" }}
             name="answer"
             render={({ field }) => (
               <textarea
                 {...field}
                 className="textarea textarea-info font-yekan w-full"
               ></textarea>
+            )}
+          />
+        )}
+        {QuestionType === 2 && (
+          <Controller
+            control={control}
+            rules={{ required: QuestionRequired === 1 && "پر کردن این بخش اجباری است" }}
+            name="answer"
+            render={({ field }) => (
+              <Input
+                {...field}
+                type="checkbox"
+                className="textarea textarea-info font-yekan w-full"
+              ></Input>
+            )}
+          />
+        )}
+        {QuestionType === 4 && (
+          <Controller
+            control={control}
+            rules={{ required: QuestionRequired === 1 && "پر کردن این بخش اجباری است" }}
+            name="answer"
+            render={({ field }) => (
+              <Input
+                {...field}
+                type="range"
+                className="textarea textarea-info font-yekan w-full"
+              ></Input>
+            )}
+          />
+        )}
+        {QuestionType === 5 && (
+          <Controller
+            control={control}
+            rules={{ required: QuestionRequired === 1 && "پر کردن این بخش اجباری است" }}
+            name="answer"
+            render={({ field }) => (
+              <Input
+                {...field}
+                type="date"
+                className="textarea textarea-info font-yekan w-full"
+              ></Input>
             )}
           />
         )}

@@ -3,7 +3,7 @@ import { Survay } from "@/types/survay"
 
 export const getAllSurvay = async () =>{
     return await httpService<Survay[]>({
-        url : '/survay',
+        url : '/SurveyAnswerQuestion',
         method : 'get'
     })
 }

@@ -52,7 +52,7 @@ const BoxForm = () => {
           </h1>
         </div>
         <div className="flex-1">
-          <TabContext value={String(tabIndex)}>
+          <TabContext value={tabIndex}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
               <TabList
                 onChange={handleChange}
@@ -62,7 +62,7 @@ const BoxForm = () => {
                 scrollButtons={false}
                 textColor="inherit"
               >
-                {surveys.map((item) => (
+                {surveys.map((item , index) => (
                   <Tab
                     style={{
                       fontFamily: "yekan",
@@ -70,19 +70,19 @@ const BoxForm = () => {
                       color: "white",
                     }}
                     disabled={true}
-                    key={item.id}
-                    label={item.title}
-                    value={item.id}
+                    key={item.QuestionID}
+                    label={'سوال : ' + (index + 1)}
+                    value={index}
                   />
                 ))}
               </TabList>
             </Box>
-            {surveys.map((item) => (
+            {surveys.map((item , index) => (
               <TabPanel
-                key={item.id}
-                defaultChecked={item.id == 0}
+                key={item.QuestionID}
+                defaultChecked={item.QuestionID === 0}
                 // @ts-ignore: Unreachable code error
-                value={item.id}
+                value={index}
                 sx={{
                   height: "100%",
                 }}

@@ -1,6 +1,4 @@
 "use client";
-
-import { Answers } from "@/types/answers";
 import { Survay } from "@/types/survay";
 import { Dispatch, ReactNode, SetStateAction, createContext, useEffect, useState } from "react";
 export interface InitialState  {
@@ -14,7 +12,10 @@ const ContextProvider = ({ children , survey }: { children: ReactNode , survey :
     state: surveys,
     setState: setSurveys,
   };
-
+  useEffect(()=>{
+    console.log(surveys);
+    
+  } , [surveys])
   return <Context.Provider value={initialState}>{children}</Context.Provider>;
 };
 export default ContextProvider;
