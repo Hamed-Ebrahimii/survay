@@ -6,6 +6,8 @@ import { useContext, useEffect, useState } from "react";
 import { Context, InitialState } from "@/context/inedx";
 import { toast } from "react-toastify";
 import DropDown from "../dropDown";
+import { Slider } from "@mui/material";
+import Range from "../range";
 interface FormProps extends Survay {
   pagination: (value: number) => void;
   tabIndex: number;
@@ -24,19 +26,19 @@ const Form = ({
   QuestionText,
   QuestionAnwseredValue,
   QuestionDesc,
-  QuestionID
-  
+  QuestionID,
 }: FormProps) => {
   // @ts-ignore
   const { state, setState }: InitialState = useContext(Context);
   const {
     control,
     handleSubmit,
+    watch,
     formState: { errors, isDirty, isValid },
   } = useForm<Answer>({
     mode: "all",
     defaultValues: {
-      answer: QuestionAnwseredValue ,
+      answer: QuestionAnwseredValue,
     },
   });
   useEffect(() => {
@@ -46,20 +48,21 @@ const Form = ({
       });
     }
   }, [errors.answer?.message]);
-  const questionRules = QuestionRules.split(',')
+  const questionRules = QuestionRules.split(",");
   const onSubmit = (data: Answer) => {
-    const newState : Survay = 
-      {
-        QuestionType,
-       QuestionDesc,
-       QuestionID ,
-        QuestionRequired,
-        QuestionRules,
-        QuestionText,
-        QuestionAnwseredValue : data.answer
-      }
-      const QuestionFindIndex = state.findIndex(item => item.QuestionID === QuestionID)
-      state.splice(QuestionFindIndex , 1 , newState)
+    const newState: Survay = {
+      QuestionType,
+      QuestionDesc,
+      QuestionID,
+      QuestionRequired,
+      QuestionRules,
+      QuestionText,
+      QuestionAnwseredValue: data.answer,
+    };
+    const QuestionFindIndex = state.findIndex(
+      (item) => item.QuestionID === QuestionID
+    );
+    state.splice(QuestionFindIndex, 1, newState);
     setState(state);
     pagination(1);
   };
@@ -72,45 +75,58 @@ const Form = ({
     }
     return false;
   };
+  useEffect(() => {
+    if (QuestionType === 3 && tabIndex + 1 < numberSurvey) {
+      const subscription = watch(() => handleSubmit(onSubmit)());
+
+      return () => subscription.unsubscribe();
+    }
+  }, [handleSubmit, watch]);
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="w-full flex flex-col h-full !min-h-[450px]"
     >
-      <p className="text-xl font-medium text-white font-yekan">{QuestionText}</p>
-      <div className="w-full space-y-4  mt-12 flex-1 ">
+      <p className="text-xl font-medium text-white font-yekan">
+        {QuestionText}
+      </p>
+      <div className="w-full space-y-4  mt-12 flex-1  grid grid-cols-2 justify-start items-start overflow-hidden overflow-y-auto">
         {QuestionType === 0 &&
-          QuestionRules.split(',')?.map((item) => (
+          QuestionRules.split(",")?.map((item) => (
             <Controller
-              rules={{ required: QuestionRequired === 1 && "پر کردن این بخش اجباری است" }}
+              rules={{
+                required:
+                  QuestionRequired === 1 && "پر کردن این بخش اجباری است",
+              }}
               control={control}
               name="answer"
               key={item}
-              render={({ field }) => (
-               <Input type="text" {...field} />
-              )}
+              render={({ field }) => <Input type="text" {...field} />}
             />
           ))}
         {QuestionType === 7 && (
           <Controller
             control={control}
-            rules={{ required: QuestionRequired ==1  && "پر کردن این بخش اجباری است" }}
+            rules={{
+              required: QuestionRequired == 1 && "پر کردن این بخش اجباری است",
+            }}
             name="answer"
             render={({ field }) => (
-              <DropDown
-                name={field.name}
-                onChange={field.onChange}
-                data={["بله", "خیر"]}
-                lable=""
-                defaultValue={field.value}
-              />
+              <div className="col-span-2">
+                <DropDown
+                  name={field.name}
+                  onChange={field.onChange}
+                  data={["بله", "خیر"]}
+                  lable=""
+                  defaultValue={field.value}
+                />
+              </div>
             )}
           />
         )}
         {QuestionType === 3 &&
-          
           questionRules?.map((item) => (
-            <div className="flex gap-2 items-center w-full" key={item}>
+            <div className="flex gap-2 items-center w-ful !m-0" key={item}>
               <label
                 htmlFor={item}
                 className="text-lg font-yekan font-medium text-white"
@@ -119,11 +135,14 @@ const Form = ({
               </label>
               <Controller
                 name="answer"
-                rules={{ required: QuestionRequired === 1 && "پر کردن این بخش اجباری است" }}
+                rules={{
+                  required:
+                    QuestionRequired === 1 && "پر کردن این بخش اجباری است",
+                }}
                 control={control}
                 render={({ field }) => (
                   <Input
-                    type={'radio'}
+                    type={"radio"}
                     onChange={(e) => {
                       field.onChange(e.target.value);
                     }}
@@ -140,7 +159,9 @@ const Form = ({
         {QuestionType === 1 && (
           <Controller
             control={control}
-            rules={{ required: QuestionRequired === 1 && "پر کردن این بخش اجباری است" }}
+            rules={{
+              required: QuestionRequired === 1 && "پر کردن این بخش اجباری است",
+            }}
             name="answer"
             render={({ field }) => (
               <textarea
@@ -150,38 +171,55 @@ const Form = ({
             )}
           />
         )}
-        {QuestionType === 2 && (
-          <Controller
-            control={control}
-            rules={{ required: QuestionRequired === 1 && "پر کردن این بخش اجباری است" }}
-            name="answer"
-            render={({ field }) => (
-              <Input
-                {...field}
-                type="checkbox"
-                className="textarea textarea-info font-yekan w-full"
-              ></Input>
-            )}
-          />
-        )}
+        {QuestionType === 2 &&
+          questionRules.map((item) => (
+            <div key={item} className="flex items-center gap-2 !margin-0">
+              <label
+                htmlFor={item}
+                className="text-lg font-yekan font-medium text-white"
+              >
+                {item}
+              </label>
+              <Controller
+                control={control}
+                rules={{
+                  required:
+                    QuestionRequired === 1 && "پر کردن این بخش اجباری است",
+                }}
+                name="answer"
+                render={({ field }) => (
+                  <Input
+                    {...field}
+                    type="checkbox"
+                    className=" font-yekan w-full"
+                  ></Input>
+                )}
+              />
+            </div>
+          ))}
         {QuestionType === 4 && (
           <Controller
             control={control}
-            rules={{ required: QuestionRequired === 1 && "پر کردن این بخش اجباری است" }}
+            rules={{
+              required: QuestionRequired === 1 && "پر کردن این بخش اجباری است",
+            }}
             name="answer"
             render={({ field }) => (
-              <Input
-                {...field}
-                type="range"
-                className="textarea textarea-info font-yekan w-full"
-              ></Input>
+              <div className="w-full px-4 py-1  rounded-full  flex items-center justify-center  col-span-2">
+                <Range
+                  min={+questionRules[0]}
+                  max={+questionRules.slice(-1)[0]}
+                />
+              </div>
             )}
           />
         )}
         {QuestionType === 5 && (
           <Controller
             control={control}
-            rules={{ required: QuestionRequired === 1 && "پر کردن این بخش اجباری است" }}
+            rules={{
+              required: QuestionRequired === 1 && "پر کردن این بخش اجباری است",
+            }}
             name="answer"
             render={({ field }) => (
               <Input

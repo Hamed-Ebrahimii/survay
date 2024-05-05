@@ -5,9 +5,9 @@
       "QuestionID": 94,
       "QuestionText": "تا چه میزان تمایل دارید که مجددا در آروند فن پارس ثبت سفارش کنید؟",
       "QuestionDesc": null,
-      "QuestionType": 0,
+      "QuestionType": 4,
       "QuestionRequired": 1,
-      "QuestionRules": "1"
+      "QuestionRules": "1,2,3,4,5"
     },
     {
       "QuestionAnwseredValue": null,

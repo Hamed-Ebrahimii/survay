@@ -33,7 +33,7 @@ const BoxForm = () => {
   return (
     <>
       <ToastContainer rtl />
-      <div className="glass w-1/4 px-4 py-5 rounded-xl min-h-[660px] relative flex flex-col">
+      <div className="glass w-1/2 px-4 py-5 rounded-xl min-h-[660px] relative flex flex-col">
         <div className="w-full flex items-center gap-2 absolute -top-9">
           <Image
             src="/img/user.png"
