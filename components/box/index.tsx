@@ -15,13 +15,12 @@ const BoxForm = () => {
   const [tabIndex, setTabIndex] = useState<number>(0);
   //@ts-ignore
   const { setState, state: surveys }: InitialState = useContext(Context);
-  
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabIndex(newValue);
   };
   const pagination = (page: number) => {
-   console.log(tabIndex , surveys.length);
-   
+    console.log(tabIndex, surveys.length);
+
     if (tabIndex + 1 >= surveys.length) {
       toast("ممنون بابت مشارکت شما ", {
         type: "info",
@@ -36,7 +35,7 @@ const BoxForm = () => {
   };
   const handleDisableBtn = () => {
     if (surveys[tabIndex]?.requierd) {
-      if (!surveys.find(item => item.id === tabIndex)?.userAnswer) {
+      if (!surveys.find((item) => item.id === tabIndex)?.userAnswer) {
         return true;
       }
       return false;
@@ -99,18 +98,16 @@ const BoxForm = () => {
                 value={item.id}
               >
                 {/* @ts-ignore: Unreachable code error */}
-                <Form
-                  handleTabs={pagination}
-                  {...item}
-                  
-                />
+                <Form handleTabs={pagination} {...item} />
               </TabPanel>
             ))}
           </TabContext>
         </div>
         <div className="w-full flex items-center justify-between my-4">
           <div>
-            <Btn disabled={tabIndex <= 0} onClick={() => pagination(-1)}>سوال قبلی</Btn>
+            <Btn disabled={tabIndex <= 0} onClick={() => pagination(-1)}>
+              سوال قبلی
+            </Btn>
           </div>
           <div className="min-w-[118px]">
             <Btn

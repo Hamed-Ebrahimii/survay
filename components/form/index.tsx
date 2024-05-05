@@ -1,12 +1,12 @@
 import { Survay } from "@/types/survay";
 import Btn from "./components/btn";
-import { Button, MenuItem, Select } from "@mui/material";
+import { MenuItem, Select } from "@mui/material";
 import Input from "../input";
 import { Controller, useForm } from "react-hook-form";
 import { useContext, useEffect, useState } from "react";
-import { debounce } from "@/tools/debounce";
 import { Context, InitialState } from "@/context/inedx";
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
+import DropDown from "../dropDown";
 interface Iprops extends Survay {
   handleTabs: (value: number) => void;
   handleDisabled: (value: boolean) => void;
@@ -82,26 +82,12 @@ const Form = ({
             rules={{ required: requierd && "پر کردن این بخش اجباری است" }}
             name="answer"
             render={({ field }) => (
-              <Select
-                dir="rtl"
-                sx={{
-                  backgroundColor: "white",
-                  color: "#666",
-                  fontFamily: "yekan",
-                }}
-                {...field}
-              >
-                {answers?.map((item, index) => (
-                  <MenuItem
-                    defaultChecked={index === 1}
-                    style={{ fontFamily: "yekan" }}
-                    value={item.answer}
-                    key={item.id}
-                  >
-                    {item.answer}
-                  </MenuItem>
-                ))}
-              </Select>
+              <DropDown
+              name={field.name}
+                onChange={field.onChange}
+              data={['بله' , 'خیر']}
+              lable=""
+              />
             )}
           />
         )}
