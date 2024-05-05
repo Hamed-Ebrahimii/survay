@@ -6,6 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useContext, useEffect, useState } from "react";
 import { debounce } from "@/tools/debounce";
 import { Context, InitialState } from "@/context/inedx";
+import { ToastContainer, toast } from "react-toastify";
 interface Iprops extends Survay {
   handleTabs: (value: number) => void;
   handleDisabled: (value: boolean) => void;
@@ -17,12 +18,11 @@ const Form = ({
   answers,
   id,
   question,
-  title,
   handleTabs,
   type,
-  handleDisabled,
+  requierd,
+  userAnswer,
 }: Iprops) => {
-  const [onChange, setOnChange] = useState(false);
   // @ts-ignore
   const { state, setState }: InitialState = useContext(Context);
   const {
@@ -31,7 +31,17 @@ const Form = ({
     formState: { errors },
   } = useForm<Answer>({
     mode: "all",
+    defaultValues: {
+      answer: userAnswer,
+    },
   });
+  useEffect(() => {
+    if (errors.answer?.message) {
+      toast(errors.answer.message, {
+        type: "error",
+      });
+    }
+  }, [errors.answer?.message]);
   const onSubmit = (data: Answer) => {
     const findeIndex = state.findIndex((item) => item.id === id);
     const find = state.find((item) => item.id === id);
@@ -39,6 +49,7 @@ const Form = ({
     find && state.splice(findeIndex, 1, find);
     setState([...state]);
     handleTabs(1);
+   
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full">
@@ -47,6 +58,7 @@ const Form = ({
         {type === "button" &&
           answers?.map((item) => (
             <Controller
+              rules={{ required: requierd && "پر کردن این بخش اجباری است" }}
               control={control}
               name="answer"
               key={item.id}
@@ -59,7 +71,6 @@ const Form = ({
                   onClick={(e) => {
                     //@ts-ignore
                     field.onChange(e.target.value);
-                    console.log(errors);
                   }}
                 />
               )}
@@ -68,6 +79,7 @@ const Form = ({
         {type === "drowpDown" && (
           <Controller
             control={control}
+            rules={{ required: requierd && "پر کردن این بخش اجباری است" }}
             name="answer"
             render={({ field }) => (
               <Select
@@ -106,15 +118,17 @@ const Form = ({
               </label>
               <Controller
                 name="answer"
+                rules={{ required: requierd && "پر کردن این بخش اجباری است" }}
                 control={control}
                 render={({ field }) => (
                   <Input
                     type={type}
                     onChange={(e) => {
-                    console.log(e.target.value);
-                    
+                      console.log(e.target.value);
+
                       field.onChange(e.target.value);
                     }}
+                    checked={item.answer === userAnswer || undefined}
                     placeholder={item.answer}
                     value={type !== "text" ? item.answer : undefined}
                     id={item.answer}
@@ -127,24 +141,22 @@ const Form = ({
         {type === "textarea" && (
           <Controller
             control={control}
+            rules={{ required: requierd && "پر کردن این بخش اجباری است" }}
             name="answer"
             render={({ field }) => (
               <textarea
-                onChange={(e) => {
-                  debounce(3000, () => field.onChange(e.target.value));
-                }}
+                {...field}
                 className="textarea textarea-info font-yekan"
               ></textarea>
             )}
           />
         )}
       </div>
-      {
-        type === 'textarea' || type === "text" || type === 'drowpDown' &&
-      <div className="w-1/6 my-5">
-        <Btn type="submit">تایید</Btn>
-      </div>
-      }
+      {type !== "button" && (
+        <div className="w-1/6 my-5">
+          <Btn type="submit">تایید</Btn>
+        </div>
+      )}
     </form>
   );
 };

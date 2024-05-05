@@ -2,7 +2,7 @@
 
 import { Answers } from "@/types/answers";
 import { Survay } from "@/types/survay";
-import { Dispatch, ReactNode, SetStateAction, createContext, useState } from "react";
+import { Dispatch, ReactNode, SetStateAction, createContext, useEffect, useState } from "react";
 export interface InitialState  {
     state: Survay[],
     setState:  Dispatch<SetStateAction<Survay[]>>,

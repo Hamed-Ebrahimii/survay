@@ -12,15 +12,17 @@ import "react-toastify/dist/ReactToastify.css";
 import Btn from "../form/components/btn";
 import { Context, InitialState } from "@/context/inedx";
 const BoxForm = () => {
-  const [value, setValue] = useState<number>(0);
+  const [tabIndex, setTabIndex] = useState<number>(0);
   //@ts-ignore
   const { setState, state: surveys }: InitialState = useContext(Context);
   
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+    setTabIndex(newValue);
   };
   const pagination = (page: number) => {
-    if (page + 1 > surveys.length) {
+   console.log(tabIndex , surveys.length);
+   
+    if (tabIndex + 1 >= surveys.length) {
       toast("ممنون بابت مشارکت شما ", {
         type: "info",
         position: "top-right",
@@ -30,19 +32,18 @@ const BoxForm = () => {
       });
       return;
     }
-    setValue(value + page);
+    setTabIndex(tabIndex + page);
   };
   const handleDisableBtn = () => {
-    if (surveys[value + 1]?.requierd) {
-      if (!surveys.find(item => item.id === value)?.userAnswer) {
+    if (surveys[tabIndex]?.requierd) {
+      if (!surveys.find(item => item.id === tabIndex)?.userAnswer) {
         return true;
       }
       return false;
     }
     return false;
   };
-  useEffect(()=>{console.log(value);
-  } , [value])
+
   return (
     <>
       <ToastContainer rtl />
@@ -65,7 +66,7 @@ const BoxForm = () => {
           </h1>
         </div>
         <div className="flex-1">
-          <TabContext value={String(value)}>
+          <TabContext value={String(tabIndex)}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
               <TabList
                 onChange={handleChange}
@@ -109,14 +110,14 @@ const BoxForm = () => {
         </div>
         <div className="w-full flex items-center justify-between my-4">
           <div>
-            <Btn disabled={value <= 0} onClick={() => pagination(value - 1)}>سوال قبلی</Btn>
+            <Btn disabled={tabIndex <= 0} onClick={() => pagination(-1)}>سوال قبلی</Btn>
           </div>
           <div className="min-w-[118px]">
             <Btn
-              onClick={() => pagination(value + 1)}
+              onClick={() => pagination(tabIndex + 1)}
               disabled={handleDisableBtn()}
             >
-              {value + 1 >= surveys.length ? "پایان" : "  سوال بعدی"}
+              {tabIndex + 1 >= surveys.length ? "پایان" : "  سوال بعدی"}
             </Btn>
           </div>
         </div>
