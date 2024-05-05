@@ -53,8 +53,6 @@ const Form = ({
     pagination(1);
   };
   const checkDisabled = () => {
-    console.log(errors.answer?.message);
-
     if (requierd) {
       if (isDirty || isValid) {
         return false;
@@ -129,7 +127,8 @@ const Form = ({
 
                       field.onChange(e.target.value);
                     }}
-                    checked={item.answer === userAnswer || undefined}
+                   
+                    defaultChecked={item.answer === userAnswer || undefined}
                     placeholder={item.answer}
                     value={type !== "text" ? item.answer : undefined}
                     id={item.answer}

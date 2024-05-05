@@ -18,7 +18,8 @@ const BoxForm = () => {
     setTabIndex(newValue);
   };
   const pagination = (page: number) => {
-    if (tabIndex + 1 >= surveys.length) {
+    
+    if (tabIndex + 1 >= surveys.length && page > 0) {
       toast("ممنون بابت مشارکت شما ", {
         type: "info",
         position: "top-right",
