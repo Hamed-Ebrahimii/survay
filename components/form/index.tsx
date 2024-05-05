@@ -100,6 +100,7 @@ const Form = ({
                 onChange={field.onChange}
                 data={["بله", "خیر"]}
                 lable=""
+                defaultValue={field.value}
               />
             )}
           />

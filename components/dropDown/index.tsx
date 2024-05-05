@@ -94,7 +94,7 @@ const DropDown = (props: DropDownProps) => {
               input.current?.focus();
             }}
           >
-            <span>{value.length === 0 ? props.placeholder : value[0]}</span>
+            <span>{props.defaultValue ? props.defaultValue : value.length === 0 ? props.placeholder : value[0]}</span>
             <MdOutlineArrowDropDown className="!text-xl" />
           </button>
           {showDrop && (

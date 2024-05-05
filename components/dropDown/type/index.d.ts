@@ -25,6 +25,7 @@ interface DropDownProps extends HTMLAttributes<HTMLDivElement> {
   onChange?: (value: string | undefined) => void;
   placeholder?: string;
   selectAll? : boolean
+  defaultValue? : string
 }
 interface ISearch {
  [key : string] : string
