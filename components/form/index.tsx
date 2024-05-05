@@ -1,15 +1,15 @@
 import { Survay } from "@/types/survay";
 import Btn from "./components/btn";
-import { MenuItem, Select } from "@mui/material";
 import Input from "../input";
 import { Controller, useForm } from "react-hook-form";
 import { useContext, useEffect, useState } from "react";
 import { Context, InitialState } from "@/context/inedx";
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
 import DropDown from "../dropDown";
-interface Iprops extends Survay {
-  handleTabs: (value: number) => void;
-  handleDisabled: (value: boolean) => void;
+interface FormProps extends Survay {
+  pagination: (value: number) => void;
+  tabIndex: number;
+  numberSurvey: number;
 }
 interface Answer {
   answer: string;
@@ -18,17 +18,19 @@ const Form = ({
   answers,
   id,
   question,
-  handleTabs,
+  pagination,
   type,
   requierd,
   userAnswer,
-}: Iprops) => {
+  tabIndex,
+  numberSurvey,
+}: FormProps) => {
   // @ts-ignore
   const { state, setState }: InitialState = useContext(Context);
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty, isValid },
   } = useForm<Answer>({
     mode: "all",
     defaultValues: {
@@ -48,13 +50,26 @@ const Form = ({
     find!.userAnswer = data.answer;
     find && state.splice(findeIndex, 1, find);
     setState([...state]);
-    handleTabs(1);
-   
+    pagination(1);
+  };
+  const checkDisabled = () => {
+    console.log(errors.answer?.message);
+
+    if (requierd) {
+      if (isDirty || isValid) {
+        return false;
+      }
+      return true;
+    }
+    return false;
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="w-full flex flex-col h-full"
+    >
       <p className="text-xl font-medium text-white font-yekan">{question}</p>
-      <div className="w-full grid grid-cols-1 gap-5 mt-12">
+      <div className="w-full grid grid-cols-1 gap-5 mt-12 flex-1 ">
         {type === "button" &&
           answers?.map((item) => (
             <Controller
@@ -83,10 +98,10 @@ const Form = ({
             name="answer"
             render={({ field }) => (
               <DropDown
-              name={field.name}
+                name={field.name}
                 onChange={field.onChange}
-              data={['بله' , 'خیر']}
-              lable=""
+                data={["بله", "خیر"]}
+                lable=""
               />
             )}
           />
@@ -138,11 +153,22 @@ const Form = ({
           />
         )}
       </div>
-      {type !== "button" && (
-        <div className="w-1/6 my-5">
-          <Btn type="submit">تایید</Btn>
+      <div className="w-full flex items-center justify-between my-4">
+        <div>
+          <Btn
+            type="button"
+            disabled={tabIndex <= 0}
+            onClick={() => pagination(-1)}
+          >
+            سوال قبلی
+          </Btn>
         </div>
-      )}
+        <div className="min-w-[118px]">
+          <Btn type="submit" disabled={checkDisabled()}>
+            {numberSurvey <= tabIndex + 1 ? "پایان" : " سوال بعدی"}
+          </Btn>
+        </div>
+      </div>
     </form>
   );
 };

@@ -9,7 +9,6 @@ import { useContext, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Form from "../form";
 import "react-toastify/dist/ReactToastify.css";
-import Btn from "../form/components/btn";
 import { Context, InitialState } from "@/context/inedx";
 const BoxForm = () => {
   const [tabIndex, setTabIndex] = useState<number>(0);
@@ -19,8 +18,6 @@ const BoxForm = () => {
     setTabIndex(newValue);
   };
   const pagination = (page: number) => {
-    console.log(tabIndex, surveys.length);
-
     if (tabIndex + 1 >= surveys.length) {
       toast("ممنون بابت مشارکت شما ", {
         type: "info",
@@ -33,16 +30,6 @@ const BoxForm = () => {
     }
     setTabIndex(tabIndex + page);
   };
-  const handleDisableBtn = () => {
-    if (surveys[tabIndex]?.requierd) {
-      if (!surveys.find((item) => item.id === tabIndex)?.userAnswer) {
-        return true;
-      }
-      return false;
-    }
-    return false;
-  };
-
   return (
     <>
       <ToastContainer rtl />
@@ -97,26 +84,15 @@ const BoxForm = () => {
                 // @ts-ignore: Unreachable code error
                 value={item.id}
               >
-                {/* @ts-ignore: Unreachable code error */}
-                <Form handleTabs={pagination} {...item} />
+                <Form
+                  pagination={pagination}
+                  {...item}
+                  tabIndex={tabIndex}
+                  numberSurvey={surveys.length}
+                />
               </TabPanel>
             ))}
           </TabContext>
-        </div>
-        <div className="w-full flex items-center justify-between my-4">
-          <div>
-            <Btn disabled={tabIndex <= 0} onClick={() => pagination(-1)}>
-              سوال قبلی
-            </Btn>
-          </div>
-          <div className="min-w-[118px]">
-            <Btn
-              onClick={() => pagination(tabIndex + 1)}
-              disabled={handleDisableBtn()}
-            >
-              {tabIndex + 1 >= surveys.length ? "پایان" : "  سوال بعدی"}
-            </Btn>
-          </div>
         </div>
       </div>
     </>
