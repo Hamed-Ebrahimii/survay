@@ -9,18 +9,16 @@ import { useContext, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Form from "../form";
 import "react-toastify/dist/ReactToastify.css";
-import Btn from "../form/components/btn";
 import { Context, InitialState } from "@/context/inedx";
 const BoxForm = () => {
-  const [value, setValue] = useState<number>(0);
+  const [tabIndex, setTabIndex] = useState<number>(0);
   //@ts-ignore
   const { setState, state: surveys }: InitialState = useContext(Context);
-  
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+    setTabIndex(newValue);
   };
   const pagination = (page: number) => {
-    if (page + 1 > surveys.length) {
+    if (tabIndex + 1 >= surveys.length && page > 0) {
       toast("ممنون بابت مشارکت شما ", {
         type: "info",
         position: "top-right",
@@ -30,23 +28,12 @@ const BoxForm = () => {
       });
       return;
     }
-    setValue(value + page);
+    setTabIndex(tabIndex + page);
   };
-  const handleDisableBtn = () => {
-    if (surveys[value + 1]?.requierd) {
-      if (!surveys.find(item => item.id === value)?.userAnswer) {
-        return true;
-      }
-      return false;
-    }
-    return false;
-  };
-  useEffect(()=>{console.log(value);
-  } , [value])
   return (
     <>
       <ToastContainer rtl />
-      <div className="glass w-1/4 px-4 py-5 rounded-xl min-h-[561px] relative flex flex-col">
+      <div className="glass w-1/2 px-4 py-5 rounded-xl min-h-[660px] relative flex flex-col">
         <div className="w-full flex items-center gap-2 absolute -top-9">
           <Image
             src="/img/user.png"
@@ -65,7 +52,7 @@ const BoxForm = () => {
           </h1>
         </div>
         <div className="flex-1">
-          <TabContext value={String(value)}>
+          <TabContext value={tabIndex}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
               <TabList
                 onChange={handleChange}
@@ -75,7 +62,7 @@ const BoxForm = () => {
                 scrollButtons={false}
                 textColor="inherit"
               >
-                {surveys.map((item) => (
+                {surveys.map((item , index) => (
                   <Tab
                     style={{
                       fontFamily: "yekan",
@@ -83,42 +70,33 @@ const BoxForm = () => {
                       color: "white",
                     }}
                     disabled={true}
-                    key={item.id}
-                    label={item.title}
-                    value={item.id}
+                    key={item.QuestionID}
+                    label={'سوال : ' + (index + 1)}
+                    value={index}
                   />
                 ))}
               </TabList>
             </Box>
-            {surveys.map((item) => (
+            {surveys.map((item , index) => (
               <TabPanel
-                key={item.id}
-                defaultChecked={item.id == 0}
+                key={item.QuestionID}
+                defaultChecked={item.QuestionID === 0}
                 // @ts-ignore: Unreachable code error
-                value={item.id}
+                value={index}
+                sx={{
+                  height: "100%",
+                }}
+                className="!h-full"
               >
-                {/* @ts-ignore: Unreachable code error */}
                 <Form
-                  handleTabs={pagination}
+                  pagination={pagination}
                   {...item}
-                  
+                  tabIndex={tabIndex}
+                  numberSurvey={surveys.length}
                 />
               </TabPanel>
             ))}
           </TabContext>
-        </div>
-        <div className="w-full flex items-center justify-between my-4">
-          <div>
-            <Btn disabled={value <= 0} onClick={() => pagination(value - 1)}>سوال قبلی</Btn>
-          </div>
-          <div className="min-w-[118px]">
-            <Btn
-              onClick={() => pagination(value + 1)}
-              disabled={handleDisableBtn()}
-            >
-              {value + 1 >= surveys.length ? "پایان" : "  سوال بعدی"}
-            </Btn>
-          </div>
         </div>
       </div>
     </>

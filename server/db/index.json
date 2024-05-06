@@ -1,117 +1,31 @@
 {
-  "survay": [
+  "SurveyAnswerQuestion": [
     {
-      "id": 0,
-      "title": "بسته بندی محصول",
-      "question": "بسته بندی محصول شما مورد خوب بود ؟",
-      "answers": [
-        {
-          "id": 0,
-          "answer": "بله همه چی سالم بود"
-        },
-        {
-          "id": 1,
-          "answer": "بسته بندی خراب بود ولی محصول سالم بود"
-        },
-        {
-          "id": 2,
-          "answer": "خیر هم محصول هم بسته بندی خراب بود"
-        },
-        {
-          "id": 3,
-          "answer": "نظری ندارم"
-        }
-      ],
-      "requierd" : false,
-      "type" : "button"
+      "QuestionAnwseredValue": null,
+      "QuestionID": 94,
+      "QuestionText": "تا چه میزان تمایل دارید که مجددا در آروند فن پارس ثبت سفارش کنید؟",
+      "QuestionDesc": null,
+      "QuestionType": 4,
+      "QuestionRequired": 1,
+      "QuestionRules": "1,2,3,4,5"
     },
     {
-      "id": 1,
-      "title": "راهنمایی فروشندگان",
-      "question": "از راهنمایی فروشندگان ما راضی بودید؟",
-      "answers": [
-        {
-          "id": 0,
-          "answer": "بله"
-        },
-        {
-          "id": 1,
-          "answer": "نه خیلی"
-        },
-        {
-          "id": 2,
-          "answer": "خیر"
-        }
-        
-      ],
-      "requierd" : true,
-      "type" : "radio"
+      "QuestionAnwseredValue": null,
+      "QuestionID": 99,
+      "QuestionText": "به سرعت هماهنگی جهت امور درخواستی شما توسط کارشناسان چه امتیازی می دهید؟",
+      "QuestionDesc": null,
+      "QuestionType": 3,
+      "QuestionRequired": 1,
+      "QuestionRules": "1,2,3,4,5"
     },
     {
-      "id": 2,
-      "title": "رضایت شما",
-      "question": "به طور کلی، آیا از محصولات ما راضی هستید؟",
-      "answers": [
-        {
-          "id": 0,
-          "answer": "آری"
-        },{
-          "id": 1,
-          "answer": "خیر"
-        }
-      ],
-      "requierd" : false,
-      "type" : "radio"
-    },
-    {
-      "id": 3,
-      "title": "پشتیبانی",
-      "question": "آیا تیم پشتیبانی مشتری تمام سوالات شما در رابطه با محصولات را پاسخ داده است؟",
-      "answers": [
-        {
-          "id": 0,
-          "answer": "آری"
-        },{
-          "id": 1,
-          "answer": "خیر"
-        }
-      ],
-      "requierd" : true,
-      "type" : "drowpDown"
-    },
-    {
-      "id": 4,
-      "title": "نارضایتی شما",
-      "question": "دلایلی که ممکن است محصولات ما را انتخاب نکنید چیست؟",
-      "answers": [
-        {
-          "id": 0,
-          "answer": "کیفیت محصول"
-        },
-        {
-          "id": 1,
-          "answer": "خدمات پس از فروش"
-        },
-        {
-          "id": 2,
-          "answer": "نحوه ارسال"
-        }
-      ],
-      "requierd" : true,
-      "type" : "checkbox"
-    },
-    {
-      "id": 5,
-      "title": "انتقادات و پیشنهادات",
-      "question": "امنتقادات و پیشنهادات خود را جهت خدمات رسانی بهتر به شما عزیزان را برای ما بنویسید",
-      "answers": [
-        {
-          "id": 0,
-          "answer": ""
-        }
-      ],
-      "requierd" : true,
-      "type" : "textarea"
+      "QuestionAnwseredValue": null,
+      "QuestionID": 102,
+      "QuestionText": "آیا مستندات ارسالی اعم از فاکتور، گزارشات و ... تکمیل بوده است؟",
+      "QuestionDesc": null,
+      "QuestionType": 3,
+      "QuestionRequired": 1,
+      "QuestionRules": "بله,خیر"
     }
   ]
 }
