@@ -6,6 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useContext, useEffect, useState } from "react";
 import { debounce } from "@/tools/debounce";
 import { Context, InitialState } from "@/context/inedx";
+import { ToastContainer } from "react-toastify";
 interface Iprops extends Survay {
   handleTabs: (value: number) => void;
   handleDisabled: (value: boolean) => void;
@@ -22,13 +23,13 @@ const Form = ({
   type,
   handleDisabled,
 }: Iprops) => {
-  const [onChange, setOnChange] = useState(false);
   // @ts-ignore
   const { state, setState }: InitialState = useContext(Context);
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, disabled }
+  
   } = useForm<Answer>({
     mode: "all",
   });
@@ -42,6 +43,7 @@ const Form = ({
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+      <ToastContainer />
       <p className="text-xl font-medium text-white font-yekan">{question}</p>
       <div className="w-full grid grid-cols-1 gap-5 mt-12">
         {type === "button" &&
@@ -59,7 +61,7 @@ const Form = ({
                   onClick={(e) => {
                     //@ts-ignore
                     field.onChange(e.target.value);
-                    console.log(errors);
+                    
                   }}
                 />
               )}
@@ -111,8 +113,8 @@ const Form = ({
                   <Input
                     type={type}
                     onChange={(e) => {
-                    console.log(e.target.value);
-                    
+                      console.log(e.target.value);
+
                       field.onChange(e.target.value);
                     }}
                     placeholder={item.answer}
@@ -140,10 +142,10 @@ const Form = ({
         )}
       </div>
       {
-        type === 'textarea' || type === "text" || type === 'drowpDown' &&
-      <div className="w-1/6 my-5">
-        <Btn type="submit">تایید</Btn>
-      </div>
+        type !== 'button' &&
+        <div className="w-1/6 my-5">
+          <Btn type="submit" disabled={disabled}>تایید</Btn>
+        </div>
       }
     </form>
   );
