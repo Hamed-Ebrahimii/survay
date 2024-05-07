@@ -12,14 +12,12 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import { debounce } from "@/tools/debounce";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SurveyValidation, SurveyValidationType } from "@/validation";
+import { SurveyValidationType } from "@/validation";
 interface FormProps extends Survay {
   pagination: (value: number) => void;
   tabIndex: number;
   numberSurvey: number;
 }
-
 const Form = ({
   QuestionType,
   tabIndex,
@@ -44,7 +42,6 @@ const Form = ({
       answer: QuestionAnwseredValue,
     },
   });
-
   const questionRules = QuestionRules.split(",");
   const onSubmit = (data: SurveyValidationType) => {
     const newState: Survay = {
@@ -81,7 +78,6 @@ const Form = ({
       tabIndex + 1 < numberSurvey
     ) {
       const subscription = watch(() => handleSubmit(onSubmit)());
-
       return () => subscription.unsubscribe();
     }
   }, [watch]);
@@ -216,7 +212,7 @@ const Form = ({
             rules={{ required: QuestionRequired === 1 }}
             render={({ field: { onChange, value } }) => (
               <DatePicker
-                inputClass="py-1 px-2 rounded-lg outline-none placeholder:text-xs"
+                inputClass="py-1 px-2 rounded-lg outline-none placeholder:text-xs placeholder:text-white bg-orange-secondary text-white"
                 value={value || ""}
                 onChange={(date: DateObject) => {
                   onChange(date?.isValid ? date.format() : "");
@@ -249,6 +245,7 @@ const Form = ({
                 onChange={(date: DateObject) => {
                   onChange(date?.isValid ? date.format() : "");
                 }}
+                onOpenPickNewDate={false}
                 inputClass="py-1 px-2 rounded-lg outline-none placeholder:text-xs"
                 placeholder="زمان مورد نظر خورد را انتخاب کنید"
                 editable={false}

@@ -14,7 +14,7 @@
       "QuestionID": 99,
       "QuestionText": "به سرعت هماهنگی جهت امور درخواستی شما توسط کارشناسان چه امتیازی می دهید؟",
       "QuestionDesc": null,
-      "QuestionType": 3,
+      "QuestionType": 5,
       "QuestionRequired": 1,
       "QuestionRules": "1,2,3,4,5"
     },
@@ -23,7 +23,7 @@
       "QuestionID": 102,
       "QuestionText": "آیا مستندات ارسالی اعم از فاکتور، گزارشات و ... تکمیل بوده است؟",
       "QuestionDesc": null,
-      "QuestionType": 3,
+      "QuestionType": 7,
       "QuestionRequired": 1,
       "QuestionRules": "بله,خیر"
     }
