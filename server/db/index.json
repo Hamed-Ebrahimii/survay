@@ -6,7 +6,7 @@
       "QuestionText": "تا چه میزان تمایل دارید که مجددا در آروند فن پارس ثبت سفارش کنید؟",
       "QuestionDesc": null,
       "QuestionType": 4,
-      "QuestionRequired": 1,
+      "QuestionRequired": 0,
       "QuestionRules": "1,2,3,4,5"
     },
     {

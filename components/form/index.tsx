@@ -12,7 +12,7 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import { debounce } from "@/tools/debounce";
-import { zodResolver } from '@hookform/resolvers/zod';
+import { zodResolver } from "@hookform/resolvers/zod";
 import { SurveyValidation, SurveyValidationType } from "@/validation";
 interface FormProps extends Survay {
   pagination: (value: number) => void;
@@ -43,7 +43,7 @@ const Form = ({
     defaultValues: {
       answer: QuestionAnwseredValue,
     },
-    resolver : zodResolver(SurveyValidation)
+    resolver: zodResolver(SurveyValidation),
   });
 
   const questionRules = QuestionRules.split(",");
@@ -74,7 +74,6 @@ const Form = ({
     return false;
   };
   useEffect(() => {
-    console.log(handleSubmit , watch);
     if (
       QuestionType !== 0 &&
       QuestionType !== 1 &&
@@ -83,11 +82,13 @@ const Form = ({
       tabIndex + 1 < numberSurvey
     ) {
       const subscription = watch(() => handleSubmit(onSubmit)());
-      
+
       return () => subscription.unsubscribe();
     }
   }, [watch]);
-
+  useEffect(() => {
+    console.log(errors.answer?.message);
+  }, [errors.answer?.message]);
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -109,10 +110,7 @@ const Form = ({
         {QuestionType === 0 &&
           QuestionRules.split(",")?.map((item) => (
             <Controller
-              rules={{
-                required:
-                  QuestionRequired === 1 ,
-              }}
+             
               control={control}
               name="answer"
               key={item}
@@ -122,9 +120,7 @@ const Form = ({
         {QuestionType === 1 && (
           <Controller
             control={control}
-            rules={{
-              required: QuestionRequired === 1 ,
-            }}
+            
             name="answer"
             render={({ field }) => (
               <textarea
@@ -140,10 +136,7 @@ const Form = ({
               <div key={item} className="flex items-center gap-2 !margin-0">
                 <Controller
                   control={control}
-                  rules={{
-                    required:
-                      QuestionRequired === 1,
-                  }}
+                  
                   name="answer"
                   render={({ field }) => (
                     <Input
@@ -171,10 +164,7 @@ const Form = ({
               <div className="" key={item}>
                 <Controller
                   name="answer"
-                  rules={{
-                    required:
-                      QuestionRequired === 1 ,
-                  }}
+                  
                   control={control}
                   render={({ field }) => (
                     <Input
@@ -207,9 +197,7 @@ const Form = ({
         {QuestionType === 4 && (
           <Controller
             control={control}
-            rules={{
-              required: QuestionRequired === 1 ,
-            }}
+            
             name="answer"
             render={({ field }) => (
               <div className="w-full px-4 py-1  rounded-full  flex items-center justify-center  ">
@@ -225,9 +213,7 @@ const Form = ({
         {QuestionType === 5 && (
           <Controller
             control={control}
-            rules={{
-              required: QuestionRequired === 1 ,
-            }}
+            
             name="answer"
             render={({ field: { onChange, value } }) => (
               <DatePicker
@@ -250,9 +236,7 @@ const Form = ({
         {QuestionType === 6 && (
           <Controller
             control={control}
-            rules={{
-              required: QuestionRequired === 1 ,
-            }}
+           
             name="answer"
             render={({ field: { onChange, value } }) => (
               <DatePicker
@@ -276,9 +260,7 @@ const Form = ({
         {QuestionType === 7 && (
           <Controller
             control={control}
-            rules={{
-              required: QuestionRequired == 1 ,
-            }}
+            
             name="answer"
             render={({ field }) => (
               <div className="col-span-2">

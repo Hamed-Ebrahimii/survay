@@ -13,21 +13,19 @@ const Radio = (
 ) => {
   return (
     <div>
-     
       <input
         {...props}
         id={String(props.value)}
         onChange={(e) => {
           props.onChange && props.onChange(e);
-          console.log(e.target.checked);
         }}
         type="radio"
         name="range"
         className="hidden peer"
       />
-       <label
+      <label
         htmlFor={String(props.value)}
-        className={`border-r py-3 block px-6 text-lg text-white font-medium peer-checked:bg-blue-primary bg-blue-custome  hover:bg-blue-primary`}
+        className={`border-r py-3 block px-6 text-lg text-white font-medium peer-checked:bg-blue-custome border bg-blue-primary/30 border-blue-custome  hover:bg-blue-primary`}
       >
         {props.value}
       </label>

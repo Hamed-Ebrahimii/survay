@@ -35,7 +35,7 @@ const DropDown = (props: DropDownProps) => {
     }
     setValue([data]);
 
-   props.setSearchValue && props?.setSearchValue("");
+    props.setSearchValue && props?.setSearchValue("");
   };
   const onRemove = (name: string) => {
     setValue(value.filter((item) => item !== name));
@@ -94,7 +94,13 @@ const DropDown = (props: DropDownProps) => {
               input.current?.focus();
             }}
           >
-            <span>{props.defaultValue ? props.defaultValue : value.length === 0 ? props.placeholder : value[0]}</span>
+            <span>
+              {props.defaultValue
+                ? props.defaultValue
+                : value.length === 0
+                ? props.placeholder
+                : value[0]}
+            </span>
             <MdOutlineArrowDropDown className="!text-xl" />
           </button>
           {showDrop && (
@@ -116,8 +122,6 @@ const DropDown = (props: DropDownProps) => {
                             }
                           }}
                           checkBox={true}
-                          
-                        
                           value={" همه"}
                         >
                           همه
@@ -161,14 +165,12 @@ const DropDown = (props: DropDownProps) => {
                     isChecked={false}
                     setValue={onChange}
                     checkBox={props.checkBox || false}
-                    
                     value={""}
                   >
-                      گزینه ای یافت نشد
-                    </SelectOption>
+                    گزینه ای یافت نشد
+                  </SelectOption>
                 ) : (
                   <>
-                    
                     {props.data?.map((item) => (
                       <SelectOption
                         onChange={props.onChange}
@@ -176,11 +178,10 @@ const DropDown = (props: DropDownProps) => {
                         setValue={onChange}
                         checkBox={props.checkBox || false}
                         key={item}
-                        
                         value={item}
                       >
                         {item}
-                        </SelectOption>
+                      </SelectOption>
                     ))}
                   </>
                 )}
