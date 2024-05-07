@@ -12,14 +12,14 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import { debounce } from "@/tools/debounce";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { SurveyValidation, SurveyValidationType } from "@/validation";
 interface FormProps extends Survay {
   pagination: (value: number) => void;
   tabIndex: number;
   numberSurvey: number;
 }
-interface Answer {
-  answer: string;
-}
+
 const Form = ({
   QuestionType,
   tabIndex,
@@ -38,15 +38,16 @@ const Form = ({
     handleSubmit,
     watch,
     formState: { errors, isDirty, isValid },
-  } = useForm<Answer>({
+  } = useForm<SurveyValidationType>({
     mode: "all",
     defaultValues: {
       answer: QuestionAnwseredValue,
     },
+    resolver : zodResolver(SurveyValidation)
   });
 
   const questionRules = QuestionRules.split(",");
-  const onSubmit = (data: Answer) => {
+  const onSubmit = (data: SurveyValidationType) => {
     const newState: Survay = {
       QuestionType,
       QuestionDesc,
@@ -86,7 +87,7 @@ const Form = ({
       return () => subscription.unsubscribe();
     }
   }, [watch]);
-  
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -110,7 +111,7 @@ const Form = ({
             <Controller
               rules={{
                 required:
-                  QuestionRequired === 1 && "پر کردن این بخش اجباری است",
+                  QuestionRequired === 1 ,
               }}
               control={control}
               name="answer"
@@ -122,7 +123,7 @@ const Form = ({
           <Controller
             control={control}
             rules={{
-              required: QuestionRequired === 1 && "پر کردن این بخش اجباری است",
+              required: QuestionRequired === 1 ,
             }}
             name="answer"
             render={({ field }) => (
@@ -141,7 +142,7 @@ const Form = ({
                   control={control}
                   rules={{
                     required:
-                      QuestionRequired === 1 && "پر کردن این بخش اجباری است",
+                      QuestionRequired === 1,
                   }}
                   name="answer"
                   render={({ field }) => (
@@ -172,7 +173,7 @@ const Form = ({
                   name="answer"
                   rules={{
                     required:
-                      QuestionRequired === 1 && "پر کردن این بخش اجباری است",
+                      QuestionRequired === 1 ,
                   }}
                   control={control}
                   render={({ field }) => (
@@ -207,7 +208,7 @@ const Form = ({
           <Controller
             control={control}
             rules={{
-              required: QuestionRequired === 1 && "پر کردن این بخش اجباری است",
+              required: QuestionRequired === 1 ,
             }}
             name="answer"
             render={({ field }) => (
@@ -225,7 +226,7 @@ const Form = ({
           <Controller
             control={control}
             rules={{
-              required: QuestionRequired === 1 && "پر کردن این بخش اجباری است",
+              required: QuestionRequired === 1 ,
             }}
             name="answer"
             render={({ field: { onChange, value } }) => (
@@ -233,8 +234,9 @@ const Form = ({
                 inputClass="py-1 px-2 rounded-lg outline-none placeholder:text-xs"
                 value={value || ""}
                 onChange={(date: DateObject) => {
-                  onChange(date?.isValid ? date : "");
+                  onChange(date?.isValid ? date.format() : "");
                 }}
+                onOpenPickNewDate={false}
                 format={"YYYY/MM/DD"}
                 calendar={persian}
                 locale={persian_fa}
@@ -249,7 +251,7 @@ const Form = ({
           <Controller
             control={control}
             rules={{
-              required: QuestionRequired === 1 && "پر کردن این بخش اجباری است",
+              required: QuestionRequired === 1 ,
             }}
             name="answer"
             render={({ field: { onChange, value } }) => (
@@ -262,7 +264,7 @@ const Form = ({
                 calendarPosition="bottom-right"
                 value={value || ""}
                 onChange={(date: DateObject) => {
-                  onChange(date?.isValid ? date : "");
+                  onChange(date?.isValid ? date.format() : "");
                 }}
                 inputClass="py-1 px-2 rounded-lg outline-none placeholder:text-xs"
                 placeholder="زمان مورد نظر خورد را انتخاب کنید"
@@ -275,7 +277,7 @@ const Form = ({
           <Controller
             control={control}
             rules={{
-              required: QuestionRequired == 1 && "پر کردن این بخش اجباری است",
+              required: QuestionRequired == 1 ,
             }}
             name="answer"
             render={({ field }) => (
