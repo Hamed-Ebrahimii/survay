@@ -18,3 +18,4 @@ export const questionTypesTexts: { [P: number]: string } = {
     7: 'گزینشی'
 }
 export const questionTypes = ["short-answer", "paragraph", "multiple-choice", "single-choice", "linear-scale", "date", "time", "select-option"];
+

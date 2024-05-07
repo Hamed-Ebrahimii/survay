@@ -228,7 +228,7 @@ const Form = ({
             name="answer"
             render={({ field: { onChange, value } }) => (
               <DatePicker
-                className=" bg-dark"
+                inputClass="py-1 px-2 rounded-lg outline-none placeholder:text-xs"
                 value={value || ""}
                 onChange={(date: DateObject) => {
                   onChange(date?.isValid ? date : "");
@@ -237,6 +237,9 @@ const Form = ({
                 calendar={persian}
                 locale={persian_fa}
                 calendarPosition="bottom-right"
+                editable={false}
+                placeholder="تاریخ مورد نظر را انتخاب کنید"
+                
               />
             )}
           />
@@ -256,6 +259,13 @@ const Form = ({
                 calendar={persian}
                 locale={persian_fa}
                 calendarPosition="bottom-right"
+                value={value || ""}
+                onChange={(date: DateObject) => {
+                  onChange(date?.isValid ? date : "");
+                }}
+                inputClass="py-1 px-2 rounded-lg outline-none placeholder:text-xs"
+                placeholder="زمان مورد نظر خورد را انتخاب کنید"
+                editable={false}
               />
             )}
           />
