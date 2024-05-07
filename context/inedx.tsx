@@ -5,7 +5,10 @@ export interface InitialState  {
     state: Survay[],
     setState:  Dispatch<SetStateAction<Survay[]>>,
   };
-export const Context = createContext({});
+export const ContextSurvey = createContext<InitialState>({
+  setState: () => {},
+  state: []
+});
 const ContextProvider = ({ children , survey }: { children: ReactNode , survey : Survay[] }) => {
   const [surveys, setSurveys] = useState<Survay[]>(survey);
   const initialState = {
@@ -16,6 +19,6 @@ const ContextProvider = ({ children , survey }: { children: ReactNode , survey :
     console.log(surveys);
     
   } , [surveys])
-  return <Context.Provider value={initialState}>{children}</Context.Provider>;
+  return <ContextSurvey.Provider value={initialState}>{children}</ContextSurvey.Provider>;
 };
 export default ContextProvider;

@@ -2,8 +2,8 @@ import { Survay, questionTypesTexts } from "@/types/survay";
 import Btn from "./components/btn";
 import Input from "../input";
 import { Controller, useForm } from "react-hook-form";
-import { useContext, useEffect, useState } from "react";
-import { Context, InitialState } from "@/context/inedx";
+import { useContext, useEffect } from "react";
+import { ContextSurvey, InitialState } from "@/context/inedx";
 import { toast } from "react-toastify";
 import DropDown from "../dropDown";
 import Range from "../range";
@@ -32,8 +32,7 @@ const Form = ({
   QuestionDesc,
   QuestionID,
 }: FormProps) => {
-  // @ts-ignore
-  const { state, setState }: InitialState = useContext(Context);
+  const { state, setState }: InitialState = useContext(ContextSurvey);
   const {
     control,
     handleSubmit,
@@ -239,7 +238,6 @@ const Form = ({
                 calendarPosition="bottom-right"
                 editable={false}
                 placeholder="تاریخ مورد نظر را انتخاب کنید"
-                
               />
             )}
           />
