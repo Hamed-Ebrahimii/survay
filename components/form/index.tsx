@@ -8,8 +8,10 @@ import { toast } from "react-toastify";
 import DropDown from "../dropDown";
 import Range from "../range";
 import DatePicker, { DateObject } from "react-multi-date-picker";
-import persian from "react-date-object/calendars/persian"
-import persian_fa from "react-date-object/locales/persian_fa"
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
+import TimePicker from "react-multi-date-picker/plugins/time_picker";
+import { debounce } from "@/tools/debounce";
 interface FormProps extends Survay {
   pagination: (value: number) => void;
   tabIndex: number;
@@ -36,7 +38,6 @@ const Form = ({
     control,
     handleSubmit,
     watch,
-    
     formState: { errors, isDirty, isValid },
   } = useForm<Answer>({
     mode: "all",
@@ -44,13 +45,7 @@ const Form = ({
       answer: QuestionAnwseredValue,
     },
   });
-  useEffect(() => {
-    if (errors.answer?.message) {
-      toast(errors.answer.message, {
-        type: "error",
-      });
-    }
-  }, [errors.answer?.message]);
+
   const questionRules = QuestionRules.split(",");
   const onSubmit = (data: Answer) => {
     const newState: Survay = {
@@ -79,16 +74,29 @@ const Form = ({
     return false;
   };
   useEffect(() => {
-    if (QuestionType === 3 && tabIndex + 1 < numberSurvey) {
+    if (
+      QuestionType !== 0 &&
+      QuestionType !== 1 &&
+      QuestionType !== 5 &&
+      QuestionType !== 6 &&
+      tabIndex + 1 < numberSurvey
+    ) {
       const subscription = watch(() => handleSubmit(onSubmit)());
-        
-        
       return () => subscription.unsubscribe();
     }
   }, [handleSubmit, watch]);
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
+      onChange={() => {
+        debounce(1000, () => {
+          if (errors.answer?.message) {
+            toast(errors.answer.message, {
+              type: "error",
+            });
+          }
+        });
+      }}
       className="w-full flex flex-col h-full !min-h-[450px]"
     >
       <p className="text-xl font-medium text-white font-yekan">
@@ -108,7 +116,7 @@ const Form = ({
               render={({ field }) => <Input type="text" {...field} />}
             />
           ))}
-          {QuestionType === 1 && (
+        {QuestionType === 1 && (
           <Controller
             control={control}
             rules={{
@@ -153,7 +161,7 @@ const Form = ({
             ))}
           </div>
         )}
-       
+
         {QuestionType === 3 && (
           <div className="w-full grid grid-cols-2 items-center justify-center gap-5">
             {questionRules?.map((item) => (
@@ -184,7 +192,7 @@ const Form = ({
                 />
                 <label
                   htmlFor={item}
-                  className="flex gap-2 items-center w-ful bg-blue-custome hover:bg-blue-primary justify-center !m-0 w-full border rounded-lg p-5 text-lg font-medium text-white peer-checked:bg-blue-primary"
+                  className="flex gap-2 items-center w-full bg-blue-custome hover:bg-blue-primary justify-center !m-0  border rounded-lg p-5 text-lg font-medium text-white peer-checked:bg-blue-primary"
                 >
                   {item}
                 </label>
@@ -192,7 +200,7 @@ const Form = ({
             ))}
           </div>
         )}
-        
+
         {QuestionType === 4 && (
           <Controller
             control={control}
@@ -218,21 +226,41 @@ const Form = ({
               required: QuestionRequired === 1 && "پر کردن این بخش اجباری است",
             }}
             name="answer"
-            render={({ field : {onChange , value} }) => (
+            render={({ field: { onChange, value } }) => (
               <DatePicker
-              value={value || ""}
-              onChange={(date : DateObject) => {
-                onChange(date?.isValid ? date : "");
-              }}
-              format={"YYYY/MM/DD"}
-              calendar={persian}
-              locale={persian_fa}
-              calendarPosition="bottom-right"
-            />
+                className=" bg-dark"
+                value={value || ""}
+                onChange={(date: DateObject) => {
+                  onChange(date?.isValid ? date : "");
+                }}
+                format={"YYYY/MM/DD"}
+                calendar={persian}
+                locale={persian_fa}
+                calendarPosition="bottom-right"
+              />
             )}
           />
         )}
-         {QuestionType === 7 && (
+        {QuestionType === 6 && (
+          <Controller
+            control={control}
+            rules={{
+              required: QuestionRequired === 1 && "پر کردن این بخش اجباری است",
+            }}
+            name="answer"
+            render={({ field: { onChange, value } }) => (
+              <DatePicker
+                disableDayPicker
+                format="HH:mm"
+                plugins={[<TimePicker key={undefined} hideSeconds />]}
+                calendar={persian}
+                locale={persian_fa}
+                calendarPosition="bottom-right"
+              />
+            )}
+          />
+        )}
+        {QuestionType === 7 && (
           <Controller
             control={control}
             rules={{

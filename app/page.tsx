@@ -1,7 +1,6 @@
 "use server";
 import { getAllSurvay } from "@/api/getAllSurvay";
 import BoxForm from "@/components/box";
-import Form from "@/components/box";
 import ContextProvider from "@/context/inedx";
 import QueryProvider from "@/provider/reactQuery";
 
