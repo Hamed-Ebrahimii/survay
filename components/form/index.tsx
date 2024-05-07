@@ -43,7 +43,6 @@ const Form = ({
     defaultValues: {
       answer: QuestionAnwseredValue,
     },
-    resolver: zodResolver(SurveyValidation),
   });
 
   const questionRules = QuestionRules.split(",");
@@ -113,6 +112,7 @@ const Form = ({
               control={control}
               name="answer"
               key={item}
+              rules={{ required: QuestionRequired === 1 }}
               render={({ field }) => <Input type="text" {...field} />}
             />
           ))}
@@ -120,6 +120,7 @@ const Form = ({
           <Controller
             control={control}
             name="answer"
+            rules={{ required: QuestionRequired === 1 }}
             render={({ field }) => (
               <textarea
                 {...field}
@@ -135,6 +136,7 @@ const Form = ({
                 <Controller
                   control={control}
                   name="answer"
+                  rules={{ required: QuestionRequired === 1 }}
                   render={({ field }) => (
                     <Input
                       {...field}
@@ -161,6 +163,7 @@ const Form = ({
               <div className="" key={item}>
                 <Controller
                   name="answer"
+                  rules={{ required: QuestionRequired === 1 }}
                   control={control}
                   render={({ field }) => (
                     <Input
@@ -194,6 +197,7 @@ const Form = ({
           <Controller
             control={control}
             name="answer"
+            rules={{ required: QuestionRequired === 1 }}
             render={({ field }) => (
               <div className="w-full px-4 py-1  rounded-full  flex items-center justify-center flex-wrap ">
                 <Range
@@ -209,6 +213,7 @@ const Form = ({
           <Controller
             control={control}
             name="answer"
+            rules={{ required: QuestionRequired === 1 }}
             render={({ field: { onChange, value } }) => (
               <DatePicker
                 inputClass="py-1 px-2 rounded-lg outline-none placeholder:text-xs"
@@ -231,6 +236,7 @@ const Form = ({
           <Controller
             control={control}
             name="answer"
+            rules={{ required: QuestionRequired === 1 }}
             render={({ field: { onChange, value } }) => (
               <DatePicker
                 disableDayPicker
@@ -253,6 +259,7 @@ const Form = ({
         {QuestionType === 7 && (
           <Controller
             control={control}
+            rules={{ required: QuestionRequired === 1 }}
             name="answer"
             render={({ field }) => (
               <div className="col-span-2">
