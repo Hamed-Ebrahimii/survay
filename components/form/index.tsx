@@ -279,6 +279,7 @@ const Form = ({
       <div className="w-full flex items-center justify-between my-4 ">
         <div>
           <Btn
+          className=""
             type="button"
             disabled={tabIndex <= 0}
             onClick={() => pagination(-1)}
@@ -287,7 +288,7 @@ const Form = ({
           </Btn>
         </div>
         <div className="min-w-[118px]">
-          <Btn type="submit" disabled={checkDisabled()}>
+          <Btn className="neo-btn" type="submit" disabled={checkDisabled()}>
             {numberSurvey <= tabIndex + 1 ? "پایان" : " سوال بعدی"}
           </Btn>
         </div>

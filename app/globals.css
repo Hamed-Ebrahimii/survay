@@ -1,22 +1,32 @@
 @font-face {
-    font-family: 'yekan';
-    src: url('/font/Yekan.ttf');
+  font-family: "yekan";
+  src: url("/font/Yekan.ttf");
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 .glass {
-/* From https://css.glass */
-background: rgba(0, 0, 0, 0.36);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(10.8px);
--webkit-backdrop-filter: blur(10.8px);
-border: 1px solid rgba(0, 0, 0, 0.3);
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 11.5px );
+    -webkit-backdrop-filter: blur( 11.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
-.gradient{
-    background: rgb(180,58,85);
-background: linear-gradient(90deg, rgba(180,58,85,1) 0%, rgba(253,29,29,1) 25%, rgba(252,176,69,1) 100%);
+.gradient {
+  background: rgb(180, 58, 85);
+  background: linear-gradient(
+    90deg,
+    rgba(180, 58, 85, 1) 0%,
+    rgba(253, 29, 29, 1) 25%,
+    rgba(252, 176, 69, 1) 100%
+  );
+}
+.neo {
+    border-radius: 12px;
+    background: linear-gradient(145deg, #304799, #3955b6);
+    box-shadow:  11px 11px 22px #2d4391,
+                 -11px -11px 22px #3d5bc4;
 }

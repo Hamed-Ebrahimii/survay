@@ -13,7 +13,7 @@ const Range = (
   console.log(array);
   
   return (
-    <div className="rounded-md flex items-center overflow-hidden">
+    <div className=" flex items-center overflow-hidden gap-2 p-1 px-3 rounded-lg">
       
         {
           array.map(item => <Radio key={item} value={item} onChange={props.onChange}/>)

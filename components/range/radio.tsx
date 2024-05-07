@@ -25,9 +25,11 @@ const Radio = (
       />
       <label
         htmlFor={String(props.value)}
-        className={`border-r py-3 block px-6 text-lg text-white font-medium peer-checked:bg-blue-custome border bg-blue-primary/30 border-blue-custome  hover:bg-blue-primary`}
+        className={`group item py-3 block px-6 text-lg text-white font-medium  rounded-lg bg-orange-secondary/80 hover:bg-orange-secondary cursor-pointer `}
       >
+        <span className={'group-hover scale-110 transition-all'}>
         {props.value}
+        </span>
       </label>
     </div>
   );
