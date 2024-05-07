@@ -2,7 +2,7 @@ import { Survay, questionTypesTexts } from "@/types/survay";
 import Btn from "./components/btn";
 import Input from "../input";
 import { Controller, useForm } from "react-hook-form";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { ContextSurvey, InitialState } from "@/context/inedx";
 import { toast } from "react-toastify";
 import DropDown from "../dropDown";
@@ -13,6 +13,8 @@ import persian_fa from "react-date-object/locales/persian_fa";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import { debounce } from "@/tools/debounce";
 import { SurveyValidationType } from "@/validation";
+import { TiTick } from "react-icons/ti";
+import anime from 'animejs/lib/anime.es.js';
 interface FormProps extends Survay {
   pagination: (value: number) => void;
   tabIndex: number;
@@ -35,6 +37,7 @@ const Form = ({
     control,
     handleSubmit,
     watch,
+    getValues,
     formState: { errors, isDirty, isValid },
   } = useForm<SurveyValidationType>({
     mode: "all",
@@ -58,9 +61,8 @@ const Form = ({
     );
     state.splice(QuestionFindIndex, 1, newState);
     setState(state);
-    console.log(state);
-    
-    pagination(1);
+
+    debounce(2000, () => pagination(1));
   };
   const checkDisabled = () => {
     if (QuestionRequired) {
@@ -80,12 +82,19 @@ const Form = ({
       tabIndex + 1 < numberSurvey
     ) {
       const subscription = watch(() => handleSubmit(onSubmit)());
+      animeTick()
       return () => subscription.unsubscribe();
     }
   }, [watch]);
-  useEffect(() => {
-    console.log(errors.answer?.message);
-  }, [errors.answer?.message]);
+  const animeTick = () =>{
+    anime({
+      targets : tick,
+      opacity :  "1",
+      duration : 500,
+      
+    }).play()
+  }
+  const tick = useRef<HTMLDivElement>()
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -182,9 +191,14 @@ const Form = ({
                 />
                 <label
                   htmlFor={item}
-                  className="flex gap-2 items-center w-full bg-orange-secondary/80 hover:bg-orange-secondary justify-center !m-0  border rounded-lg p-5 text-lg font-medium text-white peer-checked:bg-orange-secondary"
+                  className="flex relative gap-2 items-center w-full bg-orange-secondary/80 hover:bg-orange-secondary justify-center !m-0  border rounded-lg p-5 text-lg font-medium text-white peer-checked:bg-orange-secondary"
                 >
                   {item}
+                  {getValues("answer") === item && (
+                    <div ref={tick} className="size-5 absolute left-1 bottom-1 flex items-center justify-center rounded-full opacity-0 bg-slate-50/50 tick">
+                      <TiTick className=" text-green-400 " />
+                    </div>
+                  )}
                 </label>
               </div>
             ))}

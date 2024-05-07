@@ -26,7 +26,10 @@
 }
 .neo {
   border-radius: 44px;
+  
   background: #FF8911;
   box-shadow: inset 26px 26px 51px #a6590b,
               inset -26px -26px 51px #ffb917
+              
+        
 }
