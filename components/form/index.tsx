@@ -149,7 +149,7 @@ const Form = ({
                 />
                 <label
                   htmlFor={item}
-                  className="flex gap-2 items-center w-ful bg-blue-custome hover:bg-blue-primary justify-center !m-0 w-full border rounded-lg p-5 text-lg font-medium text-white peer-checked:bg-blue-primary"
+                  className="flex gap-2 items-center w-ful bg-orange-secondary/80 hover:bg-orange-secondary justify-center !m-0 w-full border rounded-lg p-5 text-lg font-medium text-white peer-checked:bg-orange-secondary"
                 >
                   {item}
                 </label>
@@ -185,7 +185,7 @@ const Form = ({
                 />
                 <label
                   htmlFor={item}
-                  className="flex gap-2 items-center w-full bg-blue-custome hover:bg-blue-primary justify-center !m-0  border rounded-lg p-5 text-lg font-medium text-white peer-checked:bg-blue-primary"
+                  className="flex gap-2 items-center w-full bg-orange-secondary/80 hover:bg-orange-secondary justify-center !m-0  border rounded-lg p-5 text-lg font-medium text-white peer-checked:bg-orange-secondary"
                 >
                   {item}
                 </label>
@@ -200,7 +200,7 @@ const Form = ({
             
             name="answer"
             render={({ field }) => (
-              <div className="w-full px-4 py-1  rounded-full  flex items-center justify-center  ">
+              <div className="w-full px-4 py-1  rounded-full  flex items-center justify-center flex-wrap ">
                 <Range
                   {...field}
                   min={+questionRules[0]}
@@ -288,7 +288,7 @@ const Form = ({
           </Btn>
         </div>
         <div className="min-w-[118px]">
-          <Btn className="neo-btn" type="submit" disabled={checkDisabled()}>
+          <Btn  type="submit" disabled={checkDisabled()}>
             {numberSurvey <= tabIndex + 1 ? "پایان" : " سوال بعدی"}
           </Btn>
         </div>

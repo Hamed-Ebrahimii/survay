@@ -8,12 +8,12 @@
 @tailwind components;
 @tailwind utilities;
 .glass {
-    background: rgba( 255, 255, 255, 0.25 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 11.5px );
-    -webkit-backdrop-filter: blur( 11.5px );
-    border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(11.5px);
+  -webkit-backdrop-filter: blur(11.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 .gradient {
   background: rgb(180, 58, 85);
@@ -25,8 +25,8 @@
   );
 }
 .neo {
-    border-radius: 12px;
-    background: linear-gradient(145deg, #304799, #3955b6);
-    box-shadow:  11px 11px 22px #2d4391,
-                 -11px -11px 22px #3d5bc4;
+  border-radius: 44px;
+  background: #FF8911;
+  box-shadow: inset 26px 26px 51px #a6590b,
+              inset -26px -26px 51px #ffb917
 }

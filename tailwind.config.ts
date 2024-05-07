@@ -30,7 +30,8 @@ const config: Config = {
           secondary : '#FF8911'
         },
         yellow : {
-          primary : '#FFF455'
+          primary : '#FFF455',
+          secondary : '#FDDE55'
         }
       },
     },
