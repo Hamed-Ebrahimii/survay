@@ -58,6 +58,8 @@ const Form = ({
     );
     state.splice(QuestionFindIndex, 1, newState);
     setState(state);
+    console.log(state);
+    
     pagination(1);
   };
   const checkDisabled = () => {
@@ -246,7 +248,7 @@ const Form = ({
                   onChange(date?.isValid ? date.format() : "");
                 }}
                 onOpenPickNewDate={false}
-                inputClass="py-1 px-2 rounded-lg outline-none placeholder:text-xs"
+                inputClass="py-1 px-2 rounded-lg outline-none placeholder:text-xs placeholder:text-white bg-orange-secondary text-white"
                 placeholder="زمان مورد نظر خورد را انتخاب کنید"
                 editable={false}
               />
