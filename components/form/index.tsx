@@ -73,6 +73,7 @@ const Form = ({
     return false;
   };
   useEffect(() => {
+    console.log(handleSubmit , watch);
     if (
       QuestionType !== 0 &&
       QuestionType !== 1 &&
@@ -81,9 +82,11 @@ const Form = ({
       tabIndex + 1 < numberSurvey
     ) {
       const subscription = watch(() => handleSubmit(onSubmit)());
+      
       return () => subscription.unsubscribe();
     }
-  }, [handleSubmit, watch]);
+  }, [watch]);
+  
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}

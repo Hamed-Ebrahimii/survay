@@ -9,11 +9,11 @@ import { useContext, useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Form from "../form";
 import "react-toastify/dist/ReactToastify.css";
-import { Context, InitialState } from "@/context/inedx";
+import { ContextSurvey, InitialState } from "@/context/inedx";
 const BoxForm = () => {
   const [tabIndex, setTabIndex] = useState<number>(0);
   //@ts-ignore
-  const { setState, state: surveys }: InitialState = useContext(Context);
+  const { setState, state: surveys }: InitialState = useContext(ContextSurvey);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabIndex(newValue);
   };
