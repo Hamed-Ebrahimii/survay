@@ -7,6 +7,9 @@ import { Context, InitialState } from "@/context/inedx";
 import { toast } from "react-toastify";
 import DropDown from "../dropDown";
 import Range from "../range";
+import DatePicker, { DateObject } from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian"
+import persian_fa from "react-date-object/locales/persian_fa"
 interface FormProps extends Survay {
   pagination: (value: number) => void;
   tabIndex: number;
@@ -33,6 +36,7 @@ const Form = ({
     control,
     handleSubmit,
     watch,
+    
     formState: { errors, isDirty, isValid },
   } = useForm<Answer>({
     mode: "all",
@@ -77,7 +81,8 @@ const Form = ({
   useEffect(() => {
     if (QuestionType === 3 && tabIndex + 1 < numberSurvey) {
       const subscription = watch(() => handleSubmit(onSubmit)());
-
+        
+        
       return () => subscription.unsubscribe();
     }
   }, [handleSubmit, watch]);
@@ -103,65 +108,7 @@ const Form = ({
               render={({ field }) => <Input type="text" {...field} />}
             />
           ))}
-        {QuestionType === 7 && (
-          <Controller
-            control={control}
-            rules={{
-              required: QuestionRequired == 1 && "پر کردن این بخش اجباری است",
-            }}
-            name="answer"
-            render={({ field }) => (
-              <div className="col-span-2">
-                <DropDown
-                  name={field.name}
-                  onChange={field.onChange}
-                  data={["بله", "خیر"]}
-                  lable=""
-                  defaultValue={field.value}
-                />
-              </div>
-            )}
-          />
-        )}
-        {QuestionType === 3 && (
-          <div className="w-full grid grid-cols-2 items-center justify-center gap-5">
-            {questionRules?.map((item) => (
-              <div className="" key={item}>
-                <Controller
-                  name="answer"
-                  rules={{
-                    required:
-                      QuestionRequired === 1 && "پر کردن این بخش اجباری است",
-                  }}
-                  control={control}
-                  render={({ field }) => (
-                    <Input
-                      type={"radio"}
-                      onChange={(e) => {
-                        field.onChange(e.target.value);
-                      }}
-                      defaultChecked={
-                        item === QuestionAnwseredValue || undefined
-                      }
-                      placeholder={item}
-                      value={item}
-                      id={item}
-                      name="answer"
-                      className="hidden peer"
-                    />
-                  )}
-                />
-                <label
-                  htmlFor={item}
-                  className="flex gap-2 items-center w-ful bg-blue-custome hover:bg-blue-primary justify-center !m-0 w-full border rounded-lg p-5 text-lg font-medium text-white peer-checked:bg-blue-primary"
-                >
-                  {item}
-                </label>
-              </div>
-            ))}
-          </div>
-        )}
-        {QuestionType === 1 && (
+          {QuestionType === 1 && (
           <Controller
             control={control}
             rules={{
@@ -206,6 +153,46 @@ const Form = ({
             ))}
           </div>
         )}
+       
+        {QuestionType === 3 && (
+          <div className="w-full grid grid-cols-2 items-center justify-center gap-5">
+            {questionRules?.map((item) => (
+              <div className="" key={item}>
+                <Controller
+                  name="answer"
+                  rules={{
+                    required:
+                      QuestionRequired === 1 && "پر کردن این بخش اجباری است",
+                  }}
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      type={"radio"}
+                      onChange={(e) => {
+                        field.onChange(e.target.value);
+                      }}
+                      defaultChecked={
+                        item === QuestionAnwseredValue || undefined
+                      }
+                      placeholder={item}
+                      value={item}
+                      id={item}
+                      name="answer"
+                      className="hidden peer"
+                    />
+                  )}
+                />
+                <label
+                  htmlFor={item}
+                  className="flex gap-2 items-center w-ful bg-blue-custome hover:bg-blue-primary justify-center !m-0 w-full border rounded-lg p-5 text-lg font-medium text-white peer-checked:bg-blue-primary"
+                >
+                  {item}
+                </label>
+              </div>
+            ))}
+          </div>
+        )}
+        
         {QuestionType === 4 && (
           <Controller
             control={control}
@@ -231,12 +218,37 @@ const Form = ({
               required: QuestionRequired === 1 && "پر کردن این بخش اجباری است",
             }}
             name="answer"
+            render={({ field : {onChange , value} }) => (
+              <DatePicker
+              value={value || ""}
+              onChange={(date : DateObject) => {
+                onChange(date?.isValid ? date : "");
+              }}
+              format={"YYYY/MM/DD"}
+              calendar={persian}
+              locale={persian_fa}
+              calendarPosition="bottom-right"
+            />
+            )}
+          />
+        )}
+         {QuestionType === 7 && (
+          <Controller
+            control={control}
+            rules={{
+              required: QuestionRequired == 1 && "پر کردن این بخش اجباری است",
+            }}
+            name="answer"
             render={({ field }) => (
-              <Input
-                {...field}
-                type="date"
-                className="textarea textarea-info font-yekan w-full"
-              ></Input>
+              <div className="col-span-2">
+                <DropDown
+                  name={field.name}
+                  onChange={field.onChange}
+                  data={["بله", "خیر"]}
+                  lable=""
+                  defaultValue={field.value}
+                />
+              </div>
             )}
           />
         )}

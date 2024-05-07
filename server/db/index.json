@@ -14,7 +14,7 @@
       "QuestionID": 99,
       "QuestionText": "به سرعت هماهنگی جهت امور درخواستی شما توسط کارشناسان چه امتیازی می دهید؟",
       "QuestionDesc": null,
-      "QuestionType": 2,
+      "QuestionType": 3,
       "QuestionRequired": 1,
       "QuestionRules": "1,2,3,4,5"
     },
