@@ -6,7 +6,6 @@ import { useContext, useEffect, useState } from "react";
 import { Context, InitialState } from "@/context/inedx";
 import { toast } from "react-toastify";
 import DropDown from "../dropDown";
-import { Slider } from "@mui/material";
 import Range from "../range";
 interface FormProps extends Survay {
   pagination: (value: number) => void;
@@ -124,38 +123,44 @@ const Form = ({
             )}
           />
         )}
-        {QuestionType === 3 &&
-          questionRules?.map((item) => (
-            <div className="flex gap-2 items-center w-ful !m-0" key={item}>
-              <label
-                htmlFor={item}
-                className="text-lg font-yekan font-medium text-white"
-              >
-                {item}
-              </label>
-              <Controller
-                name="answer"
-                rules={{
-                  required:
-                    QuestionRequired === 1 && "پر کردن این بخش اجباری است",
-                }}
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    type={"radio"}
-                    onChange={(e) => {
-                      field.onChange(e.target.value);
-                    }}
-                    defaultChecked={item === QuestionAnwseredValue || undefined}
-                    placeholder={item}
-                    value={item}
-                    id={item}
-                    name="answer"
-                  />
-                )}
-              />
-            </div>
-          ))}
+        {QuestionType === 3 && (
+          <div className="w-full grid grid-cols-2 items-center justify-center gap-5">
+            {questionRules?.map((item) => (
+              <div className="" key={item}>
+                <Controller
+                  name="answer"
+                  rules={{
+                    required:
+                      QuestionRequired === 1 && "پر کردن این بخش اجباری است",
+                  }}
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      type={"radio"}
+                      onChange={(e) => {
+                        field.onChange(e.target.value);
+                      }}
+                      defaultChecked={
+                        item === QuestionAnwseredValue || undefined
+                      }
+                      placeholder={item}
+                      value={item}
+                      id={item}
+                      name="answer"
+                      className="hidden peer"
+                    />
+                  )}
+                />
+                <label
+                  htmlFor={item}
+                  className="flex gap-2 items-center w-ful bg-blue-custome hover:bg-blue-primary justify-center !m-0 w-full border rounded-lg p-5 text-lg font-medium text-white peer-checked:bg-blue-primary"
+                >
+                  {item}
+                </label>
+              </div>
+            ))}
+          </div>
+        )}
         {QuestionType === 1 && (
           <Controller
             control={control}
@@ -171,32 +176,36 @@ const Form = ({
             )}
           />
         )}
-        {QuestionType === 2 &&
-          questionRules.map((item) => (
-            <div key={item} className="flex items-center gap-2 !margin-0">
-              <label
-                htmlFor={item}
-                className="text-lg font-yekan font-medium text-white"
-              >
-                {item}
-              </label>
-              <Controller
-                control={control}
-                rules={{
-                  required:
-                    QuestionRequired === 1 && "پر کردن این بخش اجباری است",
-                }}
-                name="answer"
-                render={({ field }) => (
-                  <Input
-                    {...field}
-                    type="checkbox"
-                    className=" font-yekan w-full"
-                  ></Input>
-                )}
-              />
-            </div>
-          ))}
+        {QuestionType === 2 && (
+          <div className="grid grid-cols-2 gap-5">
+            {questionRules.map((item) => (
+              <div key={item} className="flex items-center gap-2 !margin-0">
+                <Controller
+                  control={control}
+                  rules={{
+                    required:
+                      QuestionRequired === 1 && "پر کردن این بخش اجباری است",
+                  }}
+                  name="answer"
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      type="checkbox"
+                      id={item}
+                      className=" font-yekan w-full hidden peer"
+                    ></Input>
+                  )}
+                />
+                <label
+                  htmlFor={item}
+                  className="flex gap-2 items-center w-ful bg-blue-custome hover:bg-blue-primary justify-center !m-0 w-full border rounded-lg p-5 text-lg font-medium text-white peer-checked:bg-blue-primary"
+                >
+                  {item}
+                </label>
+              </div>
+            ))}
+          </div>
+        )}
         {QuestionType === 4 && (
           <Controller
             control={control}
@@ -207,7 +216,7 @@ const Form = ({
             render={({ field }) => (
               <div className="w-full px-4 py-1  rounded-full  flex items-center justify-center  ">
                 <Range
-                {...field}
+                  {...field}
                   min={+questionRules[0]}
                   max={+questionRules.slice(-1)[0]}
                 />

@@ -20,7 +20,9 @@ const config: Config = {
       },
       colors : {
         blue : {
-          dark : '#253382'
+          dark : '#253382',
+          custome : '#2176ff',
+          primary : '#33a1fd'
         } 
       }
     },
