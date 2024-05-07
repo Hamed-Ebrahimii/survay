@@ -110,7 +110,6 @@ const Form = ({
         {QuestionType === 0 &&
           QuestionRules.split(",")?.map((item) => (
             <Controller
-             
               control={control}
               name="answer"
               key={item}
@@ -120,7 +119,6 @@ const Form = ({
         {QuestionType === 1 && (
           <Controller
             control={control}
-            
             name="answer"
             render={({ field }) => (
               <textarea
@@ -136,7 +134,6 @@ const Form = ({
               <div key={item} className="flex items-center gap-2 !margin-0">
                 <Controller
                   control={control}
-                  
                   name="answer"
                   render={({ field }) => (
                     <Input
@@ -164,7 +161,6 @@ const Form = ({
               <div className="" key={item}>
                 <Controller
                   name="answer"
-                  
                   control={control}
                   render={({ field }) => (
                     <Input
@@ -197,7 +193,6 @@ const Form = ({
         {QuestionType === 4 && (
           <Controller
             control={control}
-            
             name="answer"
             render={({ field }) => (
               <div className="w-full px-4 py-1  rounded-full  flex items-center justify-center flex-wrap ">
@@ -213,7 +208,6 @@ const Form = ({
         {QuestionType === 5 && (
           <Controller
             control={control}
-            
             name="answer"
             render={({ field: { onChange, value } }) => (
               <DatePicker
@@ -236,7 +230,6 @@ const Form = ({
         {QuestionType === 6 && (
           <Controller
             control={control}
-           
             name="answer"
             render={({ field: { onChange, value } }) => (
               <DatePicker
@@ -260,7 +253,6 @@ const Form = ({
         {QuestionType === 7 && (
           <Controller
             control={control}
-            
             name="answer"
             render={({ field }) => (
               <div className="col-span-2">
@@ -279,7 +271,7 @@ const Form = ({
       <div className="w-full flex items-center justify-between my-4 ">
         <div>
           <Btn
-          className=""
+            className=""
             type="button"
             disabled={tabIndex <= 0}
             onClick={() => pagination(-1)}
@@ -288,7 +280,7 @@ const Form = ({
           </Btn>
         </div>
         <div className="min-w-[118px]">
-          <Btn  type="submit" disabled={checkDisabled()}>
+          <Btn type="submit" disabled={checkDisabled()}>
             {numberSurvey <= tabIndex + 1 ? "پایان" : " سوال بعدی"}
           </Btn>
         </div>

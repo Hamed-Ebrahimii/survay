@@ -21,13 +21,13 @@ const config: Config = {
       colors: {
         blue: {
           dark: "#253382",
-          custome: "#354faa",
+          custome: "#5AB2FF",
           primary: "#4663c2",
           hover: "#85A5F5",
         },
         orange : {
-          primary : '#FFC470',
-          secondary : '#FF8911'
+          primary : '#FFBB70',
+          secondary : '#ED9455'
         },
         yellow : {
           primary : '#FFF455',
