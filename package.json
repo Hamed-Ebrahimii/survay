@@ -15,6 +15,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@mantine/core": "^7.9.0",
     "@mantine/hooks": "^7.9.0",
+    "@material-tailwind/react": "^2.1.9",
     "@mui/icons-material": "^5.15.16",
     "@mui/lab": "^5.0.0-alpha.170",
     "@mui/material": "^5.15.15",

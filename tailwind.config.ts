@@ -1,7 +1,7 @@
-import { blue, orange, yellow } from "@mui/material/colors";
+const withMT = require("@material-tailwind/react/utils/withMT");
 import type { Config } from "tailwindcss";
 
-const config: Config = {
+const config: Config = withMT({
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -44,10 +44,11 @@ const config: Config = {
         },
       },
       boxShadow : {
-        neo : ' 6px 6px 10px -1px rgba(0,0,0,0.15), -3px -3px 5px -1px rgba(255,255,255,0.7)'
+        neo : ' -5px 11px 80px -25px rgba(0,0,0,0.52)',
+        normal  : ' 6px 6px 10px 0px rgba(0, 0, 0, 0.4)'
       }
     },
   },
-  plugins: [require("daisyui")],
-};
+  plugins: [],
+});
 export default config;

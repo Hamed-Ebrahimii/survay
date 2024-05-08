@@ -2,7 +2,7 @@ import { Survay } from "@/types/survay";
 import Btn from "./components/btn";
 import Input from "../input";
 import { Controller, useForm } from "react-hook-form";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ContextSurvey, InitialState } from "@/context/inedx";
 import { toast } from "react-toastify";
 import DropDown from "../dropDown";
@@ -31,6 +31,7 @@ const Form = ({
   QuestionID,
 }: FormProps) => {
   const { state, setState }: InitialState = useContext(ContextSurvey);
+  const [isSelected, setIsSelcted] = useState<number[]>([]);
   const {
     control,
     handleSubmit,
@@ -58,8 +59,9 @@ const Form = ({
     );
     state.splice(QuestionFindIndex, 1, newState);
     setState(state);
+    console.log(state);
 
-    debounce(1000, () => pagination(1));
+    // debounce(1000, () => pagination(1));
   };
   const checkDisabled = () => {
     if (QuestionRequired) {
@@ -109,7 +111,7 @@ const Form = ({
               name="answer"
               key={item}
               rules={{ required: QuestionRequired === 1 }}
-              render={({ field }) => <Input type="text" {...field} />}
+              render={({ field }) => <Input label={item} type="text" {...field} />}
             />
           ))}
         {QuestionType === 1 && (
@@ -132,37 +134,29 @@ const Form = ({
                 key={item}
                 className="flex w-3/4 relative items-center gap-2 mx-auto !margin-0"
               >
-                <label
-                  htmlFor={item}
-                  className="flex glass relative   gap-2 peer-checked:scale-105 transition-all text-justify  items-center !m-0 w-full border rounded-lg p-5 text-lg font-medium text-white"
-                >
+                
                   <Controller
                     control={control}
                     name="answer"
                     rules={{ required: QuestionRequired === 1 }}
                     render={({ field }) => (
                       <Input
+                      label={item}
                         onChange={(e) => {
                           field.onChange(e.target.value);
-                          const parrent = e.target
-                            .parentNode as HTMLInputElement;
-                          if (e.target.checked) {
-                            parrent.classList.add("scale-105", "shadow-neo");
-                          } else {
-                            parrent.classList.remove("scale-105", "shadow-neo");
-                          }
+                         
                         }}
                         type="checkbox"
                         id={item}
                         defaultChecked={
                           item === QuestionAnwseredValue || undefined
                         }
-                        className=" font-yekan  peer"
+                        className="items-center"
                       ></Input>
                     )}
                   />
-                  {item}
-                </label>
+                  
+                
               </div>
             ))}
           </div>
@@ -171,36 +165,29 @@ const Form = ({
           <div className="w-full grid grid-cols-2 py-6 px-5 items-center justify-center gap-3">
             {questionRules?.map((item, index) => (
               <div className="w-11/12 mx-auto" key={index}>
-                <label
-                  htmlFor={String(index)}
-                  className="flex break-normal   transition-all flex-row-reverse relative gap-2 text-justify hyphens-auto  w-full glass justify-center !m-0  border rounded-lg p-4 text-lg font-medium text-white cursor-pointer"
-                >
-                  {item}
-                  <Controller
-                    name="answer"
-                    rules={{ required: QuestionRequired === 1 }}
-                    control={control}
-                    render={({ field }) => (
-                      <Input
-                        type={"radio"}
-                        onChange={(e) => {
-                          field.onChange(e.target.value);
-                          const parrent = e.target
-                            .parentNode as HTMLInputElement;
-                          parrent.classList.add("scale-110", "shadow-neo");
-                        }}
-                        defaultChecked={
-                          item === QuestionAnwseredValue || undefined
-                        }
-                        placeholder={item}
-                        value={item}
-                        id={String(index)}
-                        name="answer"
-                        className=" peer"
-                      />
-                    )}
-                  />
-                </label>
+                <Controller
+                  name="answer"
+                  rules={{ required: QuestionRequired === 1 }}
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      label={item}
+                      type={"radio"}
+                      onChange={(e: { target: { value: any; }; }) => {
+                        field.onChange(e.target.value);
+                        setIsSelcted([index]);
+                      }}
+                      defaultChecked={
+                        item === QuestionAnwseredValue || undefined
+                      }
+                      checked={isSelected.includes(index)}
+                      value={item}
+                      id={String(index)}
+                      name="answer"
+                      className="items-start"
+                    />
+                  )}
+                />
               </div>
             ))}
           </div>
@@ -301,7 +288,11 @@ const Form = ({
           </Btn>
         </div>
         <div className="min-w-[118px]">
-          <Btn type="submit" disabled={checkDisabled()}>
+          <Btn
+            type="submit"
+            onClick={() => pagination(1)}
+            disabled={checkDisabled()}
+          >
             {numberSurvey <= tabIndex + 1 ? "پایان" : " سوال بعدی"}
           </Btn>
         </div>
