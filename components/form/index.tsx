@@ -36,6 +36,7 @@ const Form = ({
     control,
     handleSubmit,
     watch,
+    
     formState: { errors, isDirty, isValid },
   } = useForm<SurveyValidationType>({
     mode: "all",
@@ -111,7 +112,9 @@ const Form = ({
               name="answer"
               key={item}
               rules={{ required: QuestionRequired === 1 }}
-              render={({ field }) => <Input label={item} type="text" {...field} />}
+              render={({ field }) => (
+                <Input label={item} type="text" {...field} />
+              )}
             />
           ))}
         {QuestionType === 1 && (
@@ -134,29 +137,23 @@ const Form = ({
                 key={item}
                 className="flex w-3/4 relative items-center gap-2 mx-auto !margin-0"
               >
-                
-                  <Controller
-                    control={control}
-                    name="answer"
-                    rules={{ required: QuestionRequired === 1 }}
-                    render={({ field }) => (
-                      <Input
+                <Controller
+                  control={control}
+                  name="answer"
+                  rules={{ required: QuestionRequired === 1 }}
+                  render={({ field }) => (
+                    <Input
                       label={item}
-                        onChange={(e) => {
-                          field.onChange(e.target.value);
-                         
-                        }}
-                        type="checkbox"
-                        id={item}
-                        defaultChecked={
-                          item === QuestionAnwseredValue || undefined
-                        }
-                        className="items-center"
-                      ></Input>
-                    )}
-                  />
-                  
-                
+                      onChange={(e) => {
+                        field.onChange(e.target.value);
+                      }}
+                      type="checkbox"
+                      id={item}
+                      
+                      className="items-center"
+                    ></Input>
+                  )}
+                />
               </div>
             ))}
           </div>
@@ -173,7 +170,7 @@ const Form = ({
                     <Input
                       label={item}
                       type={"radio"}
-                      onChange={(e: { target: { value: any; }; }) => {
+                      onChange={(e: { target: { value: any } }) => {
                         field.onChange(e.target.value);
                         setIsSelcted([index]);
                       }}
