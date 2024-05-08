@@ -43,6 +43,9 @@ const config: Config = {
           '100%': { transform: 'rotate(-360deg) scale(10)' },
         },
       },
+      boxShadow : {
+        neo : ' 13px 13px 25px #c97e48, -13px -13px 25px #ffaa62'
+      }
     },
   },
   plugins: [require("daisyui")],

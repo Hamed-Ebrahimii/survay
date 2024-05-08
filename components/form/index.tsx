@@ -59,11 +59,11 @@ const Form = ({
     state.splice(QuestionFindIndex, 1, newState);
     setState(state);
 
-    debounce(500 , ()=> pagination(1))
+    debounce(1000 , ()=> pagination(1))
   };
   const checkDisabled = () => {
     if (QuestionRequired) {
-      if (isDirty || isValid) {
+      if ( isValid) {
         return false;
       }
       return true;
@@ -135,7 +135,8 @@ const Form = ({
               >
                 <label
                   htmlFor={item}
-                  className="flex glass gap-2  text-justify  items-center !m-0 w-full border rounded-lg p-5 text-lg font-medium text-white"
+                   
+                  className="flex glass  gap-2 peer-checked:scale-105 transition-all text-justify  items-center !m-0 w-full border rounded-lg p-5 text-lg font-medium text-white"
                 >
                   <Controller
                     control={control}
@@ -143,9 +144,21 @@ const Form = ({
                     rules={{ required: QuestionRequired === 1 }}
                     render={({ field }) => (
                       <Input
-                        {...field}
+                      onChange={(e) => {
+                        field.onChange(e.target.value);
+                        const parrent = e.target.parentNode as HTMLInputElement
+                        if(e.target.checked){
+                          parrent.classList.add('scale-90')
+                        }
+                        else {
+                          parrent.classList.remove('scale-90')
+                        }
+                      }}
                         type="checkbox"
                         id={item}
+                        defaultChecked={
+                          item === QuestionAnwseredValue || undefined
+                        }
                         className=" font-yekan  peer"
                       ></Input>
                     )}
@@ -162,7 +175,7 @@ const Form = ({
               <div className="" key={index}>
                 <label
                   htmlFor={String(index)}
-                  className="flex break-normal peer-checked:scale-105 transition-all flex-row-reverse relative gap-2 text-justify hyphens-auto  w-full glass justify-center !m-0  border rounded-lg p-4 text-lg font-medium text-white cursor-pointer"
+                  className="flex break-normal   transition-all flex-row-reverse relative gap-2 text-justify hyphens-auto  w-full glass justify-center !m-0  border rounded-lg p-4 text-lg font-medium text-white cursor-pointer"
                 >
                   {item}
                   <Controller
@@ -174,6 +187,8 @@ const Form = ({
                         type={"radio"}
                         onChange={(e) => {
                           field.onChange(e.target.value);
+                          const parrent = e.target.parentNode as HTMLInputElement
+                          parrent.classList.add('scale-90')
                         }}
                         defaultChecked={
                           item === QuestionAnwseredValue || undefined
