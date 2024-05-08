@@ -1,4 +1,4 @@
-import { Survay, questionTypesTexts } from "@/types/survay";
+import { Survay } from "@/types/survay";
 import Btn from "./components/btn";
 import Input from "../input";
 import { Controller, useForm } from "react-hook-form";
@@ -13,7 +13,6 @@ import persian_fa from "react-date-object/locales/persian_fa";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import { debounce } from "@/tools/debounce";
 import { SurveyValidationType } from "@/validation";
-import { TiTick } from "react-icons/ti";
 import anime from "animejs/lib/anime.es.js";
 interface FormProps extends Survay {
   pagination: (value: number) => void;
@@ -37,7 +36,6 @@ const Form = ({
     control,
     handleSubmit,
     watch,
-    getValues,
     formState: { errors, isDirty, isValid },
   } = useForm<SurveyValidationType>({
     mode: "all",
@@ -86,6 +84,7 @@ const Form = ({
       return () => subscription.unsubscribe();
     }
   }, [watch]);
+
   const animeTick = () => {
     anime({
       targets: tick,
@@ -119,7 +118,7 @@ const Form = ({
               name="answer"
               key={item}
               rules={{ required: QuestionRequired === 1 }}
-              render={({ field }) => <Input type="text"  {...field} />}
+              render={({ field }) => <Input type="text" {...field} />}
             />
           ))}
         {QuestionType === 1 && (
@@ -165,11 +164,10 @@ const Form = ({
             ))}
           </div>
         )}
-
         {QuestionType === 3 && (
           <div className="w-full grid grid-cols-2 items-center justify-center gap-3">
             {questionRules?.map((item, index) => (
-              <div className="" key={item}>
+              <div className="" key={index}>
                 <label
                   htmlFor={String(index)}
                   className="flex break-normal  flex-row-reverse relative gap-2 text-justify hyphens-auto  w-full glass justify-center !m-0  border rounded-lg p-4 text-lg font-medium text-white cursor-pointer"
@@ -208,7 +206,7 @@ const Form = ({
             name="answer"
             rules={{ required: QuestionRequired === 1 }}
             render={({ field }) => (
-              <div className="w-full px-4 py-1  rounded-full  flex items-center justify-center flex-wrap ">
+              <div className="w-full px-4 py-1 rounded-full flex items-center justify-center flex-wrap ">
                 <Range
                   {...field}
                   min={+questionRules[0]}
