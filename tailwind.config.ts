@@ -44,7 +44,7 @@ const config: Config = {
         },
       },
       boxShadow : {
-        neo : ' 13px 13px 25px #c97e48, -13px -13px 25px #ffaa62'
+        neo : ' 6px 6px 10px -1px rgba(0,0,0,0.15), -3px -3px 5px -1px rgba(255,255,255,0.7)'
       }
     },
   },

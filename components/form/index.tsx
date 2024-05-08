@@ -59,11 +59,11 @@ const Form = ({
     state.splice(QuestionFindIndex, 1, newState);
     setState(state);
 
-    debounce(1000 , ()=> pagination(1))
+    debounce(1000, () => pagination(1));
   };
   const checkDisabled = () => {
     if (QuestionRequired) {
-      if ( isValid) {
+      if (isValid) {
         return false;
       }
       return true;
@@ -79,12 +79,11 @@ const Form = ({
       tabIndex + 1 < numberSurvey
     ) {
       const subscription = watch(() => handleSubmit(onSubmit)());
-      
+
       return () => subscription.unsubscribe();
     }
   }, [watch]);
 
- 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -127,16 +126,15 @@ const Form = ({
           />
         )}
         {QuestionType === 2 && (
-          <div className="grid grid-cols-2 gap-5">
+          <div className="grid grid-cols-2 justify-center py-5 items-center">
             {questionRules.map((item) => (
               <div
                 key={item}
-                className="flex relative items-center gap-2 !margin-0"
+                className="flex w-3/4 relative items-center gap-2 mx-auto !margin-0"
               >
                 <label
                   htmlFor={item}
-                   
-                  className="flex glass  gap-2 peer-checked:scale-105 transition-all text-justify  items-center !m-0 w-full border rounded-lg p-5 text-lg font-medium text-white"
+                  className="flex glass relative   gap-2 peer-checked:scale-105 transition-all text-justify  items-center !m-0 w-full border rounded-lg p-5 text-lg font-medium text-white"
                 >
                   <Controller
                     control={control}
@@ -144,16 +142,16 @@ const Form = ({
                     rules={{ required: QuestionRequired === 1 }}
                     render={({ field }) => (
                       <Input
-                      onChange={(e) => {
-                        field.onChange(e.target.value);
-                        const parrent = e.target.parentNode as HTMLInputElement
-                        if(e.target.checked){
-                          parrent.classList.add('scale-90')
-                        }
-                        else {
-                          parrent.classList.remove('scale-90')
-                        }
-                      }}
+                        onChange={(e) => {
+                          field.onChange(e.target.value);
+                          const parrent = e.target
+                            .parentNode as HTMLInputElement;
+                          if (e.target.checked) {
+                            parrent.classList.add("scale-105", "shadow-neo");
+                          } else {
+                            parrent.classList.remove("scale-105", "shadow-neo");
+                          }
+                        }}
                         type="checkbox"
                         id={item}
                         defaultChecked={
@@ -170,9 +168,9 @@ const Form = ({
           </div>
         )}
         {QuestionType === 3 && (
-          <div className="w-full grid grid-cols-2 items-center justify-center gap-3">
+          <div className="w-full grid grid-cols-2 py-6 px-5 items-center justify-center gap-3">
             {questionRules?.map((item, index) => (
-              <div className="" key={index}>
+              <div className="w-11/12 mx-auto" key={index}>
                 <label
                   htmlFor={String(index)}
                   className="flex break-normal   transition-all flex-row-reverse relative gap-2 text-justify hyphens-auto  w-full glass justify-center !m-0  border rounded-lg p-4 text-lg font-medium text-white cursor-pointer"
@@ -187,8 +185,9 @@ const Form = ({
                         type={"radio"}
                         onChange={(e) => {
                           field.onChange(e.target.value);
-                          const parrent = e.target.parentNode as HTMLInputElement
-                          parrent.classList.add('scale-90')
+                          const parrent = e.target
+                            .parentNode as HTMLInputElement;
+                          parrent.classList.add("scale-110", "shadow-neo");
                         }}
                         defaultChecked={
                           item === QuestionAnwseredValue || undefined
