@@ -14,7 +14,7 @@ import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import { debounce } from "@/tools/debounce";
 import { SurveyValidationType } from "@/validation";
 import { TiTick } from "react-icons/ti";
-import anime from 'animejs/lib/anime.es.js';
+import anime from "animejs/lib/anime.es.js";
 interface FormProps extends Survay {
   pagination: (value: number) => void;
   tabIndex: number;
@@ -82,19 +82,18 @@ const Form = ({
       tabIndex + 1 < numberSurvey
     ) {
       const subscription = watch(() => handleSubmit(onSubmit)());
-      animeTick()
+      animeTick();
       return () => subscription.unsubscribe();
     }
   }, [watch]);
-  const animeTick = () =>{
+  const animeTick = () => {
     anime({
-      targets : tick,
-      opacity :  "1",
-      duration : 500,
-      
-    }).play()
-  }
-  const tick = useRef<HTMLDivElement>()
+      targets: tick,
+      opacity: "1",
+      duration: 500,
+    }).play();
+  };
+  const tick = useRef<HTMLDivElement>();
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -112,7 +111,7 @@ const Form = ({
       <p className="text-xl font-medium text-white font-yekan">
         {QuestionText}
       </p>
-      <div className="w-full space-y-4  mt-12 flex-1   justify-start items-start overflow-hidden overflow-y-auto">
+      <div className="w-full space-y-4 mt-12 flex-1 justify-start items-start overflow-hidden overflow-y-auto">
         {QuestionType === 0 &&
           QuestionRules.split(",")?.map((item) => (
             <Controller
@@ -139,24 +138,27 @@ const Form = ({
         {QuestionType === 2 && (
           <div className="grid grid-cols-2 gap-5">
             {questionRules.map((item) => (
-              <div key={item} className="flex items-center gap-2 !margin-0">
-                <Controller
-                  control={control}
-                  name="answer"
-                  rules={{ required: QuestionRequired === 1 }}
-                  render={({ field }) => (
-                    <Input
-                      {...field}
-                      type="checkbox"
-                      id={item}
-                      className=" font-yekan w-full hidden peer"
-                    ></Input>
-                  )}
-                />
+              <div
+                key={item}
+                className="flex relative items-center gap-2 !margin-0"
+              >
                 <label
                   htmlFor={item}
-                  className="flex gap-2 items-center w-ful bg-orange-secondary/80 hover:bg-orange-secondary justify-center !m-0 w-full border rounded-lg p-5 text-lg font-medium text-white peer-checked:bg-orange-secondary"
+                  className="flex glass gap-2 justify-center text-justify  items-center !m-0 w-full border rounded-lg p-5 text-lg font-medium text-white"
                 >
+                  <Controller
+                    control={control}
+                    name="answer"
+                    rules={{ required: QuestionRequired === 1 }}
+                    render={({ field }) => (
+                      <Input
+                        {...field}
+                        type="checkbox"
+                        id={item}
+                        className=" font-yekan  peer"
+                      ></Input>
+                    )}
+                  />
                   {item}
                 </label>
               </div>
@@ -165,40 +167,35 @@ const Form = ({
         )}
 
         {QuestionType === 3 && (
-          <div className="w-full grid grid-cols-2 items-center justify-center gap-5">
-            {questionRules?.map((item) => (
+          <div className="w-full grid grid-cols-2 items-center justify-center gap-3">
+            {questionRules?.map((item, index) => (
               <div className="" key={item}>
-                <Controller
-                  name="answer"
-                  rules={{ required: QuestionRequired === 1 }}
-                  control={control}
-                  render={({ field }) => (
-                    <Input
-                      type={"radio"}
-                      onChange={(e) => {
-                        field.onChange(e.target.value);
-                      }}
-                      defaultChecked={
-                        item === QuestionAnwseredValue || undefined
-                      }
-                      placeholder={item}
-                      value={item}
-                      id={item}
-                      name="answer"
-                      className="hidden peer"
-                    />
-                  )}
-                />
                 <label
-                  htmlFor={item}
-                  className="flex relative gap-2 items-center w-full bg-orange-secondary/80 hover:bg-orange-secondary justify-center !m-0  border rounded-lg p-5 text-lg font-medium text-white peer-checked:bg-orange-secondary"
+                  htmlFor={String(index)}
+                  className="flex break-normal  flex-row-reverse relative gap-2 text-justify hyphens-auto  w-full glass justify-center !m-0  border rounded-lg p-4 text-lg font-medium text-white cursor-pointer"
                 >
                   {item}
-                  {getValues("answer") === item && (
-                    <div ref={tick} className="size-5 absolute left-1 bottom-1 flex items-center justify-center rounded-full opacity-0 bg-slate-50/50 tick">
-                      <TiTick className=" text-green-400 " />
-                    </div>
-                  )}
+                  <Controller
+                    name="answer"
+                    rules={{ required: QuestionRequired === 1 }}
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        type={"radio"}
+                        onChange={(e) => {
+                          field.onChange(e.target.value);
+                        }}
+                        defaultChecked={
+                          item === QuestionAnwseredValue || undefined
+                        }
+                        placeholder={item}
+                        value={item}
+                        id={String(index)}
+                        name="answer"
+                        className=" peer"
+                      />
+                    )}
+                  />
                 </label>
               </div>
             ))}

@@ -16,14 +16,14 @@
       "QuestionDesc": null,
       "QuestionType": 3,
       "QuestionRequired": 1,
-      "QuestionRules": "1,2,3,4,5"
+      "QuestionRules": "به سرعت هماهنگی جهت امور درخواستی شما توسط کارشناسان چه امتیازی می دهید؟,به سرعت هماهنگی جهت امور درخواستی شما توسط کارشناسان چه امتیازی می دهید؟,به سرعت هماهنگی جهت امور  درخواستی شما توسط کارشناسان چه امتیازی می دهید؟"
     },
     {
       "QuestionAnwseredValue": null,
       "QuestionID": 102,
       "QuestionText": "آیا مستندات ارسالی اعم از فاکتور، گزارشات و ... تکمیل بوده است؟",
       "QuestionDesc": null,
-      "QuestionType": 7,
+      "QuestionType": 2,
       "QuestionRequired": 1,
       "QuestionRules": "بله,خیر"
     }

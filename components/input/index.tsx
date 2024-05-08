@@ -10,9 +10,9 @@ const Input = (
     <input
       {...props}
       className={` ${
-        props.type === "radio" && "size-4 radio radio-info  rounded-lg"
+        props.type === "radio" && "size-4 radio radio-warning mt-1 rounded-lg "
       } ${
-        props.type === "checkbox" && "checkbox checkbox-info [--chkfg:white]"
+        props.type === "checkbox" && "checkbox !size-6 border-orange-secondary glass [--chkfg:white] [--chkbg:orange]"
       } ${props.type === "text" && "input input-bordered input-info w-full bg-gray-50 font-yekan"} ${props.className}`}
     />
   );

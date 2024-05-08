@@ -25,14 +25,23 @@ const config: Config = {
           primary: "#4663c2",
           hover: "#85A5F5",
         },
-        orange : {
-          primary : '#FFBB70',
-          secondary : '#ED9455'
+        orange: {
+          primary: "#FFBB70",
+          secondary: "#ED9455",
         },
-        yellow : {
-          primary : '#FFF455',
-          secondary : '#FDDE55'
-        }
+        yellow: {
+          primary: "#FFF455",
+          secondary: "#FDDE55",
+        },
+      },
+      animation: {
+        rotate: 'rotate 10s linear infinite',
+      },
+      keyframes: {
+        rotate: {
+          '0%': { transform: 'rotate(0deg) scale(10)' },
+          '100%': { transform: 'rotate(-360deg) scale(10)' },
+        },
       },
     },
   },
