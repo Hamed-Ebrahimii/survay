@@ -62,7 +62,7 @@ const Form = ({
     state.splice(QuestionFindIndex, 1, newState);
     setState(state);
 
-    debounce(2000, () => pagination(1));
+    pagination(1);
   };
   const checkDisabled = () => {
     if (QuestionRequired) {
@@ -119,7 +119,7 @@ const Form = ({
               name="answer"
               key={item}
               rules={{ required: QuestionRequired === 1 }}
-              render={({ field }) => <Input type="text" {...field} />}
+              render={({ field }) => <Input type="text"  {...field} />}
             />
           ))}
         {QuestionType === 1 && (
@@ -144,7 +144,7 @@ const Form = ({
               >
                 <label
                   htmlFor={item}
-                  className="flex glass gap-2 justify-center text-justify  items-center !m-0 w-full border rounded-lg p-5 text-lg font-medium text-white"
+                  className="flex glass gap-2  text-justify  items-center !m-0 w-full border rounded-lg p-5 text-lg font-medium text-white"
                 >
                   <Controller
                     control={control}
@@ -225,7 +225,7 @@ const Form = ({
             rules={{ required: QuestionRequired === 1 }}
             render={({ field: { onChange, value } }) => (
               <DatePicker
-                inputClass="py-1 px-2 rounded-lg outline-none placeholder:text-xs placeholder:text-white bg-orange-secondary text-white"
+                inputClass="py-1 px-2 rounded-lg outline-none placeholder:text-xs placeholder:text-white  text-white"
                 value={value || ""}
                 onChange={(date: DateObject) => {
                   onChange(date?.isValid ? date.format() : "");
