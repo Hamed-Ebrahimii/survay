@@ -34,7 +34,7 @@ const Form = ({
   isAttach,
   numberAttatchFile,
   typeAttatchFile,
-  requierdAttach 
+  requierdAttach
 }: FormProps) => {
   const { state, setState }: InitialState = useContext(ContextSurvey);
   const [isSelected, setIsSelcted] = useState<number[]>([]);
@@ -73,19 +73,19 @@ const Form = ({
     debounce(1000, () => pagination(1));
   };
   const checkDisabled = () => {
-    console.log( requierdAttach);
-    
-      if (QuestionRequired || requierdAttach) {
-        if (isValid ) {
-          return false;
-        }
-        return true;
+    console.log(requierdAttach);
+
+    if (QuestionRequired || requierdAttach) {
+      if (isValid) {
+        return false;
       }
-      return false;
+      return true;
     }
-    
-    
-  
+    return false;
+  }
+
+
+
   useEffect(() => {
     if (
       QuestionType !== 0 &&
@@ -118,7 +118,7 @@ const Form = ({
       <p className="text-xl font-medium text-white font-yekan">
         {QuestionText}
       </p>
-      <div className="w-full space-y-4 mt-3 flex-1 justify-start items-start ">
+      <div className="w-full space-y-4  flex-1 justify-start items-start ">
         {QuestionType === 0 && <>
           {
             QuestionRules.split(",")?.map((item) => (
@@ -139,7 +139,7 @@ const Form = ({
             )
             )
           }
-         
+
         </>}
         {QuestionType === 1 && (
           <>
@@ -155,7 +155,7 @@ const Form = ({
                 ></textarea>
               )}
             />
- 
+
           </>
 
         )}
@@ -185,7 +185,7 @@ const Form = ({
 
               </div>
             ))}
-           
+
           </div>
         )}
         {QuestionType === 3 && (
@@ -217,7 +217,7 @@ const Form = ({
                 />
               </div>
             ))}
-          
+
           </div>
         )}
 
@@ -225,7 +225,7 @@ const Form = ({
           <Controller
             control={control}
             name="answer"
-            
+
             rules={{ required: QuestionRequired === 1 }}
             render={({ field }) => (
               <div className="w-full px-4 py-1 rounded-full flex items-center justify-center flex-wrap ">
@@ -238,7 +238,7 @@ const Form = ({
               </div>
             )}
           />
-          
+
         </>
         }
         {QuestionType === 5 && (
@@ -260,7 +260,7 @@ const Form = ({
                 />
               )}
             />
-        
+
           </>
         )}
         {QuestionType === 6 && (
@@ -268,7 +268,7 @@ const Form = ({
             <Controller
               control={control}
               name="answer"
-              
+
               rules={{ required: QuestionRequired === 1 }}
               render={({ field: { onChange, value } }) => (
                 <Calendar
@@ -285,7 +285,7 @@ const Form = ({
                 />
               )}
             />
-           
+
           </>
         )}
         {QuestionType === 7 && (
@@ -307,42 +307,42 @@ const Form = ({
                 </div>
               )}
             />
-           
+
           </>
         )}
       </div>
       <div>
-      {
-              isAttach &&
-              <Controller
-                control={control}
-                name="attach"
-                rules={{required : requierdAttach}}
-                render={({ field }) => (
-                  <InputFile
-                    htmlFor=""
-                    label=""
-                    accept={typeAttatchFile}
-                    error={errors.attach?.message}
-                    multiple={(numberAttatchFile || 0) > 1}
-                    numberFile={numberAttatchFile || 0}
-                    onChange={(e) => {
-                      const file = Array.from(e.target.files || [])
-                      if ((numberAttatchFile || 0) < file.length) {
-                        setError('attach', {
-                          message: `تعداد فایل بیش از ${numberAttatchFile} میباشد`
-                        })
-                        return
-                      }
-                      field.onChange(file)
-                    }}
-                    placeholder={QuestionText}
-                  />
-                )}
+        {
+          isAttach &&
+          <Controller
+            control={control}
+            name="attach"
+            rules={{ required: requierdAttach }}
+            render={({ field }) => (
+              <InputFile
+                htmlFor=""
+                label=""
+                accept={typeAttatchFile}
+                error={errors.attach?.message}
+                multiple={(numberAttatchFile || 0) > 1}
+                numberFile={numberAttatchFile || 0}
+                onChange={(e) => {
+                  const file = Array.from(e.target.files || [])
+                  if ((numberAttatchFile || 0) < file.length) {
+                    setError('attach', {
+                      message: `تعداد فایل بیش از ${numberAttatchFile} میباشد`
+                    })
+                    return
+                  }
+                  field.onChange(file)
+                }}
+                placeholder={QuestionText}
               />
-            }
+            )}
+          />
+        }
       </div>
-      <div className="w-full flex items-center justify-between my-4 ">
+      <div className="w-full flex items-center justify-between mt-5 ">
         <div>
           <Btn
             className=""

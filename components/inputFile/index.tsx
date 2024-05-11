@@ -51,7 +51,7 @@ const InputFile = (props: InputProps) => {
 
                 accept={acceptType[props.accept || "all"]}
                 className={`${file.length > 0 ? "rounded-t-lg rounded-b-0" : "rounded-lg"
-                    } border w-1/2 bg-gray-100   py-1  outline-none placeholder:text-gray-400 text-gray-500 placeholder:text-xs placeholder:font-semibold file:mr-1 file:rounded-md file:border-0 file:ml-4  file:bg-blue-500 file:py-1 file:px-4 file:text-sm file:font-semibold file:text-white hover:file:bg-primary-700 ${props.type === "file" ? "px-1" : "px-5"
+                    } border w-full bg-gray-100   py-1  outline-none placeholder:text-gray-400 text-gray-500 placeholder:text-xs placeholder:font-semibold file:mr-1 file:rounded-md file:border-0 file:ml-4  file:bg-blue-500 file:py-1 file:px-4 file:text-sm file:font-semibold file:text-white hover:file:bg-primary-700 ${props.type === "file" ? "px-1" : "px-5"
                     } ${props.error ? "border-red-400" : "border-gray-200"}`}
             />
 

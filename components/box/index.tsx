@@ -53,7 +53,7 @@ const BoxForm = () => {
     }
     {
       showTab &&
-      <div className="glass w-1/3 px-2 py-2 rounded-xl min-h-[330px] relative flex flex-col tab">
+      <div className="glass w-1/3 px-2 py-5 rounded-xl min-h-[330px] relative flex flex-col tab">
         <div className="w-full flex items-center gap-2 absolute -top-9">
           <Image
             src="/img/user.png"
@@ -66,7 +66,7 @@ const BoxForm = () => {
             <p className="text-white font-medium font-mono">hamed ebrahimi</p>
           </div>
         </div>
-        <div className="my-3 w-full">
+        <div className=" w-full">
           <h1 className="text-xl font-medium text-white flex items-center justify-center">
             نظرسنجی محصول موبایل
           </h1>
