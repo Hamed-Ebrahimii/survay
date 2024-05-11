@@ -5,7 +5,12 @@ export interface Survay {
     "QuestionDesc": string,
     "QuestionType": number,
     "QuestionRequired": number,
-    "QuestionRules": string
+    "QuestionRules": string,
+    "attach"? : File ,
+    "isAttach" : boolean,
+    "numberAttatchFile"? : number,
+    "typeAttatchFile"? : string,
+
 }
 export const questionTypesTexts: { [P: number]: string } = {
     0: 'پاسخ کوتاه',

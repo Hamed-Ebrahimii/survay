@@ -14,6 +14,7 @@ import TimePicker from "react-multi-date-picker/plugins/analog_time_picker";
 import { debounce } from "@/tools/debounce";
 import { SurveyValidationType } from "@/validation";
 import "../../style/datepiker.css";
+import InputFile from "../inputFile";
 interface FormProps extends Survay {
   pagination: (value: number) => void;
   tabIndex: number;
@@ -30,6 +31,7 @@ const Form = ({
   QuestionAnwseredValue,
   QuestionDesc,
   QuestionID,
+  isAttach
 }: FormProps) => {
   const { state, setState }: InitialState = useContext(ContextSurvey);
   const [isSelected, setIsSelcted] = useState<number[]>([]);
@@ -54,6 +56,7 @@ const Form = ({
       QuestionRequired,
       QuestionRules,
       QuestionText,
+      isAttach,
       QuestionAnwseredValue: data.answer,
     };
     const QuestionFindIndex = state.findIndex(
@@ -107,23 +110,45 @@ const Form = ({
         {QuestionText}
       </p>
       <div className="w-full space-y-4  flex-1 justify-start items-start ">
-        {QuestionType === 0 &&
+        {QuestionType === 0 && <div>
+          {
           QuestionRules.split(",")?.map((item) => (
-            <Controller
-              control={control}
-              name="answer"
-              key={item}
-              rules={{ required: QuestionRequired === 1 }}
-              render={({ field }) => (
-                <Input
-                  label={item}
-                  type="text"
-                  {...field}
-                  placeholder={QuestionText}
-                />
-              )}
-            />
-          ))}
+          <Controller
+            control={control}
+            name="answer"
+            key={item}
+            rules={{ required: QuestionRequired === 1 }}
+            render={({ field }) => (
+              <Input
+                label={item}
+                type="text"
+                {...field}
+                placeholder={QuestionText}
+              />
+            )}
+          />
+          )
+          )
+        }
+          {
+            isAttach && <Controller
+            control={control}
+            name="attach"
+            rules={{ required: QuestionRequired === 1 }}
+            render={({ field }) => (
+              <InputFile
+                htmlFor=""
+                label=""
+                onChange={(e)=>{
+                  const file = Array.from(e.target.files || [])
+                      field.onChange(file[0])
+                }}
+                placeholder={QuestionText}
+              />
+            )}
+          />
+          }
+        </div>}
         {QuestionType === 1 && (
           <Controller
             control={control}
