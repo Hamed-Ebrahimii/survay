@@ -112,56 +112,78 @@ const Form = ({
       <div className="w-full space-y-4  flex-1 justify-start items-start ">
         {QuestionType === 0 && <div>
           {
-          QuestionRules.split(",")?.map((item) => (
-          <Controller
-            control={control}
-            name="answer"
-            key={item}
-            rules={{ required: QuestionRequired === 1 }}
-            render={({ field }) => (
-              <Input
-                label={item}
-                type="text"
-                {...field}
-                placeholder={QuestionText}
+            QuestionRules.split(",")?.map((item) => (
+              <Controller
+                control={control}
+                name="answer"
+                key={item}
+                rules={{ required: QuestionRequired === 1 }}
+                render={({ field }) => (
+                  <Input
+                    label={item}
+                    type="text"
+                    {...field}
+                    placeholder={QuestionText}
+                  />
+                )}
               />
-            )}
-          />
-          )
-          )
-        }
+            )
+            )
+          }
           {
             isAttach && <Controller
-            control={control}
-            name="attach"
-            rules={{ required: QuestionRequired === 1 }}
-            render={({ field }) => (
-              <InputFile
-                htmlFor=""
-                label=""
-                onChange={(e)=>{
-                  const file = Array.from(e.target.files || [])
-                      field.onChange(file[0])
-                }}
-                placeholder={QuestionText}
-              />
-            )}
-          />
+              control={control}
+              name="attach"
+              rules={{ required: QuestionRequired === 1 }}
+              render={({ field }) => (
+                <InputFile
+                  htmlFor=""
+                  label=""
+                  onChange={(e) => {
+                    const file = Array.from(e.target.files || [])
+                    field.onChange(file[0])
+                  }}
+                  placeholder={QuestionText}
+                />
+              )}
+            />
           }
         </div>}
         {QuestionType === 1 && (
-          <Controller
-            control={control}
-            name="answer"
-            rules={{ required: QuestionRequired === 1 }}
-            render={({ field }) => (
-              <textarea
-                {...field}
-                placeholder={QuestionText}
-                className="font-yekan w-full bg-white text-gray-600 border-orange-secondary border outline-none rounded-xl p-4 max-h-36 overflow-y-auto mt-4"
-              ></textarea>
-            )}
-          />
+          <div>
+            <Controller
+              control={control}
+              name="answer"
+              rules={{ required: QuestionRequired === 1 }}
+              render={({ field }) => (
+                <textarea
+                  {...field}
+                  placeholder={QuestionText}
+                  className="font-yekan w-full bg-white text-gray-600 border-orange-secondary border outline-none rounded-xl p-4 max-h-36 overflow-y-auto mt-4"
+                ></textarea>
+              )}
+            />
+            {
+              isAttach &&
+              <Controller
+                control={control}
+                name="attach"
+                rules={{ required: QuestionRequired === 1 }}
+                render={({ field }) => (
+                  <InputFile
+                    htmlFor=""
+                    label=""
+                    onChange={(e) => {
+                      const file = Array.from(e.target.files || [])
+                      field.onChange(file[0])
+                    }}
+                    placeholder={QuestionText}
+                  />
+                )}
+              />
+            }
+          </div>
+
         )}
         {QuestionType === 2 && (
           <div className="grid grid-cols-2 justify-center py-5 items-center">
@@ -186,6 +208,25 @@ const Form = ({
                     ></Input>
                   )}
                 />
+                {
+                  isAttach &&
+                  <Controller
+                    control={control}
+                    name="attach"
+                    rules={{ required: QuestionRequired === 1 }}
+                    render={({ field }) => (
+                      <InputFile
+                        htmlFor=""
+                        label=""
+                        onChange={(e) => {
+                          const file = Array.from(e.target.files || [])
+                          field.onChange(file[0])
+                        }}
+                        placeholder={QuestionText}
+                      />
+                    )}
+                  />
+                }
               </div>
             ))}
           </div>
@@ -219,6 +260,25 @@ const Form = ({
                 />
               </div>
             ))}
+            {
+              isAttach &&
+              <Controller
+                control={control}
+                name="attach"
+                rules={{ required: QuestionRequired === 1 }}
+                render={({ field }) => (
+                  <InputFile
+                    htmlFor=""
+                    label=""
+                    onChange={(e) => {
+                      const file = Array.from(e.target.files || [])
+                      field.onChange(file[0])
+                    }}
+                    placeholder={QuestionText}
+                  />
+                )}
+              />
+            }
           </div>
         )}
 
@@ -234,67 +294,149 @@ const Form = ({
                   min={+questionRules[0]}
                   max={+questionRules.slice(-1)[0]}
                 />
+                {
+                  isAttach &&
+                  <Controller
+                    control={control}
+                    name="attach"
+                    rules={{ required: QuestionRequired === 1 }}
+                    render={({ field }) => (
+                      <InputFile
+                        htmlFor=""
+                        label=""
+                        onChange={(e) => {
+                          const file = Array.from(e.target.files || [])
+                          field.onChange(file[0])
+                        }}
+                        placeholder={QuestionText}
+                      />
+                    )}
+                  />
+                }
               </div>
             )}
           />
         )}
         {QuestionType === 5 && (
-          <Controller
-            control={control}
-            name="answer"
-            rules={{ required: QuestionRequired === 1 }}
-            render={({ field: { onChange, value } }) => (
-              <Calendar
-                value={value || ""}
-                onChange={(date: DateObject) => {
-                  onChange(date?.isValid ? date.format() : "");
-                }}
-                className="mx-auto"
-                format={"YYYY/MM/DD"}
-                calendar={persian}
-                locale={persian_fa}
+          <div>
+            <Controller
+              control={control}
+              name="answer"
+              rules={{ required: QuestionRequired === 1 }}
+              render={({ field: { onChange, value } }) => (
+                <Calendar
+                  value={value || ""}
+                  onChange={(date: DateObject) => {
+                    onChange(date?.isValid ? date.format() : "");
+                  }}
+                  className="mx-auto"
+                  format={"YYYY/MM/DD"}
+                  calendar={persian}
+                  locale={persian_fa}
+                />
+              )}
+            />
+            {
+              isAttach &&
+              <Controller
+                control={control}
+                name="attach"
+                rules={{ required: QuestionRequired === 1 }}
+                render={({ field }) => (
+                  <InputFile
+                    htmlFor=""
+                    label=""
+                    onChange={(e) => {
+                      const file = Array.from(e.target.files || [])
+                      field.onChange(file[0])
+                    }}
+                    placeholder={QuestionText}
+                  />
+                )}
               />
-            )}
-          />
+            }
+          </div>
         )}
         {QuestionType === 6 && (
-          <Controller
-            control={control}
-            name="answer"
-            rules={{ required: QuestionRequired === 1 }}
-            render={({ field: { onChange, value } }) => (
-              <Calendar
-                disableDayPicker
-                format="HH:mm"
-                plugins={[<TimePicker key={""} hideSeconds />]}
-                calendar={persian}
-                className=" mx-auto"
-                locale={persian_fa}
-                onChange={(date: DateObject) => {
-                  onChange(date?.isValid ? date.format() : "");
-                }}
+          <div>
+            <Controller
+              control={control}
+              name="answer"
+              rules={{ required: QuestionRequired === 1 }}
+              render={({ field: { onChange, value } }) => (
+                <Calendar
+                  disableDayPicker
+                  format="HH:mm"
+                  plugins={[<TimePicker key={""} hideSeconds />]}
+                  calendar={persian}
+                  className=" mx-auto"
+                  locale={persian_fa}
+                  onChange={(date: DateObject) => {
+                    onChange(date?.isValid ? date.format() : "");
+                  }}
+                />
+              )}
+            />
+            {
+              isAttach &&
+              <Controller
+                control={control}
+                name="attach"
+                rules={{ required: QuestionRequired === 1 }}
+                render={({ field }) => (
+                  <InputFile
+                    htmlFor=""
+                    label=""
+                    onChange={(e) => {
+                      const file = Array.from(e.target.files || [])
+                      field.onChange(file[0])
+                    }}
+                    placeholder={QuestionText}
+                  />
+                )}
               />
-            )}
-          />
+            }
+          </div>
         )}
         {QuestionType === 7 && (
-          <Controller
-            control={control}
-            rules={{ required: QuestionRequired === 1 }}
-            name="answer"
-            render={({ field }) => (
-              <div className="col-span-2">
-                <DropDown
-                  placeholder={QuestionText}
-                  name={field.name}
-                  onChange={field.onChange}
-                  data={questionRules}
-                  lable=""
-                  defaultValue={field.value}
-                />
-              </div>
-            )}
-          />
+          <div>
+            <Controller
+              control={control}
+              rules={{ required: QuestionRequired === 1 }}
+              name="answer"
+              render={({ field }) => (
+                <div className="col-span-2">
+                  <DropDown
+                    placeholder={QuestionText}
+                    name={field.name}
+                    onChange={field.onChange}
+                    data={questionRules}
+                    lable=""
+                    defaultValue={field.value}
+                  />
+                </div>
+              )}
+            />
+            {
+              isAttach &&
+              <Controller
+                control={control}
+                name="attach"
+                rules={{ required: QuestionRequired === 1 }}
+                render={({ field }) => (
+                  <InputFile
+                    htmlFor=""
+                    label=""
+                    onChange={(e) => {
+                      const file = Array.from(e.target.files || [])
+                      field.onChange(file[0])
+                    }}
+                    placeholder={QuestionText}
+                  />
+                )}
+              />
+            }
+          </div>
         )}
       </div>
       <div className="w-full flex items-center justify-between my-4 ">

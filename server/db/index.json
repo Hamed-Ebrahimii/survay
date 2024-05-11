@@ -1,77 +1,110 @@
 {
-
   "SurveyAnswerQuestion": [
-      {
-          "QuestionAnwseredValue": null,
-          "QuestionID": 49,
-          "QuestionText": "توضیحات تکمیلی",
-          "QuestionDesc": null,
-          "QuestionType": 1,
-          "QuestionRequired": 0,
-          "QuestionRules": ""
-      },
-      {
-          "QuestionAnwseredValue": null,
-          "QuestionID": 58,
-          "QuestionText": "میزان زمان طی شده جهت تعمیر دستگاه",
-          "QuestionDesc": null,
-          "QuestionType": 4,
-          "QuestionRequired": 0,
-          "QuestionRules": "1,5"
-      },
-      {
-          "QuestionAnwseredValue": null,
-          "QuestionID": 76,
-          "QuestionText": "بلی یا خیر؟",
-          "QuestionDesc": null,
-          "QuestionType": 3,
-          "QuestionRequired": 0,
-          "QuestionRules": "بلی,خیر"
-      },
-      {
-          "QuestionAnwseredValue": null,
-          "QuestionID": 78,
-          "QuestionText": "پاسخ کوتاه",
-          "QuestionDesc": null,
-          "QuestionType": 0,
-          "QuestionRequired": 0,
-          "QuestionRules": ""
-      },
-      {
-          "QuestionAnwseredValue": null,
-          "QuestionID": 79,
-          "QuestionText": "تاریخ",
-          "QuestionDesc": null,
-          "QuestionType": 5,
-          "QuestionRequired": 0,
-          "QuestionRules": "undefined,undefined"
-      },
-      {
-          "QuestionAnwseredValue": null,
-          "QuestionID": 80,
-          "QuestionText": "ساعت",
-          "QuestionDesc": null,
-          "QuestionType": 6,
-          "QuestionRequired": 0,
-          "QuestionRules": ""
-      },
-      {
-          "QuestionAnwseredValue": null,
-          "QuestionID": 81,
-          "QuestionText": "سوال چند انتخابی",
-          "QuestionDesc": null,
-          "QuestionType": 2,
-          "QuestionRequired": 1,
-          "QuestionRules": "بله,خیر"
-      },
-      {
-          "QuestionAnwseredValue": null,
-          "QuestionID": 89,
-          "QuestionText": "سوال تست تضویحات الزامی",
-          "QuestionDesc": null,
-          "QuestionType": 7,
-          "QuestionRequired": 0,
-          "QuestionRules": "ضعیف!!,معمولی,خوب"
-      }
+    {
+      "QuestionAnwseredValue": null,
+      "QuestionID": 49,
+      "QuestionText": "توضیحات تکمیلی",
+      "QuestionDesc": null,
+      "QuestionType": 1,
+      "QuestionRequired": 0,
+      "QuestionRules": "",
+      "attach": null,
+      "isAttach": true,
+      "numberAttatchFile": 1,
+      "typeAttatchFile": "all"
+    },
+    {
+      "QuestionAnwseredValue": null,
+      "QuestionID": 58,
+      "QuestionText": "میزان زمان طی شده جهت تعمیر دستگاه",
+      "QuestionDesc": null,
+      "QuestionType": 4,
+      "QuestionRequired": 0,
+      "QuestionRules": "1,5",
+      "attach": null,
+      "isAttach": false,
+      "numberAttatchFile": 1,
+      "typeAttatchFile": "all"
+    },
+    {
+      "QuestionAnwseredValue": null,
+      "QuestionID": 76,
+      "QuestionText": "بلی یا خیر؟",
+      "QuestionDesc": null,
+      "QuestionType": 3,
+      "QuestionRequired": 0,
+      "QuestionRules": "بلی,خیر",
+      "attach": null,
+      "isAttach": false,
+      "numberAttatchFile": 1,
+      "typeAttatchFile": "all"
+    },
+    {
+      "QuestionAnwseredValue": null,
+      "QuestionID": 78,
+      "QuestionText": "پاسخ کوتاه",
+      "QuestionDesc": null,
+      "QuestionType": 0,
+      "QuestionRequired": 0,
+      "QuestionRules": "",
+      "attach": null,
+      "isAttach": true,
+      "numberAttatchFile": 1,
+      "typeAttatchFile": "all"
+    },
+    {
+      "QuestionAnwseredValue": null,
+      "QuestionID": 79,
+      "QuestionText": "تاریخ",
+      "QuestionDesc": null,
+      "QuestionType": 5,
+      "QuestionRequired": 0,
+      "QuestionRules": "undefined,undefined",
+      "attach": null,
+      "isAttach": true,
+      "numberAttatchFile": 1,
+      "typeAttatchFile": "all"
+    },
+    {
+      "QuestionAnwseredValue": null,
+      "QuestionID": 80,
+      "QuestionText": "ساعت",
+      "QuestionDesc": null,
+      "QuestionType": 6,
+      "QuestionRequired": 0,
+      "QuestionRules": "",
+      
+      "attach": null,
+      "isAttach": false,
+      "numberAttatchFile": 1,
+      "typeAttatchFile": "all"
+    },
+    {
+      "QuestionAnwseredValue": null,
+      "QuestionID": 81,
+      "QuestionText": "سوال چند انتخابی",
+      "QuestionDesc": null,
+      "QuestionType": 2,
+      "QuestionRequired": 1,
+      "QuestionRules": "بله,خیر",
+      
+      "attach": null,
+      "isAttach": true,
+      "numberAttatchFile": 1,
+      "typeAttatchFile": "all"
+    },
+    {
+      "QuestionAnwseredValue": null,
+      "QuestionID": 89,
+      "QuestionText": "سوال تست تضویحات الزامی",
+      "QuestionDesc": null,
+      "QuestionType": 7,
+      "QuestionRequired": 0,
+      "QuestionRules": "ضعیف!!,معمولی,خوب",
+      "attach": null,
+      "isAttach": true,
+      "numberAttatchFile": 4,
+      "typeAttatchFile": "all"
+    }
   ]
 }
