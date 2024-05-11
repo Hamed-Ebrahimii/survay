@@ -6,12 +6,13 @@
       "QuestionText": "توضیحات تکمیلی",
       "QuestionDesc": null,
       "QuestionType": 1,
-      "QuestionRequired": 0,
+      "QuestionRequired": 1,
       "QuestionRules": "",
       "attach": null,
       "isAttach": true,
       "numberAttatchFile": 1,
-      "typeAttatchFile": "all"
+      "typeAttatchFile": "all",
+      "requierdAttach": true
     },
     {
       "QuestionAnwseredValue": null,
@@ -24,7 +25,8 @@
       "attach": null,
       "isAttach": false,
       "numberAttatchFile": 1,
-      "typeAttatchFile": "all"
+      "typeAttatchFile": "all",
+      "requierdAttach": true
     },
     {
       "QuestionAnwseredValue": null,
@@ -37,7 +39,8 @@
       "attach": null,
       "isAttach": false,
       "numberAttatchFile": 1,
-      "typeAttatchFile": "all"
+      "typeAttatchFile": "all",
+      "requierdAttach": true
     },
     {
       "QuestionAnwseredValue": null,
@@ -50,7 +53,8 @@
       "attach": null,
       "isAttach": true,
       "numberAttatchFile": 1,
-      "typeAttatchFile": "image"
+      "typeAttatchFile": "image",
+      "requierdAttach": false
     },
     {
       "QuestionAnwseredValue": null,
@@ -63,7 +67,8 @@
       "attach": null,
       "isAttach": true,
       "numberAttatchFile": 1,
-      "typeAttatchFile": "all"
+      "typeAttatchFile": "all",
+      "requierdAttach": false
     },
     {
       "QuestionAnwseredValue": null,
@@ -73,11 +78,12 @@
       "QuestionType": 6,
       "QuestionRequired": 0,
       "QuestionRules": "",
-      
+
       "attach": null,
       "isAttach": false,
       "numberAttatchFile": 1,
-      "typeAttatchFile": "all"
+      "typeAttatchFile": "all",
+      "requierdAttach": false
     },
     {
       "QuestionAnwseredValue": null,
@@ -87,11 +93,12 @@
       "QuestionType": 2,
       "QuestionRequired": 1,
       "QuestionRules": "بله,خیر",
-      
+
       "attach": null,
       "isAttach": true,
       "numberAttatchFile": 1,
-      "typeAttatchFile": "all"
+      "typeAttatchFile": "all",
+      "requierdAttach": false
     },
     {
       "QuestionAnwseredValue": null,
@@ -104,7 +111,8 @@
       "attach": null,
       "isAttach": true,
       "numberAttatchFile": 4,
-      "typeAttatchFile": "all"
+      "typeAttatchFile": "all",
+      "requierdAttach": true
     }
   ]
 }

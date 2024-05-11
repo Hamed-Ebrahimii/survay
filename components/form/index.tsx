@@ -34,6 +34,7 @@ const Form = ({
   isAttach,
   numberAttatchFile,
   typeAttatchFile,
+  requierdAttach 
 }: FormProps) => {
   const { state, setState }: InitialState = useContext(ContextSurvey);
   const [isSelected, setIsSelcted] = useState<number[]>([]);
@@ -59,7 +60,7 @@ const Form = ({
       QuestionRules,
       QuestionText,
       isAttach,
-
+      requierdAttach,
       QuestionAnwseredValue: data.answer,
     };
     const QuestionFindIndex = state.findIndex(
@@ -72,9 +73,9 @@ const Form = ({
     debounce(1000, () => pagination(1));
   };
   const checkDisabled = () => {
-    console.log( errors.attach?.message);
-    if(!errors.attach?.message){
-      if (QuestionRequired) {
+    console.log( requierdAttach);
+    
+      if (QuestionRequired || requierdAttach) {
         if (isValid ) {
           return false;
         }
@@ -82,8 +83,9 @@ const Form = ({
       }
       return false;
     }
-    return true
-  };
+    
+    
+  
   useEffect(() => {
     if (
       QuestionType !== 0 &&
@@ -141,10 +143,11 @@ const Form = ({
             isAttach && <Controller
               control={control}
               name="attach"
-
+              rules={{required : requierdAttach}}
               render={({ field }) => (
                 <InputFile
                   htmlFor=""
+                  
                   accept={typeAttatchFile}
                   label=""
                   error={errors.attach?.message}
@@ -185,7 +188,7 @@ const Form = ({
               <Controller
                 control={control}
                 name="attach"
-
+                rules={{required : requierdAttach}}
                 render={({ field }) => (
                   <InputFile
                     htmlFor=""
@@ -243,7 +246,7 @@ const Form = ({
               <Controller
                 control={control}
                 name="attach"
-
+                rules={{required : requierdAttach}}
                 render={({ field }) => (
                   <InputFile
                     htmlFor=""
@@ -303,7 +306,7 @@ const Form = ({
               <Controller
                 control={control}
                 name="attach"
-
+                rules={{required : requierdAttach}}
                 render={({ field }) => (
                   <InputFile
                     accept={typeAttatchFile || 'all'}
@@ -334,6 +337,7 @@ const Form = ({
           <Controller
             control={control}
             name="answer"
+            
             rules={{ required: QuestionRequired === 1 }}
             render={({ field }) => (
               <div className="w-full px-4 py-1 rounded-full flex items-center justify-center flex-wrap ">
@@ -351,7 +355,7 @@ const Form = ({
             <Controller
               control={control}
               name="attach"
-
+              rules={{required : requierdAttach}}
               render={({ field }) => (
                 <InputFile
                   htmlFor=""
@@ -401,7 +405,7 @@ const Form = ({
               <Controller
                 control={control}
                 name="attach"
-
+                rules={{required : requierdAttach}}
                 render={({ field }) => (
                   <InputFile
                     htmlFor=""
@@ -432,6 +436,7 @@ const Form = ({
             <Controller
               control={control}
               name="answer"
+              
               rules={{ required: QuestionRequired === 1 }}
               render={({ field: { onChange, value } }) => (
                 <Calendar
@@ -453,7 +458,7 @@ const Form = ({
               <Controller
                 control={control}
                 name="attach"
-
+                rules={{required : requierdAttach}}
                 render={({ field }) => (
                   <InputFile
                     htmlFor=""
@@ -503,7 +508,7 @@ const Form = ({
               <Controller
                 control={control}
                 name="attach"
-
+                rules={{required : requierdAttach}}
                 render={({ field }) => (
                   <InputFile
                     accept={typeAttatchFile}

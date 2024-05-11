@@ -12,6 +12,7 @@ export interface Survay {
     "isAttach" : boolean,
     "numberAttatchFile"? : number,
     "typeAttatchFile"? : "image" | "video" | "music" | "pdf" | "all",
+    "requierdAttach" : boolean
 
 }
 export const questionTypesTexts: { [P: number]: string } = {
