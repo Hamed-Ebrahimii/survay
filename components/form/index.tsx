@@ -7,13 +7,13 @@ import { ContextSurvey, InitialState } from "@/context/inedx";
 import { toast } from "react-toastify";
 import DropDown from "../dropDown";
 import Range from "../range";
-import  { Calendar, DateObject } from "react-multi-date-picker";
+import { Calendar, DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import TimePicker from "react-multi-date-picker/plugins/analog_time_picker";
 import { debounce } from "@/tools/debounce";
 import { SurveyValidationType } from "@/validation";
-import "../../style/datepiker.css"
+import "../../style/datepiker.css";
 interface FormProps extends Survay {
   pagination: (value: number) => void;
   tabIndex: number;
@@ -245,11 +245,9 @@ const Form = ({
                 calendar={persian}
                 className=" mx-auto"
                 locale={persian_fa}
-                
                 onChange={(date: DateObject) => {
                   onChange(date?.isValid ? date.format() : "");
                 }}
-                
               />
             )}
           />
