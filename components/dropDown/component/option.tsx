@@ -22,7 +22,7 @@ const SelectOption = ({
         setValue(value);
         onChange && onChange(value === "انتخاب کنید" ? undefined : value);
       }}
-      className="flex py-2 text-sm flex-row-reverse items-center justify-end gap-2  hover:bg-orange-primary/10 mb-1 px-3 text-gray-600 hover:text-white rounded-md cursor-pointer"
+      className="flex py-2 text-sm flex-row-reverse items-center justify-end gap-2  hover:bg-orange-primary/10 mb-1 px-3 text-gray-600 rounded-md cursor-pointer"
     >
       {checkBox ? (
         <>
