@@ -1,5 +1,11 @@
 import { Checkbox, Radio } from "@mui/material";
-import { DetailedHTMLProps, HTMLAttributes, InputHTMLAttributes, useState } from "react";
+import {
+  DetailedHTMLProps,
+  HTMLAttributes,
+  InputHTMLAttributes,
+  useState,
+} from "react";
+import { FaCheck } from "react-icons/fa";
 interface InputProps
   extends DetailedHTMLProps<
     InputHTMLAttributes<HTMLInputElement>,
@@ -8,7 +14,7 @@ interface InputProps
   label: string;
 }
 const Input = (props: InputProps) => {
-  const [isChcked , setIsChecked] = useState(props.checked)
+  const [isChcked, setIsChecked] = useState(props.checked);
   return (
     <label
       className={
@@ -24,14 +30,20 @@ const Input = (props: InputProps) => {
       </label>
       {props.type === "checkbox" && (
         <Checkbox
+        
+        checkedIcon={
+          <FaCheck className="text-orange-secondary border-2 border-white bg-white font-bold size-5 text-4xl"/>
+        }
           color="default"
-          className="text-orange-secondary"
+          className=" text-white  hover:before:opacity-0"
           value={props.value}
-          onChange={(e)=>{
-            props.onChange && props.onChange(e)
-            setIsChecked(e.target.checked)
+          ripple={false}
+          onChange={(e) => {
+            props.onChange && props.onChange(e);
+            setIsChecked(e.target.checked);
           }}
           checked={isChcked}
+          
           id={props.id}
         />
       )}
