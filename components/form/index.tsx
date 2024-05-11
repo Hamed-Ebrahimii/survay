@@ -253,7 +253,7 @@ const Form = ({
                   onChange={(date: DateObject) => {
                     onChange(date?.isValid ? date.format() : "");
                   }}
-                  className="mx-auto"
+                  className="mx-auto mt-4"
                   format={"YYYY/MM/DD"}
                   calendar={persian}
                   locale={persian_fa}
@@ -277,7 +277,7 @@ const Form = ({
 
                   plugins={[<TimePicker key={""} hideSeconds />]}
                   calendar={persian}
-                  className=" mx-auto"
+                  className=" mx-auto mt-4"
                   locale={persian_fa}
                   onChange={(date: DateObject) => {
                     onChange(date?.isValid ? date.format() : "");
