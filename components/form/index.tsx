@@ -106,7 +106,7 @@ const Form = ({
       <p className="text-xl font-medium text-white font-yekan">
         {QuestionText}
       </p>
-      <div className="w-full space-y-4 mt-5 flex-1 justify-start items-start overflow-hidden overflow-y-auto">
+      <div className="w-full space-y-4  flex-1 justify-start items-start ">
         {QuestionType === 0 &&
           QuestionRules.split(",")?.map((item) => (
             <Controller
@@ -133,7 +133,7 @@ const Form = ({
               <textarea
                 {...field}
                 placeholder={QuestionText}
-                className="font-yekan w-full bg-white text-gray-600 border-orange-secondary border outline-none rounded-xl p-4"
+                className="font-yekan w-full bg-white text-gray-600 border-orange-secondary border outline-none rounded-xl p-4 max-h-36 overflow-y-auto"
               ></textarea>
             )}
           />

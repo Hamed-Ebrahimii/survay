@@ -6,12 +6,14 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { useContext, useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import anime from 'animejs/lib/anime.es.js';
 import Form from "../form";
 import "react-toastify/dist/ReactToastify.css";
 import { ContextSurvey, InitialState } from "@/context/inedx";
+import Check from "../check";
 const BoxForm = () => {
   const [tabIndex, setTabIndex] = useState<number>(0);
+  const [showTab , setShowTab] = useState(true)
   //@ts-ignore
   const { setState, state: surveys }: InitialState = useContext(ContextSurvey);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -19,21 +21,33 @@ const BoxForm = () => {
   };
   const pagination = (page: number) => {
     if (tabIndex + 1 >= surveys.length && page > 0) {
-      toast("ممنون بابت مشارکت شما ", {
-        type: "info",
-        position: "top-right",
-        style: {
-          flexDirection: "row-reverse",
-        },
-      });
+        anime({
+          targets : '.tab',
+          opacity : ['100%' , '0%'],
+          loop : false ,
+          duration : 1000,
+          complete : () =>{
+            setShowTab(false)
+          }
+        }).play()
+
       return;
     }
     setTabIndex(tabIndex + page);
   };
   return (
     <>
-      <ToastContainer rtl />
-      <div className="glass w-1/3 px-2 py-2 rounded-xl min-h-[330px] relative flex flex-col">
+    {
+      !showTab && <div className="glass p-5 rounded-lg flex flex-col items-center justify-center">
+        <Check/>
+        <h1 className="mt-5 text-xl text-gray-200 font-medium">
+          فرم نظرسنجی شما با موفقیت ارسال شد
+        </h1>
+      </div>
+    }
+    {
+      showTab &&
+      <div className="glass w-1/3 px-2 py-2 rounded-xl min-h-[330px] relative flex flex-col tab">
         <div className="w-full flex items-center gap-2 absolute -top-9">
           <Image
             src="/img/user.png"
@@ -107,6 +121,7 @@ const BoxForm = () => {
           </TabContext>
         </div>
       </div>
+}
     </>
   );
 };

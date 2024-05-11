@@ -2,3 +2,28 @@
     border : none !important;
     outline: 5px solid #09589e !important;
 }
+.rmdp-wrapper {
+    background-color:  rgba(255, 255, 255, 0.3) !important ;
+    border: none;
+    color: white !important;
+}
+input[name="minute"] {
+    background-color: inherit;
+    font-size: medium;
+    font-weight: 800;
+    font-family: 'yekan';
+}
+input[name="hour"] {
+    background-color: inherit;
+    font-size: medium;
+    font-weight: 800;
+    font-family: 'yekan';
+}
+.sd{
+    color: white !important;
+    font-family: 'yekan';
+}
+.rmdp-header-values span{
+    color: #424242 !important;
+    font-family: 'yekan' !important;
+}

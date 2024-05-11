@@ -51,7 +51,7 @@ const Input = (props: InputProps) => {
       {props.type === "radio" && (
         <Radio
           color="default"
-          className={`size-5 text-orange-secondary ${props.checked && 'bg-white'} `}
+          className={`size-5 text-orange-secondary hover:bg-white ${props.checked && 'bg-white'} `}
           
           value={props.value}
           onChange={props.onChange}
