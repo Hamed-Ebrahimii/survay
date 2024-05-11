@@ -10,12 +10,13 @@ import Range from "../range";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
-import TimePicker from "react-multi-date-picker/plugins/time_picker";
+import TimePicker from "react-multi-date-picker/plugins/analog_time_picker";
 import { debounce } from "@/tools/debounce";
 import { SurveyValidationType } from "@/validation";
 import InputIcon from "react-multi-date-picker/components/input_icon";
 import "react-multi-date-picker/styles/colors/yellow.css";
-import "react-multi-date-picker/styles/colors/yellow.css";
+import "react-multi-date-picker/styles/colors/analog_time_picker_yellow.css";
+import "react-multi-date-picker/styles/backgrounds/bg-dark.css";
 interface FormProps extends Survay {
   pagination: (value: number) => void;
   tabIndex: number;
@@ -253,6 +254,7 @@ const Form = ({
                 format="HH:mm"
                 plugins={[<TimePicker key={""} hideSeconds />]}
                 calendar={persian}
+                className="yellow"
                 locale={persian_fa}
                 calendarPosition="bottom-right"
                 onChange={(date: DateObject) => {
