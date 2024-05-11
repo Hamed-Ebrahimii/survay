@@ -57,7 +57,7 @@ const DropDown = (props: DropDownProps) => {
   const newState: ISearch = JSON.parse(JSON.stringify(props.searchData || {}));
   return (
     <div
-      className="flex w-full items-center justify-center  gap-2 relative "
+      className="flex w-full items-center justify-center mt-3 gap-2 relative "
       ref={ref}
     >
       <div

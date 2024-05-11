@@ -342,7 +342,7 @@ const Form = ({
           />
         }
       </div>
-      <div className="w-full flex items-center justify-between mt-5 ">
+      <div className="w-full flex items-center justify-between mt-5 mb-3">
         <div>
           <Btn
             className=""
