@@ -56,7 +56,7 @@ const InputFile = (props: InputProps) => {
             />
 
             {file.length > 0 && (
-                <div className="w-1/2 relative bottom-0 z-30 bg-gray-100 rounded-b-lg border p-3 grid grid-cols-2 gap-3 max-h-32 overflow-auto">
+                <div className="w-full relative bottom-0 z-30 bg-gray-100 rounded-b-lg border p-3 grid grid-cols-2 gap-3 max-h-32 overflow-auto">
                     {file.map((item) => (
                         <BoxFile
                             file={item}

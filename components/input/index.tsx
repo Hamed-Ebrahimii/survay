@@ -21,7 +21,7 @@ const Input = (props: InputProps) => {
       className={
         `${
           isChcked || props.checked ? "scale-105 shadow-normal" : ""
-        }  break-normal transition-all flex-row-reverse  relative gap-2 flex text-justify mt-3 hyphens-auto text-white  w-full ${props.type !== 'text' ? 'glass border px-4 py-2' : ''} justify-end !m-0 w-full  rounded-lg  text-lg font-medium  cursor-pointer ` +
+        }  break-normal transition-all flex-row-reverse  relative gap-2  text-justify mt-3 hyphens-auto text-white  w-full ${props.type !== 'text' ? 'glass border px-4 py-2 flex' : 'inline-block '} justify-end !m-0 w-full  rounded-lg  text-lg font-medium  cursor-pointer ` +
         props.className
       }
       htmlFor={props.id}
@@ -59,7 +59,7 @@ const Input = (props: InputProps) => {
           id={props.id}
         />
       )}
-      {props.type === "text" && <input type="text" className="outline-none border border-orange-secondary py-2 px-3 rounded-lg w-full text-gray-600 placeholder:text-gray-600" {...props} />}
+      {props.type === "text" && <input type="text" className="outline-none border border-orange-secondary py-2 px-3 mt-4 rounded-lg w-full text-gray-600 placeholder:text-gray-600" {...props} />}
     </label>
   );
 };
