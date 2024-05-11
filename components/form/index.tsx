@@ -13,6 +13,8 @@ import persian_fa from "react-date-object/locales/persian_fa";
 import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import { debounce } from "@/tools/debounce";
 import { SurveyValidationType } from "@/validation";
+import InputIcon from "react-multi-date-picker/components/input_icon";
+
 interface FormProps extends Survay {
   pagination: (value: number) => void;
   tabIndex: number;
@@ -36,7 +38,7 @@ const Form = ({
     control,
     handleSubmit,
     watch,
-    
+
     formState: { errors, isDirty, isValid },
   } = useForm<SurveyValidationType>({
     mode: "all",
@@ -125,7 +127,7 @@ const Form = ({
             render={({ field }) => (
               <textarea
                 {...field}
-                className="textarea textarea-info font-yekan w-full"
+                className="font-yekan w-full bg-white border-orange-secondary border outline-none rounded-xl p-4"
               ></textarea>
             )}
           />
@@ -149,7 +151,6 @@ const Form = ({
                       }}
                       type="checkbox"
                       id={item}
-                      
                       className="items-center"
                     ></Input>
                   )}
@@ -213,7 +214,7 @@ const Form = ({
             rules={{ required: QuestionRequired === 1 }}
             render={({ field: { onChange, value } }) => (
               <DatePicker
-                inputClass="py-1 px-2 rounded-lg outline-none placeholder:text-xs placeholder:text-white  text-white"
+                inputClass="py-1 px-2 rounded-lg outline-none placeholder:text-xs placeholder:text-white  text-white border border-orange-secodary"
                 value={value || ""}
                 onChange={(date: DateObject) => {
                   onChange(date?.isValid ? date.format() : "");
@@ -225,6 +226,9 @@ const Form = ({
                 calendarPosition="bottom-right"
                 editable={false}
                 placeholder="تاریخ مورد نظر را انتخاب کنید"
+                render={
+                  <InputIcon/>
+                }
               />
             )}
           />
@@ -244,12 +248,17 @@ const Form = ({
                 calendarPosition="bottom-right"
                 value={value || ""}
                 onChange={(date: DateObject) => {
+                  console.log(date.format());
+                  
                   onChange(date?.isValid ? date.format() : "");
                 }}
                 onOpenPickNewDate={false}
-                inputClass="py-1 px-2 rounded-lg outline-none placeholder:text-xs placeholder:text-white bg-orange-secondary text-white"
+                inputClass="py-1 px-2 rounded-lg outline-none placeholder:text-xs placeholder:text-gray-600 text-white border border-orange-secodary"
                 placeholder="زمان مورد نظر خورد را انتخاب کنید"
                 editable={false}
+                render={
+                  <InputIcon/>
+                }
               />
             )}
           />

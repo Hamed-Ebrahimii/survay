@@ -20,7 +20,7 @@ const Input = (props: InputProps) => {
       className={
         `${
           isChcked || props.checked ? "scale-105 shadow-normal" : ""
-        } flex break-normal transition-all flex-row-reverse  relative gap-2 text-justify hyphens-auto text-white  w-full glass justify-end !m-0  border rounded-lg p-4 text-lg font-medium  cursor-pointer ` +
+        } flex break-normal transition-all flex-row-reverse  relative gap-2 text-justify hyphens-auto text-white  w-full ${props.type !== 'text' ? 'glass border' : ''} justify-end !m-0   rounded-lg p-4 text-lg font-medium  cursor-pointer ` +
         props.className
       }
       htmlFor={props.id}
@@ -58,7 +58,7 @@ const Input = (props: InputProps) => {
           id={props.id}
         />
       )}
-      {props.type === "text" && <input type="text" {...props} />}
+      {props.type === "text" && <input type="text" className="outline-none border border-orange-secondary py-2 px-3 rounded-lg w-full text-gray-600 placeholder:text-gray-600" {...props} />}
     </label>
   );
 };
