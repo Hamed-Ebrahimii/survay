@@ -15,7 +15,7 @@ import { debounce } from "@/tools/debounce";
 import { SurveyValidationType } from "@/validation";
 import InputIcon from "react-multi-date-picker/components/input_icon";
 import "react-multi-date-picker/styles/colors/yellow.css";
-import "react-multi-date-picker/styles/colors/yellow.css"
+import "react-multi-date-picker/styles/colors/yellow.css";
 interface FormProps extends Survay {
   pagination: (value: number) => void;
   tabIndex: number;
@@ -117,7 +117,12 @@ const Form = ({
               key={item}
               rules={{ required: QuestionRequired === 1 }}
               render={({ field }) => (
-                <Input label={item} type="text" {...field} placeholder={QuestionText}/>
+                <Input
+                  label={item}
+                  type="text"
+                  {...field}
+                  placeholder={QuestionText}
+                />
               )}
             />
           ))}
@@ -231,7 +236,7 @@ const Form = ({
                 editable={false}
                 placeholder="تاریخ مورد نظر را انتخاب کنید"
                 render={
-                  <InputIcon  className="py-1 px-2 rounded-lg outline-none placeholder:text-xs placeholder:text-gray-600 text-gray-600 border border-orange-secondary"/>
+                  <InputIcon className="py-1 px-2 rounded-lg outline-none placeholder:text-xs placeholder:text-gray-600 text-gray-600 border border-orange-secondary" />
                 }
               />
             )}
@@ -244,24 +249,17 @@ const Form = ({
             rules={{ required: QuestionRequired === 1 }}
             render={({ field: { onChange, value } }) => (
               <DatePicker
-                inputClass=""
                 disableDayPicker
-                value={value || ""}
-                onChange={(date: DateObject) => {
-                  onChange(date?.isValid ? date.format("HH:MM") : "");
-                }}
-                plugins={[
-                  <TimePicker key={''} hideSeconds/>
-                ]}
-                format={"hh:mm"}
+                format="HH:mm"
+                plugins={[<TimePicker key={""} hideSeconds />]}
                 calendar={persian}
                 locale={persian_fa}
                 calendarPosition="bottom-right"
-                editable={false}
-                onOpenPickNewDate={false}
-                placeholder="تاریخ مورد نظر را انتخاب کنید"
+                onChange={(date: DateObject) => {
+                  onChange(date?.isValid ? date.format() : "");
+                }}
                 render={
-                  <InputIcon className="py-1 px-2 rounded-lg outline-none placeholder:text-xs placeholder:text-gray-600 text-gray-600 border border-orange-secondary"/>
+                  <InputIcon className="py-1 px-2 rounded-lg outline-none placeholder:text-xs placeholder:text-gray-600 text-gray-600 border border-orange-secondary" />
                 }
               />
             )}
@@ -275,7 +273,7 @@ const Form = ({
             render={({ field }) => (
               <div className="col-span-2">
                 <DropDown
-                placeholder={QuestionText}
+                  placeholder={QuestionText}
                   name={field.name}
                   onChange={field.onChange}
                   data={questionRules}

@@ -33,10 +33,10 @@ const Input = (props: InputProps) => {
         <Checkbox
         
         checkedIcon={
-          <FaCheck className="text-orange-secondary border-2 border-white bg-white font-bold size-5 text-4xl"/>
+          <FaCheck className="text-orange-secondary border-2 border-white rounded-sm bg-white font-bold size-5 text-4xl"/>
         }
           color="default"
-          className=" text-white  hover:before:opacity-0"
+          className=" text-white  hover:before:opacity-0 rounded-sm"
           value={props.value}
           ripple={false}
           onChange={(e) => {
@@ -51,8 +51,8 @@ const Input = (props: InputProps) => {
       {props.type === "radio" && (
         <Radio
           color="default"
-          className="size-5 text-orange-secondary peer-checked:bg-white "
-         
+          className={`size-5 text-orange-secondary ${props.checked && 'bg-white'} `}
+          
           value={props.value}
           onChange={props.onChange}
           checked={props.checked}
