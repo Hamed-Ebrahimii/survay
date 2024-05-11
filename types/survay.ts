@@ -1,3 +1,5 @@
+import { Accept } from "@/components/inputFile";
+
 export interface Survay {
     "QuestionAnwseredValue": any,
     "QuestionID": number,
@@ -9,7 +11,7 @@ export interface Survay {
     "attach"? : File ,
     "isAttach" : boolean,
     "numberAttatchFile"? : number,
-    "typeAttatchFile"? : string,
+    "typeAttatchFile"? : Accept,
 
 }
 export const questionTypesTexts: { [P: number]: string } = {

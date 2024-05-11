@@ -31,7 +31,9 @@ const Form = ({
   QuestionAnwseredValue,
   QuestionDesc,
   QuestionID,
-  isAttach
+  isAttach,
+  numberAttatchFile,
+  typeAttatchFile,
 }: FormProps) => {
   const { state, setState }: InitialState = useContext(ContextSurvey);
   const [isSelected, setIsSelcted] = useState<number[]>([]);
@@ -57,6 +59,7 @@ const Form = ({
       QuestionRules,
       QuestionText,
       isAttach,
+
       QuestionAnwseredValue: data.answer,
     };
     const QuestionFindIndex = state.findIndex(
@@ -120,6 +123,7 @@ const Form = ({
                 rules={{ required: QuestionRequired === 1 }}
                 render={({ field }) => (
                   <Input
+
                     label={item}
                     type="text"
                     {...field}
@@ -139,6 +143,8 @@ const Form = ({
                 <InputFile
                   htmlFor=""
                   label=""
+                  multiple={(numberAttatchFile || 0 ) > 1}
+                  numberFile={numberAttatchFile || 0}
                   onChange={(e) => {
                     const file = Array.from(e.target.files || [])
                     field.onChange(file[0])
@@ -173,6 +179,8 @@ const Form = ({
                   <InputFile
                     htmlFor=""
                     label=""
+                    multiple={(numberAttatchFile || 0 ) > 1}
+                    numberFile={numberAttatchFile || 0}
                     onChange={(e) => {
                       const file = Array.from(e.target.files || [])
                       field.onChange(file[0])
@@ -221,6 +229,8 @@ const Form = ({
                   <InputFile
                     htmlFor=""
                     label=""
+                    multiple={(numberAttatchFile || 0 ) > 1}
+                    numberFile={numberAttatchFile || 0}
                     onChange={(e) => {
                       const file = Array.from(e.target.files || [])
                       field.onChange(file[0])
@@ -270,7 +280,9 @@ const Form = ({
                 render={({ field }) => (
                   <InputFile
                     htmlFor=""
+                    numberFile={numberAttatchFile || 0}
                     label=""
+                    multiple={(numberAttatchFile || 0 ) > 1}
                     onChange={(e) => {
                       const file = Array.from(e.target.files || [])
                       field.onChange(file[0])
@@ -295,29 +307,31 @@ const Form = ({
                   min={+questionRules[0]}
                   max={+questionRules.slice(-1)[0]}
                 />
-          
+
               </div>
             )}
           />
           {
-                  isAttach &&
-                  <Controller
-                    control={control}
-                    name="attach"
+            isAttach &&
+            <Controller
+              control={control}
+              name="attach"
 
-                    render={({ field }) => (
-                      <InputFile
-                        htmlFor=""
-                        label=""
-                        onChange={(e) => {
-                          const file = Array.from(e.target.files || [])
-                          field.onChange(file[0])
-                        }}
-                        placeholder={QuestionText}
-                      />
-                    )}
-                  />
-                }
+              render={({ field }) => (
+                <InputFile
+                  htmlFor=""
+                  multiple={(numberAttatchFile || 0 ) > 1}
+                  numberFile={numberAttatchFile || 0}
+                  label=""
+                  onChange={(e) => {
+                    const file = Array.from(e.target.files || [])
+                    field.onChange(file[0])
+                  }}
+                  placeholder={QuestionText}
+                />
+              )}
+            />
+          }
         </>
         }
         {QuestionType === 5 && (
@@ -349,6 +363,8 @@ const Form = ({
                   <InputFile
                     htmlFor=""
                     label=""
+                    multiple={(numberAttatchFile || 0 ) > 1}
+                    numberFile={numberAttatchFile || 0}
                     onChange={(e) => {
                       const file = Array.from(e.target.files || [])
                       field.onChange(file[0])
@@ -370,6 +386,7 @@ const Form = ({
                 <Calendar
                   disableDayPicker
                   format="HH:mm"
+                  
                   plugins={[<TimePicker key={""} hideSeconds />]}
                   calendar={persian}
                   className=" mx-auto"
@@ -389,7 +406,9 @@ const Form = ({
                 render={({ field }) => (
                   <InputFile
                     htmlFor=""
+                    multiple={(numberAttatchFile || 0 ) > 1}
                     label=""
+                    numberFile={numberAttatchFile || 0}
                     onChange={(e) => {
                       const file = Array.from(e.target.files || [])
                       field.onChange(file[0])
@@ -430,6 +449,8 @@ const Form = ({
                   <InputFile
                     htmlFor=""
                     label=""
+                    multiple={(numberAttatchFile || 0 ) > 1}
+                    numberFile={numberAttatchFile || 0}
                     onChange={(e) => {
                       const file = Array.from(e.target.files || [])
                       field.onChange(file[0])
