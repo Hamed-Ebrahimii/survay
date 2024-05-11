@@ -33,7 +33,7 @@ const BoxForm = () => {
   return (
     <>
       <ToastContainer rtl />
-      <div className="glass w-1/3 px-2 py-5 rounded-xl min-h-[660px] relative flex flex-col">
+      <div className="glass w-1/3 px-2 py-2 rounded-xl min-h-[330px] relative flex flex-col">
         <div className="w-full flex items-center gap-2 absolute -top-9">
           <Image
             src="/img/user.png"
@@ -46,14 +46,21 @@ const BoxForm = () => {
             <p className="text-white font-medium font-mono">hamed ebrahimi</p>
           </div>
         </div>
-        <div className="my-7 w-full">
+        <div className="my-3 w-full">
           <h1 className="text-xl font-medium text-white flex items-center justify-center">
             نظرسنجی محصول موبایل
           </h1>
         </div>
         <div className="flex-1">
           <TabContext value={tabIndex}>
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <Box
+              sx={{
+                borderBottom: 1,
+                borderColor: "divider",
+                height: "100%",
+                padding: "0px",
+              }}
+            >
               <TabList
                 onChange={handleChange}
                 aria-label="lab API tabs example"
@@ -62,7 +69,7 @@ const BoxForm = () => {
                 scrollButtons={false}
                 textColor="inherit"
               >
-                {surveys.map((item , index) => (
+                {surveys.map((item, index) => (
                   <Tab
                     style={{
                       fontFamily: "yekan",
@@ -71,13 +78,13 @@ const BoxForm = () => {
                     }}
                     disabled={true}
                     key={item.QuestionID}
-                    label={'سوال : ' + (index + 1)}
+                    label={"سوال : " + (index + 1)}
                     value={index}
                   />
                 ))}
               </TabList>
             </Box>
-            {surveys.map((item , index) => (
+            {surveys.map((item, index) => (
               <TabPanel
                 key={item.QuestionID}
                 defaultChecked={item.QuestionID === 0}
@@ -85,6 +92,7 @@ const BoxForm = () => {
                 value={index}
                 sx={{
                   height: "100%",
+                  paddingY: "0px",
                 }}
                 className="!h-full"
               >

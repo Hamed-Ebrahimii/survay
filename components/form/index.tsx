@@ -7,16 +7,13 @@ import { ContextSurvey, InitialState } from "@/context/inedx";
 import { toast } from "react-toastify";
 import DropDown from "../dropDown";
 import Range from "../range";
-import DatePicker, { DateObject } from "react-multi-date-picker";
+import  { Calendar, DateObject } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import TimePicker from "react-multi-date-picker/plugins/analog_time_picker";
 import { debounce } from "@/tools/debounce";
 import { SurveyValidationType } from "@/validation";
-import InputIcon from "react-multi-date-picker/components/input_icon";
-import "react-multi-date-picker/styles/colors/yellow.css";
-import "react-multi-date-picker/styles/colors/analog_time_picker_yellow.css";
-import "react-multi-date-picker/styles/backgrounds/bg-dark.css";
+import "../../style/datepiker.css"
 interface FormProps extends Survay {
   pagination: (value: number) => void;
   tabIndex: number;
@@ -41,7 +38,7 @@ const Form = ({
     handleSubmit,
     watch,
 
-    formState: { errors, isDirty, isValid },
+    formState: { errors, isValid },
   } = useForm<SurveyValidationType>({
     mode: "all",
     defaultValues: {
@@ -66,7 +63,7 @@ const Form = ({
     setState(state);
     console.log(state);
 
-    // debounce(1000, () => pagination(1));
+    debounce(1000, () => pagination(1));
   };
   const checkDisabled = () => {
     if (QuestionRequired) {
@@ -104,12 +101,12 @@ const Form = ({
         });
       }}
       autoComplete="off"
-      className="w-full flex flex-col h-full !min-h-[450px]"
+      className="w-full flex flex-col h-full mt-3"
     >
       <p className="text-xl font-medium text-white font-yekan">
         {QuestionText}
       </p>
-      <div className="w-full space-y-4 mt-12 flex-1 justify-start items-start overflow-hidden overflow-y-auto">
+      <div className="w-full space-y-4 mt-5 flex-1 justify-start items-start overflow-hidden overflow-y-auto">
         {QuestionType === 0 &&
           QuestionRules.split(",")?.map((item) => (
             <Controller
@@ -222,23 +219,15 @@ const Form = ({
             name="answer"
             rules={{ required: QuestionRequired === 1 }}
             render={({ field: { onChange, value } }) => (
-              <DatePicker
-                inputClass=""
+              <Calendar
                 value={value || ""}
                 onChange={(date: DateObject) => {
                   onChange(date?.isValid ? date.format() : "");
                 }}
-                onOpenPickNewDate={false}
+                className="mx-auto"
                 format={"YYYY/MM/DD"}
                 calendar={persian}
-                title={QuestionText}
                 locale={persian_fa}
-                calendarPosition="bottom-right"
-                editable={false}
-                placeholder="تاریخ مورد نظر را انتخاب کنید"
-                render={
-                  <InputIcon className="py-1 px-2 rounded-lg outline-none placeholder:text-xs placeholder:text-gray-600 text-gray-600 border border-orange-secondary" />
-                }
               />
             )}
           />
@@ -249,20 +238,18 @@ const Form = ({
             name="answer"
             rules={{ required: QuestionRequired === 1 }}
             render={({ field: { onChange, value } }) => (
-              <DatePicker
+              <Calendar
                 disableDayPicker
                 format="HH:mm"
                 plugins={[<TimePicker key={""} hideSeconds />]}
                 calendar={persian}
-                className="yellow"
+                className=" mx-auto"
                 locale={persian_fa}
-                calendarPosition="bottom-right"
+                
                 onChange={(date: DateObject) => {
                   onChange(date?.isValid ? date.format() : "");
                 }}
-                render={
-                  <InputIcon className="py-1 px-2 rounded-lg outline-none placeholder:text-xs placeholder:text-gray-600 text-gray-600 border border-orange-secondary" />
-                }
+                
               />
             )}
           />
