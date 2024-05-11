@@ -133,7 +133,7 @@ const Form = ({
               <textarea
                 {...field}
                 placeholder={QuestionText}
-                className="font-yekan w-full bg-white text-gray-600 border-orange-secondary border outline-none rounded-xl p-4 max-h-36 overflow-y-auto"
+                className="font-yekan w-full bg-white text-gray-600 border-orange-secondary border outline-none rounded-xl p-4 max-h-36 overflow-y-auto mt-4"
               ></textarea>
             )}
           />

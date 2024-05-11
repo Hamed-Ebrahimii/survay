@@ -11,6 +11,7 @@ import Form from "../form";
 import "react-toastify/dist/ReactToastify.css";
 import { ContextSurvey, InitialState } from "@/context/inedx";
 import Check from "../check";
+import Btn from "../form/components/btn";
 const BoxForm = () => {
   const [tabIndex, setTabIndex] = useState<number>(0);
   const [showTab , setShowTab] = useState(true)
@@ -43,6 +44,9 @@ const BoxForm = () => {
         <h1 className="mt-5 text-xl text-gray-200 font-medium">
           فرم نظرسنجی شما با موفقیت ارسال شد
         </h1>
+        <Btn className="mt-4 w-2/3">
+            مشاهده پاسخ ها
+        </Btn>
       </div>
     }
     {
