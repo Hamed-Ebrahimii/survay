@@ -11,7 +11,7 @@ export interface Survay {
     "attach"? : File[] ,
     "isAttach" : boolean,
     "numberAttatchFile"? : number,
-    "typeAttatchFile"? : Accept,
+    "typeAttatchFile"? : "image" | "video" | "music" | "pdf" | "all",
 
 }
 export const questionTypesTexts: { [P: number]: string } = {

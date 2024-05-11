@@ -72,13 +72,17 @@ const Form = ({
     debounce(1000, () => pagination(1));
   };
   const checkDisabled = () => {
-    if (QuestionRequired) {
-      if (isValid) {
-        return false;
+    console.log( errors.attach?.message);
+    if(!errors.attach?.message){
+      if (QuestionRequired) {
+        if (isValid ) {
+          return false;
+        }
+        return true;
       }
-      return true;
+      return false;
     }
-    return false;
+    return true
   };
   useEffect(() => {
     if (
@@ -123,7 +127,6 @@ const Form = ({
                 rules={{ required: QuestionRequired === 1 }}
                 render={({ field }) => (
                   <Input
-
                     label={item}
                     type="text"
                     {...field}
@@ -142,6 +145,7 @@ const Form = ({
               render={({ field }) => (
                 <InputFile
                   htmlFor=""
+                  accept={typeAttatchFile}
                   label=""
                   error={errors.attach?.message}
                   multiple={(numberAttatchFile || 0) > 1}
@@ -186,6 +190,7 @@ const Form = ({
                   <InputFile
                     htmlFor=""
                     label=""
+                    accept={typeAttatchFile}
                     error={errors.attach?.message}
                     multiple={(numberAttatchFile || 0) > 1}
                     numberFile={numberAttatchFile || 0}
@@ -243,6 +248,7 @@ const Form = ({
                   <InputFile
                     htmlFor=""
                     label=""
+                    accept={typeAttatchFile || 'all'}
                     error={errors.attach?.message}
                     multiple={(numberAttatchFile || 0) > 1}
                     numberFile={numberAttatchFile || 0}
@@ -300,7 +306,8 @@ const Form = ({
 
                 render={({ field }) => (
                   <InputFile
-                  error={errors.attach?.message}
+                    accept={typeAttatchFile || 'all'}
+                    error={errors.attach?.message}
                     htmlFor=""
                     numberFile={numberAttatchFile || 0}
                     label=""
@@ -348,6 +355,7 @@ const Form = ({
               render={({ field }) => (
                 <InputFile
                   htmlFor=""
+                  accept={typeAttatchFile || 'all'}
                   error={errors.attach?.message}
                   multiple={(numberAttatchFile || 0) > 1}
                   numberFile={numberAttatchFile || 0}
@@ -398,6 +406,7 @@ const Form = ({
                   <InputFile
                     htmlFor=""
                     label=""
+                    accept={typeAttatchFile}
                     error={errors.attach?.message}
                     multiple={(numberAttatchFile || 0) > 1}
                     numberFile={numberAttatchFile || 0}
@@ -448,6 +457,7 @@ const Form = ({
                 render={({ field }) => (
                   <InputFile
                     htmlFor=""
+                    accept={typeAttatchFile}
                     error={errors.attach?.message}
                     multiple={(numberAttatchFile || 0) > 1}
                     label=""
@@ -496,6 +506,7 @@ const Form = ({
 
                 render={({ field }) => (
                   <InputFile
+                    accept={typeAttatchFile}
                     htmlFor=""
                     error={errors.attach?.message}
                     label=""

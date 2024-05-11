@@ -21,7 +21,7 @@ const Input = (props: InputProps) => {
       className={
         `${
           isChcked || props.checked ? "scale-105 shadow-normal" : ""
-        }  break-normal transition-all flex-row-reverse  relative gap-2 flex text-justify mt-3 hyphens-auto text-white  w-full ${props.type !== 'text' ? 'glass border px-4' : ''} justify-end !m-0 w-full  rounded-lg  text-lg font-medium  cursor-pointer ` +
+        }  break-normal transition-all flex-row-reverse  relative gap-2 flex text-justify mt-3 hyphens-auto text-white  w-full ${props.type !== 'text' ? 'glass border px-4 py-2' : ''} justify-end !m-0 w-full  rounded-lg  text-lg font-medium  cursor-pointer ` +
         props.className
       }
       htmlFor={props.id}

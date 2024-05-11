@@ -30,6 +30,8 @@ const BoxForm = () => {
           complete : () =>{
             setShowTab(false)
           }
+          
+
         }).play()
 
       return;
