@@ -134,7 +134,7 @@ const Form = ({
             isAttach && <Controller
               control={control}
               name="attach"
-              rules={{ required: QuestionRequired === 1 }}
+
               render={({ field }) => (
                 <InputFile
                   htmlFor=""
@@ -168,7 +168,7 @@ const Form = ({
               <Controller
                 control={control}
                 name="attach"
-                rules={{ required: QuestionRequired === 1 }}
+
                 render={({ field }) => (
                   <InputFile
                     htmlFor=""
@@ -208,27 +208,28 @@ const Form = ({
                     ></Input>
                   )}
                 />
-                {
-                  isAttach &&
-                  <Controller
-                    control={control}
-                    name="attach"
-                    rules={{ required: QuestionRequired === 1 }}
-                    render={({ field }) => (
-                      <InputFile
-                        htmlFor=""
-                        label=""
-                        onChange={(e) => {
-                          const file = Array.from(e.target.files || [])
-                          field.onChange(file[0])
-                        }}
-                        placeholder={QuestionText}
-                      />
-                    )}
-                  />
-                }
+
               </div>
             ))}
+            {
+              isAttach &&
+              <Controller
+                control={control}
+                name="attach"
+
+                render={({ field }) => (
+                  <InputFile
+                    htmlFor=""
+                    label=""
+                    onChange={(e) => {
+                      const file = Array.from(e.target.files || [])
+                      field.onChange(file[0])
+                    }}
+                    placeholder={QuestionText}
+                  />
+                )}
+              />
+            }
           </div>
         )}
         {QuestionType === 3 && (
@@ -265,7 +266,7 @@ const Form = ({
               <Controller
                 control={control}
                 name="attach"
-                rules={{ required: QuestionRequired === 1 }}
+
                 render={({ field }) => (
                   <InputFile
                     htmlFor=""
@@ -299,7 +300,7 @@ const Form = ({
                   <Controller
                     control={control}
                     name="attach"
-                    rules={{ required: QuestionRequired === 1 }}
+
                     render={({ field }) => (
                       <InputFile
                         htmlFor=""
@@ -341,7 +342,7 @@ const Form = ({
               <Controller
                 control={control}
                 name="attach"
-                rules={{ required: QuestionRequired === 1 }}
+
                 render={({ field }) => (
                   <InputFile
                     htmlFor=""
@@ -382,7 +383,7 @@ const Form = ({
               <Controller
                 control={control}
                 name="attach"
-                rules={{ required: QuestionRequired === 1 }}
+
                 render={({ field }) => (
                   <InputFile
                     htmlFor=""
@@ -422,7 +423,7 @@ const Form = ({
               <Controller
                 control={control}
                 name="attach"
-                rules={{ required: QuestionRequired === 1 }}
+
                 render={({ field }) => (
                   <InputFile
                     htmlFor=""
