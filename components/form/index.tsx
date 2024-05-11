@@ -109,8 +109,8 @@ const Form = ({
       <p className="text-xl font-medium text-white font-yekan">
         {QuestionText}
       </p>
-      <div className="w-full space-y-4  flex-1 justify-start items-start ">
-        {QuestionType === 0 && <div>
+      <div className="w-full space-y-4 mt-3 flex-1 justify-start items-start ">
+        {QuestionType === 0 && <>
           {
             QuestionRules.split(",")?.map((item) => (
               <Controller
@@ -148,9 +148,9 @@ const Form = ({
               )}
             />
           }
-        </div>}
+        </>}
         {QuestionType === 1 && (
-          <div>
+          <>
             <Controller
               control={control}
               name="answer"
@@ -182,11 +182,11 @@ const Form = ({
                 )}
               />
             }
-          </div>
+          </>
 
         )}
         {QuestionType === 2 && (
-          <div className="grid grid-cols-2 justify-center py-5 items-center">
+          <div className="grid grid-cols-2 justify-center py-5 gap-4 items-center">
             {questionRules.map((item) => (
               <div
                 key={item}
@@ -233,7 +233,7 @@ const Form = ({
           </div>
         )}
         {QuestionType === 3 && (
-          <div className="w-full grid grid-cols-2 py-6 px-5 items-center justify-center gap-3">
+          <div className="w-full grid grid-cols-2 py-6 px-5  items-center justify-center gap-3">
             {questionRules?.map((item, index) => (
               <div className="w-11/12 mx-auto" key={index}>
                 <Controller
@@ -283,7 +283,7 @@ const Form = ({
           </div>
         )}
 
-        {QuestionType === 4 && (
+        {QuestionType === 4 && <>
           <Controller
             control={control}
             name="answer"
@@ -295,7 +295,11 @@ const Form = ({
                   min={+questionRules[0]}
                   max={+questionRules.slice(-1)[0]}
                 />
-                {
+          
+              </div>
+            )}
+          />
+          {
                   isAttach &&
                   <Controller
                     control={control}
@@ -314,12 +318,10 @@ const Form = ({
                     )}
                   />
                 }
-              </div>
-            )}
-          />
-        )}
+        </>
+        }
         {QuestionType === 5 && (
-          <div>
+          <>
             <Controller
               control={control}
               name="answer"
@@ -356,10 +358,10 @@ const Form = ({
                 )}
               />
             }
-          </div>
+          </>
         )}
         {QuestionType === 6 && (
-          <div>
+          <>
             <Controller
               control={control}
               name="answer"
@@ -397,10 +399,10 @@ const Form = ({
                 )}
               />
             }
-          </div>
+          </>
         )}
         {QuestionType === 7 && (
-          <div>
+          <>
             <Controller
               control={control}
               rules={{ required: QuestionRequired === 1 }}
@@ -437,7 +439,7 @@ const Form = ({
                 )}
               />
             }
-          </div>
+          </>
         )}
       </div>
       <div className="w-full flex items-center justify-between my-4 ">

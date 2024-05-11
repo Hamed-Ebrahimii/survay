@@ -21,12 +21,12 @@ const Input = (props: InputProps) => {
       className={
         `${
           isChcked || props.checked ? "scale-105 shadow-normal" : ""
-        } flex break-normal transition-all flex-row-reverse  relative gap-2 text-justify hyphens-auto text-white  w-full ${props.type !== 'text' ? 'glass border' : ''} justify-end !m-0   rounded-lg p-4 text-lg font-medium  cursor-pointer ` +
+        }  break-normal transition-all flex-row-reverse  relative gap-2 inline-block text-justify mt-3 hyphens-auto text-white  w-full ${props.type !== 'text' ? 'glass border px-4' : ''} justify-end !m-0 w-full  rounded-lg  text-lg font-medium  cursor-pointer ` +
         props.className
       }
       htmlFor={props.id}
     >
-      <label htmlFor={props.id} className="text-white cursor-pointer">
+      <label htmlFor={props.id} className="text-white cursor-pointer ">
         {props.label}
       </label>
       {props.type === "checkbox" && (
