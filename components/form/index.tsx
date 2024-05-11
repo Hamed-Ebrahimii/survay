@@ -139,35 +139,7 @@ const Form = ({
             )
             )
           }
-          {
-            isAttach && <Controller
-              control={control}
-              name="attach"
-              rules={{required : requierdAttach}}
-              render={({ field }) => (
-                <InputFile
-                  htmlFor=""
-                  
-                  accept={typeAttatchFile}
-                  label=""
-                  error={errors.attach?.message}
-                  multiple={(numberAttatchFile || 0) > 1}
-                  numberFile={numberAttatchFile || 0}
-                  onChange={(e) => {
-                    const file = Array.from(e.target.files || [])
-                    if ((numberAttatchFile || 0) < file.length) {
-                      setError('attach', {
-                        message: `تعداد فایل بیش از ${numberAttatchFile} میباشد`
-                      })
-                      return
-                    }
-                    field.onChange(file)
-                  }}
-                  placeholder={QuestionText}
-                />
-              )}
-            />
-          }
+         
         </>}
         {QuestionType === 1 && (
           <>
@@ -183,35 +155,7 @@ const Form = ({
                 ></textarea>
               )}
             />
-            {
-              isAttach &&
-              <Controller
-                control={control}
-                name="attach"
-                rules={{required : requierdAttach}}
-                render={({ field }) => (
-                  <InputFile
-                    htmlFor=""
-                    label=""
-                    accept={typeAttatchFile}
-                    error={errors.attach?.message}
-                    multiple={(numberAttatchFile || 0) > 1}
-                    numberFile={numberAttatchFile || 0}
-                    onChange={(e) => {
-                      const file = Array.from(e.target.files || [])
-                      if ((numberAttatchFile || 0) < file.length) {
-                        setError('attach', {
-                          message: `تعداد فایل بیش از ${numberAttatchFile} میباشد`
-                        })
-                        return
-                      }
-                      field.onChange(file)
-                    }}
-                    placeholder={QuestionText}
-                  />
-                )}
-              />
-            }
+ 
           </>
 
         )}
@@ -241,35 +185,7 @@ const Form = ({
 
               </div>
             ))}
-            {
-              isAttach &&
-              <Controller
-                control={control}
-                name="attach"
-                rules={{required : requierdAttach}}
-                render={({ field }) => (
-                  <InputFile
-                    htmlFor=""
-                    label=""
-                    accept={typeAttatchFile || 'all'}
-                    error={errors.attach?.message}
-                    multiple={(numberAttatchFile || 0) > 1}
-                    numberFile={numberAttatchFile || 0}
-                    onChange={(e) => {
-                      const file = Array.from(e.target.files || [])
-                      if ((numberAttatchFile || 0) < file.length) {
-                        setError('attach', {
-                          message: `تعداد فایل بیش از ${numberAttatchFile} میباشد`
-                        })
-                        return
-                      }
-                      field.onChange(file)
-                    }}
-                    placeholder={QuestionText}
-                  />
-                )}
-              />
-            }
+           
           </div>
         )}
         {QuestionType === 3 && (
@@ -301,35 +217,7 @@ const Form = ({
                 />
               </div>
             ))}
-            {
-              isAttach &&
-              <Controller
-                control={control}
-                name="attach"
-                rules={{required : requierdAttach}}
-                render={({ field }) => (
-                  <InputFile
-                    accept={typeAttatchFile || 'all'}
-                    error={errors.attach?.message}
-                    htmlFor=""
-                    numberFile={numberAttatchFile || 0}
-                    label=""
-                    multiple={(numberAttatchFile || 0) > 1}
-                    onChange={(e) => {
-                      const file = Array.from(e.target.files || [])
-                      if ((numberAttatchFile || 0) < file.length) {
-                        setError('attach', {
-                          message: `تعداد فایل بیش از ${numberAttatchFile} میباشد`
-                        })
-                        return
-                      }
-                      field.onChange(file)
-                    }}
-                    placeholder={QuestionText}
-                  />
-                )}
-              />
-            }
+          
           </div>
         )}
 
@@ -350,35 +238,7 @@ const Form = ({
               </div>
             )}
           />
-          {
-            isAttach &&
-            <Controller
-              control={control}
-              name="attach"
-              rules={{required : requierdAttach}}
-              render={({ field }) => (
-                <InputFile
-                  htmlFor=""
-                  accept={typeAttatchFile || 'all'}
-                  error={errors.attach?.message}
-                  multiple={(numberAttatchFile || 0) > 1}
-                  numberFile={numberAttatchFile || 0}
-                  label=""
-                  onChange={(e) => {
-                    const file = Array.from(e.target.files || [])
-                    if ((numberAttatchFile || 0) < file.length) {
-                      setError('attach', {
-                        message: `تعداد فایل بیش از ${numberAttatchFile} میباشد`
-                      })
-                      return
-                    }
-                    field.onChange(file)
-                  }}
-                  placeholder={QuestionText}
-                />
-              )}
-            />
-          }
+          
         </>
         }
         {QuestionType === 5 && (
@@ -400,35 +260,7 @@ const Form = ({
                 />
               )}
             />
-            {
-              isAttach &&
-              <Controller
-                control={control}
-                name="attach"
-                rules={{required : requierdAttach}}
-                render={({ field }) => (
-                  <InputFile
-                    htmlFor=""
-                    label=""
-                    accept={typeAttatchFile}
-                    error={errors.attach?.message}
-                    multiple={(numberAttatchFile || 0) > 1}
-                    numberFile={numberAttatchFile || 0}
-                    onChange={(e) => {
-                      const file = Array.from(e.target.files || [])
-                      if ((numberAttatchFile || 0) < file.length) {
-                        setError('attach', {
-                          message: `تعداد فایل بیش از ${numberAttatchFile} میباشد`
-                        })
-                        return
-                      }
-                      field.onChange(file)
-                    }}
-                    placeholder={QuestionText}
-                  />
-                )}
-              />
-            }
+        
           </>
         )}
         {QuestionType === 6 && (
@@ -453,35 +285,7 @@ const Form = ({
                 />
               )}
             />
-            {
-              isAttach &&
-              <Controller
-                control={control}
-                name="attach"
-                rules={{required : requierdAttach}}
-                render={({ field }) => (
-                  <InputFile
-                    htmlFor=""
-                    accept={typeAttatchFile}
-                    error={errors.attach?.message}
-                    multiple={(numberAttatchFile || 0) > 1}
-                    label=""
-                    numberFile={numberAttatchFile || 0}
-                    onChange={(e) => {
-                      const file = Array.from(e.target.files || [])
-                      if ((numberAttatchFile || 0) < file.length) {
-                        setError('attach', {
-                          message: `تعداد فایل بیش از ${numberAttatchFile} میباشد`
-                        })
-                        return
-                      }
-                      field.onChange(file)
-                    }}
-                    placeholder={QuestionText}
-                  />
-                )}
-              />
-            }
+           
           </>
         )}
         {QuestionType === 7 && (
@@ -503,7 +307,12 @@ const Form = ({
                 </div>
               )}
             />
-            {
+           
+          </>
+        )}
+      </div>
+      <div>
+      {
               isAttach &&
               <Controller
                 control={control}
@@ -511,10 +320,10 @@ const Form = ({
                 rules={{required : requierdAttach}}
                 render={({ field }) => (
                   <InputFile
-                    accept={typeAttatchFile}
                     htmlFor=""
-                    error={errors.attach?.message}
                     label=""
+                    accept={typeAttatchFile}
+                    error={errors.attach?.message}
                     multiple={(numberAttatchFile || 0) > 1}
                     numberFile={numberAttatchFile || 0}
                     onChange={(e) => {
@@ -532,8 +341,6 @@ const Form = ({
                 )}
               />
             }
-          </>
-        )}
       </div>
       <div className="w-full flex items-center justify-between my-4 ">
         <div>
