@@ -14,7 +14,8 @@ import TimePicker from "react-multi-date-picker/plugins/time_picker";
 import { debounce } from "@/tools/debounce";
 import { SurveyValidationType } from "@/validation";
 import InputIcon from "react-multi-date-picker/components/input_icon";
-
+import "react-multi-date-picker/styles/colors/yellow.css";
+import "react-multi-date-picker/styles/colors/yellow.css"
 interface FormProps extends Survay {
   pagination: (value: number) => void;
   tabIndex: number;
@@ -101,6 +102,7 @@ const Form = ({
           }
         });
       }}
+      autoComplete="off"
       className="w-full flex flex-col h-full !min-h-[450px]"
     >
       <p className="text-xl font-medium text-white font-yekan">
@@ -115,7 +117,7 @@ const Form = ({
               key={item}
               rules={{ required: QuestionRequired === 1 }}
               render={({ field }) => (
-                <Input label={item} type="text" {...field} />
+                <Input label={item} type="text" {...field} placeholder={QuestionText}/>
               )}
             />
           ))}
@@ -127,7 +129,8 @@ const Form = ({
             render={({ field }) => (
               <textarea
                 {...field}
-                className="font-yekan w-full bg-white border-orange-secondary border outline-none rounded-xl p-4"
+                placeholder={QuestionText}
+                className="font-yekan w-full bg-white text-gray-600 border-orange-secondary border outline-none rounded-xl p-4"
               ></textarea>
             )}
           />
@@ -214,7 +217,7 @@ const Form = ({
             rules={{ required: QuestionRequired === 1 }}
             render={({ field: { onChange, value } }) => (
               <DatePicker
-                inputClass="py-1 px-2 rounded-lg outline-none placeholder:text-xs placeholder:text-white  text-white border border-orange-secodary"
+                inputClass=""
                 value={value || ""}
                 onChange={(date: DateObject) => {
                   onChange(date?.isValid ? date.format() : "");
@@ -222,12 +225,13 @@ const Form = ({
                 onOpenPickNewDate={false}
                 format={"YYYY/MM/DD"}
                 calendar={persian}
+                title={QuestionText}
                 locale={persian_fa}
                 calendarPosition="bottom-right"
                 editable={false}
                 placeholder="تاریخ مورد نظر را انتخاب کنید"
                 render={
-                  <InputIcon/>
+                  <InputIcon  className="py-1 px-2 rounded-lg outline-none placeholder:text-xs placeholder:text-gray-600 text-gray-600 border border-orange-secondary"/>
                 }
               />
             )}
@@ -240,24 +244,24 @@ const Form = ({
             rules={{ required: QuestionRequired === 1 }}
             render={({ field: { onChange, value } }) => (
               <DatePicker
+                inputClass=""
                 disableDayPicker
-                format="HH:mm"
-                plugins={[<TimePicker key={undefined} hideSeconds />]}
+                value={value || ""}
+                onChange={(date: DateObject) => {
+                  onChange(date?.isValid ? date.format("HH:MM") : "");
+                }}
+                plugins={[
+                  <TimePicker key={''} hideSeconds/>
+                ]}
+                format={"hh:mm"}
                 calendar={persian}
                 locale={persian_fa}
                 calendarPosition="bottom-right"
-                value={value || ""}
-                onChange={(date: DateObject) => {
-                  console.log(date.format());
-                  
-                  onChange(date?.isValid ? date.format() : "");
-                }}
-                onOpenPickNewDate={false}
-                inputClass="py-1 px-2 rounded-lg outline-none placeholder:text-xs placeholder:text-gray-600 text-white border border-orange-secodary"
-                placeholder="زمان مورد نظر خورد را انتخاب کنید"
                 editable={false}
+                onOpenPickNewDate={false}
+                placeholder="تاریخ مورد نظر را انتخاب کنید"
                 render={
-                  <InputIcon/>
+                  <InputIcon className="py-1 px-2 rounded-lg outline-none placeholder:text-xs placeholder:text-gray-600 text-gray-600 border border-orange-secondary"/>
                 }
               />
             )}
@@ -271,9 +275,10 @@ const Form = ({
             render={({ field }) => (
               <div className="col-span-2">
                 <DropDown
+                placeholder={QuestionText}
                   name={field.name}
                   onChange={field.onChange}
-                  data={["بله", "خیر"]}
+                  data={questionRules}
                   lable=""
                   defaultValue={field.value}
                 />

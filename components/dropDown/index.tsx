@@ -74,14 +74,14 @@ const DropDown = (props: DropDownProps) => {
           {props.requier && <span className="text-red-400 font-bold"> *</span>}
         </label>
         <div
-          className={`  rounded-lg w-full text-ellipsis bg-orange-secondary  overflow-hidden whitespace-nowrap text-xs py-2 px-2   focus:border-blue-300 text-white  font-bold flex items-center justify-center ${
+          className={`  rounded-lg w-full text-ellipsis bg-white border border-orange-secondary  overflow-hidden whitespace-nowrap text-xs py-2 px-2   focus:border-orange-secondary text-white  font-bold flex items-center justify-center ${
             props.error ? "border-red-400" : "border-gray-200 "
           }`}
         >
           <button
             type="button"
             id="drop"
-            className={`z-30 bg-inherit outline-none w-full text-ellipsis overflow-hidden whitespace-nowrap text-xs  rounded-full focus:border-blue-300 text-white font-bold flex items-center justify-between ${
+            className={`z-30 bg-inherit outline-none w-full text-ellipsis overflow-hidden whitespace-nowrap text-xs  rounded-full focus:border-blue-300 text-gray-600 font-bold flex items-center justify-between ${
               props.error ? "border-red-400" : "border-gray-200 "
             }`}
             onClick={() => {
@@ -105,7 +105,7 @@ const DropDown = (props: DropDownProps) => {
           </button>
           {showDrop && (
             <div className="flex items-start justify-between absolute z-40 top-6 w-full">
-              <div className="drop  bg-orange-secondary  border px-3  rounded-lg mt-5 max-h-40 py-2 overflow-auto relative w-full">
+              <div className="drop  bg-white   border border-orange-secondary px-3  rounded-lg mt-5 max-h-40 py-2 overflow-auto relative w-full">
                 <div className="w-full flex items-center gap-4 ">
                   <div className="w-full">
                     <div className="py-1 mb-2 border-b flex  items-center gap-2">

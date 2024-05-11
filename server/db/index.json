@@ -1,67 +1,77 @@
 {
+
   "SurveyAnswerQuestion": [
-    {
-      "QuestionAnwseredValue": null,
-      "QuestionID": 94,
-      "QuestionText": "تا چه میزان تمایل دارید که مجددا در آروند فن پارس ثبت سفارش کنید؟",
-      "QuestionDesc": null,
-      "QuestionType": 4,
-      "QuestionRequired": 0,
-      "QuestionRules": "1,2,3,4,5,6,7,8,9,10"
-    },
-    {
-      "QuestionAnwseredValue": null,
-      "QuestionID": 99,
-      "QuestionText": "به سرعت هماهنگی جهت امور درخواستی شما توسط کارشناسان چه امتیازی می دهید؟",
-      "QuestionDesc": null,
-      "QuestionType": 3,
-      "QuestionRequired": 1,
-      "QuestionRules": "به سرعت هماهنگی جهت امور درخواستی شما توسط کارشناسان چه امتیازی می دهید؟,به سرعت هماهنگی جهت امور درخواستی شما توسط کارشناسان چه امتیازی می دهید؟,به سرعت هماهنگی جهت امور  درخواستی شما توسط کارشناسان چه امتیازی می دهید؟"
-    },
-    {
-      "QuestionAnwseredValue": null,
-      "QuestionID": 102,
-      "QuestionText": "آیا مستندات ارسالی اعم از فاکتور، گزارشات و ... تکمیل بوده است؟",
-      "QuestionDesc": null,
-      "QuestionType": 2,
-      "QuestionRequired": 1,
-      "QuestionRules": "بله,خیر"
-    },
-    {
-      "QuestionAnwseredValue": null,
-      "QuestionID": 102,
-      "QuestionText": "آیا مستندات ارسالی اعم از فاکتور، گزارشات و ... تکمیل بوده است؟",
-      "QuestionDesc": null,
-      "QuestionType": 1,
-      "QuestionRequired": 1,
-      "QuestionRules": "بله,خیر"
-    },
-    {
-      "QuestionAnwseredValue": null,
-      "QuestionID": 102,
-      "QuestionText": "آیا مستندات ارسالی اعم از فاکتور، گزارشات و ... تکمیل بوده است؟",
-      "QuestionDesc": null,
-      "QuestionType": 5,
-      "QuestionRequired": 1,
-      "QuestionRules": "بله,خیر"
-    },
-    {
-      "QuestionAnwseredValue": null,
-      "QuestionID": 102,
-      "QuestionText": "آیا مستندات ارسالی اعم از فاکتور، گزارشات و ... تکمیل بوده است؟",
-      "QuestionDesc": null,
-      "QuestionType": 0,
-      "QuestionRequired": 1,
-      "QuestionRules": ""
-    },
-    {
-      "QuestionAnwseredValue": null,
-      "QuestionID": 102,
-      "QuestionText": "آیا مستندات ارسالی اعم از فاکتور، گزارشات و ... تکمیل بوده است؟",
-      "QuestionDesc": null,
-      "QuestionType": 6,
-      "QuestionRequired": 1,
-      "QuestionRules": "بله,خیر"
-    }
+      {
+          "QuestionAnwseredValue": null,
+          "QuestionID": 49,
+          "QuestionText": "توضیحات تکمیلی",
+          "QuestionDesc": null,
+          "QuestionType": 1,
+          "QuestionRequired": 0,
+          "QuestionRules": ""
+      },
+      {
+          "QuestionAnwseredValue": null,
+          "QuestionID": 58,
+          "QuestionText": "میزان زمان طی شده جهت تعمیر دستگاه",
+          "QuestionDesc": null,
+          "QuestionType": 4,
+          "QuestionRequired": 0,
+          "QuestionRules": "1,5"
+      },
+      {
+          "QuestionAnwseredValue": null,
+          "QuestionID": 76,
+          "QuestionText": "بلی یا خیر؟",
+          "QuestionDesc": null,
+          "QuestionType": 3,
+          "QuestionRequired": 0,
+          "QuestionRules": "بلی,خیر"
+      },
+      {
+          "QuestionAnwseredValue": null,
+          "QuestionID": 78,
+          "QuestionText": "پاسخ کوتاه",
+          "QuestionDesc": null,
+          "QuestionType": 0,
+          "QuestionRequired": 0,
+          "QuestionRules": ""
+      },
+      {
+          "QuestionAnwseredValue": null,
+          "QuestionID": 79,
+          "QuestionText": "تاریخ",
+          "QuestionDesc": null,
+          "QuestionType": 5,
+          "QuestionRequired": 0,
+          "QuestionRules": "undefined,undefined"
+      },
+      {
+          "QuestionAnwseredValue": null,
+          "QuestionID": 80,
+          "QuestionText": "ساعت",
+          "QuestionDesc": null,
+          "QuestionType": 6,
+          "QuestionRequired": 0,
+          "QuestionRules": ""
+      },
+      {
+          "QuestionAnwseredValue": null,
+          "QuestionID": 81,
+          "QuestionText": "سوال چند انتخابی",
+          "QuestionDesc": null,
+          "QuestionType": 2,
+          "QuestionRequired": 1,
+          "QuestionRules": "بله,خیر"
+      },
+      {
+          "QuestionAnwseredValue": null,
+          "QuestionID": 89,
+          "QuestionText": "سوال تست تضویحات الزامی",
+          "QuestionDesc": null,
+          "QuestionType": 7,
+          "QuestionRequired": 0,
+          "QuestionRules": "ضعیف!!,معمولی,خوب"
+      }
   ]
 }

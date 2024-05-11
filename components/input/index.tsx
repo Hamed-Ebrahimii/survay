@@ -6,6 +6,7 @@ import {
   useState,
 } from "react";
 import { FaCheck } from "react-icons/fa";
+import { FaRegCircleDot } from "react-icons/fa6";
 interface InputProps
   extends DetailedHTMLProps<
     InputHTMLAttributes<HTMLInputElement>,
@@ -50,8 +51,8 @@ const Input = (props: InputProps) => {
       {props.type === "radio" && (
         <Radio
           color="default"
-          className="text-orange-secondary"
-          size="small"
+          className="size-5 text-orange-secondary peer-checked:bg-white "
+         
           value={props.value}
           onChange={props.onChange}
           checked={props.checked}
