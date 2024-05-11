@@ -8,7 +8,7 @@ export interface Survay {
     "QuestionType": number,
     "QuestionRequired": number,
     "QuestionRules": string,
-    "attach"? : File ,
+    "attach"? : File[] ,
     "isAttach" : boolean,
     "numberAttatchFile"? : number,
     "typeAttatchFile"? : Accept,

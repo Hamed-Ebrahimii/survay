@@ -53,8 +53,9 @@ const InputFile = (props: InputProps) => {
                     } border w-full bg-gray-100   py-1  outline-none placeholder:text-gray-400 text-gray-500 placeholder:text-xs placeholder:font-semibold file:mr-1 file:rounded-md file:border-0 file:ml-4  file:bg-blue-500 file:py-1 file:px-4 file:text-sm file:font-semibold file:text-white hover:file:bg-primary-700 ${props.type === "file" ? "px-1" : "px-5"
                     } ${props.error ? "border-red-400" : "border-gray-200"}`}
             />
+
             {file.length > 0 && (
-                <div className="w-full relative bottom-2 z-30 bg-gray-100 rounded-b-lg border p-3 grid grid-cols-2 gap-3 max-h-32 overflow-auto">
+                <div className="w-full relative bottom-0 z-30 bg-gray-100 rounded-b-lg border p-3 grid grid-cols-2 gap-3 max-h-32 overflow-auto">
                     {file.map((item) => (
                         <BoxFile
                             file={item}
@@ -65,7 +66,9 @@ const InputFile = (props: InputProps) => {
                     ))}
                 </div>
             )}
-
+            {
+                props.error && <p className="text-xs text-red-500"> * {props.error}</p>
+            }
         </div>
     )
 }

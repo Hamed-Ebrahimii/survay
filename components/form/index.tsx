@@ -41,7 +41,7 @@ const Form = ({
     control,
     handleSubmit,
     watch,
-
+    setError,
     formState: { errors, isValid },
   } = useForm<SurveyValidationType>({
     mode: "all",
@@ -143,11 +143,18 @@ const Form = ({
                 <InputFile
                   htmlFor=""
                   label=""
-                  multiple={(numberAttatchFile || 0 ) > 1}
+                  error={errors.attach?.message}
+                  multiple={(numberAttatchFile || 0) > 1}
                   numberFile={numberAttatchFile || 0}
                   onChange={(e) => {
                     const file = Array.from(e.target.files || [])
-                    field.onChange(file[0])
+                    if ((numberAttatchFile || 0) < file.length) {
+                      setError('attach', {
+                        message: `تعداد فایل بیش از ${numberAttatchFile} میباشد`
+                      })
+                      return
+                    }
+                    field.onChange(file)
                   }}
                   placeholder={QuestionText}
                 />
@@ -179,11 +186,18 @@ const Form = ({
                   <InputFile
                     htmlFor=""
                     label=""
-                    multiple={(numberAttatchFile || 0 ) > 1}
+                    error={errors.attach?.message}
+                    multiple={(numberAttatchFile || 0) > 1}
                     numberFile={numberAttatchFile || 0}
                     onChange={(e) => {
                       const file = Array.from(e.target.files || [])
-                      field.onChange(file[0])
+                      if ((numberAttatchFile || 0) < file.length) {
+                        setError('attach', {
+                          message: `تعداد فایل بیش از ${numberAttatchFile} میباشد`
+                        })
+                        return
+                      }
+                      field.onChange(file)
                     }}
                     placeholder={QuestionText}
                   />
@@ -229,11 +243,18 @@ const Form = ({
                   <InputFile
                     htmlFor=""
                     label=""
-                    multiple={(numberAttatchFile || 0 ) > 1}
+                    error={errors.attach?.message}
+                    multiple={(numberAttatchFile || 0) > 1}
                     numberFile={numberAttatchFile || 0}
                     onChange={(e) => {
                       const file = Array.from(e.target.files || [])
-                      field.onChange(file[0])
+                      if ((numberAttatchFile || 0) < file.length) {
+                        setError('attach', {
+                          message: `تعداد فایل بیش از ${numberAttatchFile} میباشد`
+                        })
+                        return
+                      }
+                      field.onChange(file)
                     }}
                     placeholder={QuestionText}
                   />
@@ -279,13 +300,20 @@ const Form = ({
 
                 render={({ field }) => (
                   <InputFile
+                  error={errors.attach?.message}
                     htmlFor=""
                     numberFile={numberAttatchFile || 0}
                     label=""
-                    multiple={(numberAttatchFile || 0 ) > 1}
+                    multiple={(numberAttatchFile || 0) > 1}
                     onChange={(e) => {
                       const file = Array.from(e.target.files || [])
-                      field.onChange(file[0])
+                      if ((numberAttatchFile || 0) < file.length) {
+                        setError('attach', {
+                          message: `تعداد فایل بیش از ${numberAttatchFile} میباشد`
+                        })
+                        return
+                      }
+                      field.onChange(file)
                     }}
                     placeholder={QuestionText}
                   />
@@ -320,12 +348,19 @@ const Form = ({
               render={({ field }) => (
                 <InputFile
                   htmlFor=""
-                  multiple={(numberAttatchFile || 0 ) > 1}
+                  error={errors.attach?.message}
+                  multiple={(numberAttatchFile || 0) > 1}
                   numberFile={numberAttatchFile || 0}
                   label=""
                   onChange={(e) => {
                     const file = Array.from(e.target.files || [])
-                    field.onChange(file[0])
+                    if ((numberAttatchFile || 0) < file.length) {
+                      setError('attach', {
+                        message: `تعداد فایل بیش از ${numberAttatchFile} میباشد`
+                      })
+                      return
+                    }
+                    field.onChange(file)
                   }}
                   placeholder={QuestionText}
                 />
@@ -363,11 +398,18 @@ const Form = ({
                   <InputFile
                     htmlFor=""
                     label=""
-                    multiple={(numberAttatchFile || 0 ) > 1}
+                    error={errors.attach?.message}
+                    multiple={(numberAttatchFile || 0) > 1}
                     numberFile={numberAttatchFile || 0}
                     onChange={(e) => {
                       const file = Array.from(e.target.files || [])
-                      field.onChange(file[0])
+                      if ((numberAttatchFile || 0) < file.length) {
+                        setError('attach', {
+                          message: `تعداد فایل بیش از ${numberAttatchFile} میباشد`
+                        })
+                        return
+                      }
+                      field.onChange(file)
                     }}
                     placeholder={QuestionText}
                   />
@@ -386,7 +428,7 @@ const Form = ({
                 <Calendar
                   disableDayPicker
                   format="HH:mm"
-                  
+
                   plugins={[<TimePicker key={""} hideSeconds />]}
                   calendar={persian}
                   className=" mx-auto"
@@ -406,12 +448,19 @@ const Form = ({
                 render={({ field }) => (
                   <InputFile
                     htmlFor=""
-                    multiple={(numberAttatchFile || 0 ) > 1}
+                    error={errors.attach?.message}
+                    multiple={(numberAttatchFile || 0) > 1}
                     label=""
                     numberFile={numberAttatchFile || 0}
                     onChange={(e) => {
                       const file = Array.from(e.target.files || [])
-                      field.onChange(file[0])
+                      if ((numberAttatchFile || 0) < file.length) {
+                        setError('attach', {
+                          message: `تعداد فایل بیش از ${numberAttatchFile} میباشد`
+                        })
+                        return
+                      }
+                      field.onChange(file)
                     }}
                     placeholder={QuestionText}
                   />
@@ -448,12 +497,19 @@ const Form = ({
                 render={({ field }) => (
                   <InputFile
                     htmlFor=""
+                    error={errors.attach?.message}
                     label=""
-                    multiple={(numberAttatchFile || 0 ) > 1}
+                    multiple={(numberAttatchFile || 0) > 1}
                     numberFile={numberAttatchFile || 0}
                     onChange={(e) => {
                       const file = Array.from(e.target.files || [])
-                      field.onChange(file[0])
+                      if ((numberAttatchFile || 0) < file.length) {
+                        setError('attach', {
+                          message: `تعداد فایل بیش از ${numberAttatchFile} میباشد`
+                        })
+                        return
+                      }
+                      field.onChange(file)
                     }}
                     placeholder={QuestionText}
                   />
