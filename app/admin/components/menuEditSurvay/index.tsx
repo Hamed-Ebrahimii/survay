@@ -8,6 +8,8 @@ import { useEffect, useState } from "react"
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from "react-hook-form"
 import { AddSurvayValidation, AddSurvayValidationType } from "@/validation/addSurvay"
+import { useMutation } from "@tanstack/react-query"
+import { addSurvay } from "@/api/addSurvay"
 const typeFile = ['فایل', 'عکس', 'ویدیو', 'پی دی اف', 'همه']
 const MenuProps = {
     PaperProps: {
@@ -20,7 +22,9 @@ const MenuProps = {
 const MenuEditSurvay = ({ open, setOpen, survay }: { open: boolean, setOpen: (value: boolean) => void, survay: Survay }) => {
     const ref = useClickOutside(() => setOpen(false))
     const [personName, setPersonName] = useState<string[]>([]);
-
+    const {mutate} = useMutation({
+        mutationFn : (data : Survay) => addSurvay(data)
+    })
     const handleChange = (event: SelectChangeEvent<typeof personName>) => {
         const {
             target: { value },
@@ -35,13 +39,13 @@ const MenuEditSurvay = ({ open, setOpen, survay }: { open: boolean, setOpen: (va
         resolver: zodResolver(AddSurvayValidation)
     })
     const onSubmit = (data : AddSurvayValidationType) =>{
-            console.log(data);
-            
+            const newSurvay : Survay = {
+               ...survay,
+               ...data
+            }
+           mutate(newSurvay)
     }
-    useEffect(() => {
-        console.log(errors);
-        
-    }, [errors]);
+
     return (
         <Drawer anchor="left" open={open}>
             <Box sx={{

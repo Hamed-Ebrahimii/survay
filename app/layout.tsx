@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import "./celender.css"
+import QueryProvider from "@/provider/reactQuery";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -16,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl">
+      <QueryProvider>
       <body className={"font-yekan "}>{children}</body>
+      </QueryProvider>
     </html>
   );
 }
