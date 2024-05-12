@@ -74,7 +74,7 @@ const MenuCreateSurvey = ({ setSorvay, survay }: { setSorvay: (value: Survay[]) 
     return (
         <div className="fixed menu translate-x-[250px] transition-all">
            
-                <Box ref={ref} sx={{ width: '250px', backgroundColor: '#7ABA78', paddingY: '30px', paddingX: '15px' , borderRadius : '20px' }}>
+                <Box  sx={{ width: '250px', backgroundColor: '#7ABA78', paddingY: '30px', paddingX: '15px' , borderRadius : '20px' }}>
                     <div className="space-y-5 relative ">
             <BtnShowDrawer isOpen={createSurvey} onClick={() => setCreateSurvey(!createSurvey)} />
                         {
