@@ -53,10 +53,10 @@ const MenuCreateSurvey = ({ setSorvay, survay }: { setSorvay: (value: Survay[]) 
     }
     return (
         <div className="fixed ">
+           
+                <Box ref={ref} sx={{ width: '250px', backgroundColor: '#7ABA78', paddingY: '30px', paddingX: '15px' , borderRadius : '20px' }}>
+                    <div className="space-y-5 relative">
             <BtnShowDrawer onClick={() => setCreateSurvey(true)} />
-            <Drawer open={createSurvey} anchor="right">
-                <Box ref={ref} sx={{ width: '250px', backgroundColor: 'white', paddingY: '30px', paddingX: '15px' }}>
-                    <div className="space-y-5">
                         {
                             listSurvey.map((item, index) => (
                                 <div key={index}>
@@ -83,7 +83,7 @@ const MenuCreateSurvey = ({ setSorvay, survay }: { setSorvay: (value: Survay[]) 
 
                     </div>
                 </Box>
-            </Drawer>
+           
         </div>
     )
 }

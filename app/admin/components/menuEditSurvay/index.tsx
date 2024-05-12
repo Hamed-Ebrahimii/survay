@@ -56,7 +56,7 @@ const MenuEditSurvay = ({ open, setOpen, survay, setSurvay }: { open: boolean, s
 
     }, [errors])
     return (
-        <Drawer anchor="left" open={open}>
+       
             <Box sx={{
                 width: '350px',
                 backgroundColor: 'white',
@@ -141,7 +141,7 @@ const MenuEditSurvay = ({ open, setOpen, survay, setSurvay }: { open: boolean, s
                     </Button>
                 </form>
             </Box>
-        </Drawer>
+        
     )
 }
 export default MenuEditSurvay

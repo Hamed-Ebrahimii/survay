@@ -69,12 +69,12 @@ const Form = ({
     );
     state.splice(QuestionFindIndex, 1, newState);
     setState(state);
-    
+
 
     debounce(1000, () => pagination(1));
   };
   const checkDisabled = () => {
- 
+
 
     if (QuestionRequired || requierdAttach) {
       if (isValid) {
@@ -100,10 +100,10 @@ const Form = ({
       return () => subscription.unsubscribe();
     }
   }, [watch]);
-  useDidUpdate(()=>{
+  useDidUpdate(() => {
     console.log(errors);
-    
-  } , [errors])
+
+  }, [errors])
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -281,7 +281,7 @@ const Form = ({
                   locale={persian_fa}
                   onChange={(date: DateObject) => {
                     console.log(date.format());
-                    
+
                     onChange(date?.isValid ? date.format() : "");
                   }}
                 />
