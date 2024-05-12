@@ -11,6 +11,10 @@ const Admin = () => {
     const [showEditSurvayMenu, setShowEditSurvayMenu] = useState(false)
     const [survay, setSurvay] = useState<Survay[]>([])
     const [index, setIndex] = useState(0)
+    const onRemove = (value : Survay) =>{
+       setSurvay(survay.filter(item => item.QuestionID !== value.QuestionID))
+        
+    }
     return (
         <div className="w-full bg-blue-gray-100 min-h-screen font-yekan">
             <MenuCreateSurvey setSorvay={setSurvay} survay={survay} />
@@ -41,7 +45,7 @@ const Admin = () => {
                                         <FaPencilAlt className="text-white font-medium text-lg" />
 
                                     </Button>
-                                    <Button onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} color="red" placeholder={''} >
+                                    <Button onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} color="red" placeholder={''} onClick={()=> onRemove(item)}>
                                         <MdDeleteForever className="text-white font-medium text-lg" />
                                     </Button>
                                 </div>
