@@ -4,8 +4,8 @@ import BtnShowDrawer from "../btnShowDrawer"
 import { useClickOutside } from "@mantine/hooks"
 import { useState } from "react"
 import ButtonMenu from "./components/btn"
-import { Survay, SurvayList } from "@/types/survay"
-import { convertType } from "@/tools/convertType"
+import {  SurvayList } from "@/types/survay"
+import { converTypeToPersian } from "@/tools/convertTypeToPersian"
 
 const listSurvey: SurvayList[] = [{
     title: 'توضیحات',
@@ -54,7 +54,7 @@ const MenuCreateSurvey = ({ setSorvay , survay }: { setSorvay: (value: number[])
                                             item.value.map(item => (
                                             <ButtonMenu key={item} onClick={()=> onSurvey(item)}>
                                                 {
-                                                    convertType(item)
+                                                    converTypeToPersian(item)
                                                 }
                                             </ButtonMenu>))
                                         }
