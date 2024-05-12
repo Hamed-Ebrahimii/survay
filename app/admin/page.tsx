@@ -15,7 +15,7 @@ const Admin = () => {
         <div className="w-full bg-blue-gray-100 min-h-screen font-yekan">
             <MenuCreateSurvey setSorvay={setSurvay} survay={survay} />
             {
-                showEditSurvayMenu && <MenuEditSurvay survay={survay[index]} open={showEditSurvayMenu} setOpen={setShowEditSurvayMenu} />
+                showEditSurvayMenu && <MenuEditSurvay survay={survay[index]} setSurvay={setSurvay} open={showEditSurvayMenu} setOpen={setShowEditSurvayMenu} />
             }
             <div className="flex  items-center justify-center w-full h-screen">
                 <div className="w-1/2 mx-auto   px-3 py-4 rounded-lg bg-white">

@@ -1,10 +1,10 @@
 import { converTypeToPersian } from "@/tools/convertTypeToPersian"
 import { Survay } from "@/types/survay"
 import { useClickOutside } from "@mantine/hooks"
-import { Button, Input, Option, Select } from "@material-tailwind/react"
+import { Button } from "@material-tailwind/react"
 import { Box, Drawer, SelectChangeEvent } from "@mui/material"
 import IOSSwitch from "../switch/iosSwitch"
-import { useState } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from "react-hook-form"
 import { AddSurvayValidation, AddSurvayValidationType } from "@/validation/addSurvay"
@@ -12,7 +12,7 @@ import { useMutation } from "@tanstack/react-query"
 import { addSurvay } from "@/api/addSurvay"
 const typeFile = ['فایل', 'عکس', 'ویدیو', 'پی دی اف', 'همه']
 
-const MenuEditSurvay = ({ open, setOpen, survay }: { open: boolean, setOpen: (value: boolean) => void, survay: Survay }) => {
+const MenuEditSurvay = ({ open, setOpen, survay  , setSurvay}: { open: boolean, setOpen: (value: boolean) => void, survay: Survay ,  setSurvay :  Dispatch<SetStateAction<Survay[]>>} ) => {
     const ref = useClickOutside(() => setOpen(false))
     const [personName, setPersonName] = useState<string[]>([]);
     const { mutate } = useMutation({
@@ -40,6 +40,11 @@ const MenuEditSurvay = ({ open, setOpen, survay }: { open: boolean, setOpen: (va
         }
         mutate(newSurvay)
         setOpen(false)
+        setSurvay((prev)=> {
+            const index = prev.findIndex((item : Survay) => item.QuestionID === newSurvay.QuestionID)
+            prev.splice(index , 1 , newSurvay)
+            return prev
+        })
     }
 
     return (
