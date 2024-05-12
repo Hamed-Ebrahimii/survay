@@ -4,9 +4,9 @@ import BtnShowDrawer from "../btnShowDrawer"
 import { useClickOutside } from "@mantine/hooks"
 import { useState } from "react"
 import ButtonMenu from "./components/btn"
-import {  SurvayList } from "@/types/survay"
+import {  Survay, SurvayList } from "@/types/survay"
 import { converTypeToPersian } from "@/tools/convertTypeToPersian"
-
+import random from 'random'
 const listSurvey: SurvayList[] = [{
     title: 'توضیحات',
     value: [0, 1]
@@ -29,12 +29,27 @@ const listSurvey: SurvayList[] = [{
 }
 
 ]
-const MenuCreateSurvey = ({ setSorvay , survay }: { setSorvay: (value: number[]) => void  , survay : number[]}) => {
+const MenuCreateSurvey = ({ setSorvay , survay }: { setSorvay: (value: Survay[]) => void  , survay : Survay[]}) => {
     const [createSurvey, setCreateSurvey] = useState(false)
     const ref = useClickOutside(() => setCreateSurvey(false))
     const onSurvey = (item : number) => {
-            setSorvay([...survay  , item])
+       
+            const newSurvay : Survay = {
+                isAttach : false,
+                QuestionAnwseredValue : '',
+                QuestionDesc : '',
+                QuestionID : random.int(0 , 1000),
+                QuestionRequired : 0,
+                QuestionRules : '',
+                QuestionText : '',
+                QuestionType : item,
+                requierdAttach : false ,
+                attach : [],
+                numberAttatchFile : 0,
+                typeAttatchFile : 'all'
+            } 
             setCreateSurvey(false)
+            setSorvay([...survay , newSurvay])
     }
     return (
         <div className="fixed ">
