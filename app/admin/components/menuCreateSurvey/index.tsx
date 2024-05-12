@@ -1,7 +1,8 @@
 "use client"
-import { Box, Drawer } from "@mui/material"
+import { Box } from "@mui/material"
+import anime from 'animejs/lib/anime.es.js';
 import BtnShowDrawer from "../btnShowDrawer"
-import { useClickOutside } from "@mantine/hooks"
+import { useClickOutside, useDidUpdate } from "@mantine/hooks"
 import { useState } from "react"
 import ButtonMenu from "./components/btn"
 import { Survay, SurvayList } from "@/types/survay"
@@ -51,16 +52,35 @@ const MenuCreateSurvey = ({ setSorvay, survay }: { setSorvay: (value: Survay[]) 
         setCreateSurvey(false)
         setSorvay([...survay, newSurvay])
     }
+    useDidUpdate(()=>{
+        if(createSurvey){
+                anime({
+                    targets : '.menu',
+                    translateX: 0,
+                    duration : 800,
+                    
+                }).play()
+        }
+        else {
+
+            anime({
+                targets : '.menu',
+                translateX: 250,
+                duration : 800,
+                
+            }).play()
+        }
+    } , [createSurvey])
     return (
-        <div className="fixed ">
+        <div className="fixed menu translate-x-[250px] transition-all">
            
                 <Box ref={ref} sx={{ width: '250px', backgroundColor: '#7ABA78', paddingY: '30px', paddingX: '15px' , borderRadius : '20px' }}>
-                    <div className="space-y-5 relative">
-            <BtnShowDrawer onClick={() => setCreateSurvey(true)} />
+                    <div className="space-y-5 relative ">
+            <BtnShowDrawer isOpen={createSurvey} onClick={() => setCreateSurvey(!createSurvey)} />
                         {
                             listSurvey.map((item, index) => (
                                 <div key={index}>
-                                    <p className="text-gray-600 font-medium text-lg">
+                                    <p className="text-white font-medium text-lg">
                                         {item.title}
                                     </p>
                                     <hr />
