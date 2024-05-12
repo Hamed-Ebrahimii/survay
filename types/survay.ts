@@ -1,5 +1,3 @@
-import { Accept } from "@/components/inputFile";
-
 export interface Survay {
     "QuestionAnwseredValue": any,
     "QuestionID": number,
@@ -13,7 +11,6 @@ export interface Survay {
     "numberAttatchFile"? : number,
     "typeAttatchFile"? : "image" | "video" | "music" | "pdf" | "all",
     "requierdAttach" : boolean
-
 }
 export const questionTypesTexts: { [P: number]: string } = {
     0: 'پاسخ کوتاه',
@@ -27,3 +24,7 @@ export const questionTypesTexts: { [P: number]: string } = {
 }
 export const questionTypes = ["short-answer", "paragraph", "multiple-choice", "single-choice", "linear-scale", "date", "time", "select-option"];
 
+export interface SurvayList  {
+        title : string
+        value : Array<0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 >
+}

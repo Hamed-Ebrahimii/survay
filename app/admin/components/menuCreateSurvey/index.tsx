@@ -4,86 +4,71 @@ import BtnShowDrawer from "../btnShowDrawer"
 import { useClickOutside } from "@mantine/hooks"
 import { useState } from "react"
 import ButtonMenu from "./components/btn"
+import { Survay, SurvayList } from "@/types/survay"
+import { convertType } from "@/tools/convertType"
 
-const MenuCreateSurvey = () =>{
-    const [createSurvey , setCreateSurvey] = useState(false)
-    const ref = useClickOutside(()=> setCreateSurvey(false))
-    return(
+const listSurvey: SurvayList[] = [{
+    title: 'توضیحات',
+    value: [0, 1]
+},
+{
+    title: 'انتخابی',
+    value: [2, 3]
+},
+{
+    title: 'تاریخ',
+    value: [6, 5]
+},
+{
+    title: 'مقیاس',
+    value: [4]
+},
+{
+    title: 'لیست',
+    value: [7]
+}
+
+]
+const MenuCreateSurvey = ({ setSorvay , survay }: { setSorvay: (value: number[]) => void  , survay : number[]}) => {
+    const [createSurvey, setCreateSurvey] = useState(false)
+    const ref = useClickOutside(() => setCreateSurvey(false))
+    const onSurvey = (item : number) => {
+            setSorvay([...survay  , item])
+            setCreateSurvey(false)
+    }
+    return (
         <div className="fixed ">
-                <BtnShowDrawer onClick={()=> setCreateSurvey(true)}/>
-                <Drawer open={createSurvey} anchor="right">
-                    <Box ref={ref} sx={{width : '250px' , backgroundColor : 'white' , paddingY : '30px' , paddingX : '15px'}}>
-                        <div className="space-y-5">
-                        <div>
-                        <p className="text-gray-600 font-medium text-lg">
-                            توضیحات
-                        </p> 
-                        <hr />
-                        <div className="space-y-4 mt-3">
-                            <ButtonMenu>
-                                توضیحات کوتاه
-                            </ButtonMenu>
-                            <ButtonMenu>
-                                توضیحات کامل
-                            </ButtonMenu>
-                        </div>
-                        </div>
-                        <div>
-                        <p className="text-gray-600 font-medium text-lg">
-                            انتخابی
-                        </p> 
-                        <hr />
-                        <div className="space-y-4 mt-3">
-                            <ButtonMenu>
-                               چند انتخابی
-                            </ButtonMenu>
-                            <ButtonMenu>
-                               تک انتخابی
-                            </ButtonMenu>
-                        </div>
-                        </div>
-                        <div>
-                        <p className="text-gray-600 font-medium text-lg">
-                            تاریخ
-                        </p> 
-                        <hr />
-                        <div className="space-y-4 mt-3">
-                            <ButtonMenu>
-                              تقویم
-                            </ButtonMenu>
-                            <ButtonMenu>
-                              زمان
-                            </ButtonMenu>
-                        </div>
-                        </div>
-                        <div>
-                        <p className="text-gray-600 font-medium text-lg">
-                            لیست
-                        </p> 
-                        <hr />
-                        <div className="space-y-4 mt-3">
-                            <ButtonMenu>
-                              لیست
-                            </ButtonMenu>
-                            
-                        </div>
-                        </div>
-                        <div>
-                        <p className="text-gray-600 font-medium text-lg">
-                            مقیاس
-                        </p> 
-                        <hr />
-                        <div className="space-y-4 mt-3">
-                            <ButtonMenu>
-                              مقیاس دکمه ای
-                            </ButtonMenu>
-                            
-                        </div>
-                        </div>
-                        </div>
-                    </Box>
-                </Drawer>
-                </div>
+            <BtnShowDrawer onClick={() => setCreateSurvey(true)} />
+            <Drawer open={createSurvey} anchor="right">
+                <Box ref={ref} sx={{ width: '250px', backgroundColor: 'white', paddingY: '30px', paddingX: '15px' }}>
+                    <div className="space-y-5">
+                        {
+                            listSurvey.map((item, index) => (
+                                <div key={index}>
+                                    <p className="text-gray-600 font-medium text-lg">
+                                        {item.title}
+                                    </p>
+                                    <hr />
+                                    <div className="space-y-4 mt-3">
+                                        {
+                                            item.value.map(item => (
+                                            <ButtonMenu key={item} onClick={()=> onSurvey(item)}>
+                                                {
+                                                    convertType(item)
+                                                }
+                                            </ButtonMenu>))
+                                        }
+
+                                    </div>
+                                </div>
+                            )
+                            )
+                        }
+
+                    </div>
+                </Box>
+            </Drawer>
+        </div>
     )
 }
 export default MenuCreateSurvey
