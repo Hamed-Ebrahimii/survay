@@ -1,6 +1,6 @@
 import { converTypeToPersian } from "@/tools/convertTypeToPersian"
 import { Survay } from "@/types/survay"
-import { useClickOutside } from "@mantine/hooks"
+import { useClickOutside, useDidUpdate } from "@mantine/hooks"
 import { Button } from "@material-tailwind/react"
 import { Box, Drawer, SelectChangeEvent } from "@mui/material"
 import IOSSwitch from "../switch/iosSwitch"
@@ -12,7 +12,7 @@ import { useMutation } from "@tanstack/react-query"
 import { addSurvay } from "@/api/addSurvay"
 const typeFile = ['فایل', 'عکس', 'ویدیو', 'پی دی اف', 'همه']
 
-const MenuEditSurvay = ({ open, setOpen, survay  , setSurvay}: { open: boolean, setOpen: (value: boolean) => void, survay: Survay ,  setSurvay :  Dispatch<SetStateAction<Survay[]>>} ) => {
+const MenuEditSurvay = ({ open, setOpen, survay, setSurvay }: { open: boolean, setOpen: (value: boolean) => void, survay: Survay, setSurvay: Dispatch<SetStateAction<Survay[]>> }) => {
     const ref = useClickOutside(() => setOpen(false))
     const [personName, setPersonName] = useState<string[]>([]);
     const { mutate } = useMutation({
@@ -29,7 +29,12 @@ const MenuEditSurvay = ({ open, setOpen, survay  , setSurvay}: { open: boolean, 
     };
     const { handleSubmit, control, formState: { errors } } = useForm<AddSurvayValidationType>({
         mode: 'all',
-        resolver: zodResolver(AddSurvayValidation)
+        resolver: zodResolver(AddSurvayValidation),
+        defaultValues : {
+            isAttach : false,
+            QuestionRequired : false,
+            requierdAttach : false
+        }
     })
     const onSubmit = (data: AddSurvayValidationType) => {
         //@ts-ignore
@@ -40,13 +45,16 @@ const MenuEditSurvay = ({ open, setOpen, survay  , setSurvay}: { open: boolean, 
         }
         mutate(newSurvay)
         setOpen(false)
-        setSurvay((prev)=> {
-            const index = prev.findIndex((item : Survay) => item.QuestionID === newSurvay.QuestionID)
-            prev.splice(index , 1 , newSurvay)
+        setSurvay((prev) => {
+            const index = prev.findIndex((item: Survay) => item.QuestionID === newSurvay.QuestionID)
+            prev.splice(index, 1, newSurvay)
             return prev
         })
     }
+    useDidUpdate(() => {
+        console.log(errors);
 
+    }, [errors])
     return (
         <Drawer anchor="left" open={open}>
             <Box sx={{
@@ -73,9 +81,7 @@ const MenuEditSurvay = ({ open, setOpen, survay  , setSurvay}: { open: boolean, 
                             پاسخ دادن به سوال اجباری باشد ؟
                         </p>
                         <Controller control={control} name="QuestionRequired" render={({ field }) => (
-                            <IOSSwitch onChange={(e) => {
-                                field.onChange(e.target.checked ? 1 : 0)
-                            }} />
+                            <IOSSwitch {...field} />
                         )} />
                     </div>
                     <div className="w-full py-4 border-b px-2  flex items-center justify-between">
@@ -83,9 +89,7 @@ const MenuEditSurvay = ({ open, setOpen, survay  , setSurvay}: { open: boolean, 
                             فایل ضمیمه داشته باشد ؟
                         </p>
                         <Controller control={control} name="isAttach" render={({ field }) => (
-                            <IOSSwitch onChange={(e) => {
-                                field.onChange(e.target.checked)
-                            }} />
+                            <IOSSwitch  {...field} />
                         )} />
                     </div>
                     <div className="w-full py-4 border-b px-2  flex items-center justify-between">
@@ -93,9 +97,7 @@ const MenuEditSurvay = ({ open, setOpen, survay  , setSurvay}: { open: boolean, 
                             وارد کردن فایل ضمیمه اجباری باشد ؟
                         </p>
                         <Controller rules={{ required: false }} control={control} name="requierdAttach" render={({ field }) => (
-                            <IOSSwitch onChange={(e) => {
-                                field.onChange(e.target.checked)
-                            }} />
+                            <IOSSwitch  {...field} />
                         )} />
                     </div>
                     <div className="w-full py-4 border-b px-2  flex items-center justify-between">
