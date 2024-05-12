@@ -15,10 +15,7 @@ const ContextProvider = ({ children , survey }: { children: ReactNode , survey :
     state: surveys,
     setState: setSurveys,
   };
-  useEffect(()=>{
-    console.log(surveys);
-    
-  } , [surveys])
+
   return <ContextSurvey.Provider value={initialState}>{children}</ContextSurvey.Provider>;
 };
 export default ContextProvider;

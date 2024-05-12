@@ -68,12 +68,12 @@ const Form = ({
     );
     state.splice(QuestionFindIndex, 1, newState);
     setState(state);
-    console.log(state);
+    
 
     debounce(1000, () => pagination(1));
   };
   const checkDisabled = () => {
-    console.log(requierdAttach);
+ 
 
     if (QuestionRequired || requierdAttach) {
       if (isValid) {
