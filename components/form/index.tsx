@@ -15,6 +15,7 @@ import { debounce } from "@/tools/debounce";
 import { SurveyValidationType } from "@/validation";
 import "../../style/datepiker.css";
 import InputFile from "../inputFile";
+import { useDidUpdate } from "@mantine/hooks";
 interface FormProps extends Survay {
   pagination: (value: number) => void;
   tabIndex: number;
@@ -99,7 +100,10 @@ const Form = ({
       return () => subscription.unsubscribe();
     }
   }, [watch]);
-
+  useDidUpdate(()=>{
+    console.log(errors);
+    
+  } , [errors])
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -267,16 +271,17 @@ const Form = ({
               name="answer"
 
               rules={{ required: QuestionRequired === 1 }}
-              render={({ field: { onChange, value } }) => (
+              render={({ field: { onChange } }) => (
                 <Calendar
                   disableDayPicker
                   format="HH:mm"
-
                   plugins={[<TimePicker key={""} hideSeconds />]}
                   calendar={persian}
                   className=" mx-auto mt-4"
                   locale={persian_fa}
                   onChange={(date: DateObject) => {
+                    console.log(date.format());
+                    
                     onChange(date?.isValid ? date.format() : "");
                   }}
                 />
