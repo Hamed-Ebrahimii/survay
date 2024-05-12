@@ -49,6 +49,6 @@ const config: Config = withMT({
       }
     },
   },
-  plugins: [],
+  plugins: [require('daisyui')],
 });
 export default config;

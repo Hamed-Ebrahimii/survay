@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import "./celender.css"
 import QueryProvider from "@/provider/reactQuery";
+import { MuiMaterial } from "@/provider/muiMaterial";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -17,9 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl">
+      <MuiMaterial>
       <QueryProvider>
       <body className={"font-yekan "}>{children}</body>
       </QueryProvider>
+      </MuiMaterial>
     </html>
   );
 }

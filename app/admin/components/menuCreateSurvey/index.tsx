@@ -4,7 +4,7 @@ import BtnShowDrawer from "../btnShowDrawer"
 import { useClickOutside } from "@mantine/hooks"
 import { useState } from "react"
 import ButtonMenu from "./components/btn"
-import {  Survay, SurvayList } from "@/types/survay"
+import { Survay, SurvayList } from "@/types/survay"
 import { converTypeToPersian } from "@/tools/convertTypeToPersian"
 import random from 'random'
 const listSurvey: SurvayList[] = [{
@@ -29,27 +29,27 @@ const listSurvey: SurvayList[] = [{
 }
 
 ]
-const MenuCreateSurvey = ({ setSorvay , survay }: { setSorvay: (value: Survay[]) => void  , survay : Survay[]}) => {
+const MenuCreateSurvey = ({ setSorvay, survay }: { setSorvay: (value: Survay[]) => void, survay: Survay[] }) => {
     const [createSurvey, setCreateSurvey] = useState(false)
     const ref = useClickOutside(() => setCreateSurvey(false))
-    const onSurvey = (item : number) => {
-       
-            const newSurvay : Survay = {
-                isAttach : false,
-                QuestionAnwseredValue : '',
-                QuestionDesc : '',
-                QuestionID : random.int(0 , 1000),
-                QuestionRequired : 0,
-                QuestionRules : '',
-                QuestionText : '',
-                QuestionType : item,
-                requierdAttach : false ,
-                attach : [],
-                numberAttatchFile : 0,
-                typeAttatchFile : 'all'
-            } 
-            setCreateSurvey(false)
-            setSorvay([...survay , newSurvay])
+    const onSurvey = (item: number) => {
+
+        const newSurvay: Survay = {
+            isAttach: false,
+            QuestionAnwseredValue: '',
+            QuestionDesc: '',
+            QuestionID: random.int(0, 1000),
+            QuestionRequired: 0,
+            QuestionRules: '',
+            QuestionText: '',
+            QuestionType: item,
+            requierdAttach: false,
+            attach: [],
+            numberAttatchFile: 0,
+            typeAttatchFile: 'all'
+        }
+        setCreateSurvey(false)
+        setSorvay([...survay, newSurvay])
     }
     return (
         <div className="fixed ">
@@ -67,11 +67,12 @@ const MenuCreateSurvey = ({ setSorvay , survay }: { setSorvay: (value: Survay[])
                                     <div className="space-y-4 mt-3">
                                         {
                                             item.value.map(item => (
-                                            <ButtonMenu key={item} onClick={()=> onSurvey(item)}>
-                                                {
-                                                    converTypeToPersian(item)
-                                                }
-                                            </ButtonMenu>))
+                                                <ButtonMenu key={item} onClick={() => onSurvey(item)}>
+                                                    {
+                                                        converTypeToPersian(item)
+                                                    }
+                                                </ButtonMenu>
+                                                ))
                                         }
 
                                     </div>
