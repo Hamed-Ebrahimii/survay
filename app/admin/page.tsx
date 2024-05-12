@@ -30,15 +30,13 @@ const Admin = () => {
                                         converTypeToPersian(item.QuestionType)
                                     }
                                 </p>
-                                <div className="flex items-center gap-2 text-gray-400 font-medium ">
+                                <div className="flex items-center justify-center gap-2 text-gray-400 font-medium ">
                                     <p>
-                                        تایتل:
+                                        تایتل: {item.QuestionText}
                                     </p>
-                                    <p>
 
-                                    </p>
                                 </div>
-                                <div className="flex items-center gap-3">
+                                <div className="flex items-center gap-3 justify-end">
                                     <Button color="amber" placeholder={''} onClick={() => { setShowEditSurvayMenu(true); setIndex(index) }} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} >
                                         <FaPencilAlt className="text-white font-medium text-lg" />
 
