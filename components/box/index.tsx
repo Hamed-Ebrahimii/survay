@@ -45,7 +45,7 @@ const BoxForm = () => {
       }
       {
         showTab &&
-        <div className="glass w-1/3 px-2 py-5 rounded-xl min-h-[330px] relative flex flex-col tab">
+        <div className="glass w-1/3 px-2 py-6 rounded-xl min-h-[330px] relative flex flex-col tab">
           <div className="w-full flex items-center gap-2 absolute -top-9">
             <Image
               src="/img/user.png"
@@ -63,7 +63,7 @@ const BoxForm = () => {
               نظرسنجی محصول موبایل
             </h1>
           </div>
-          <div className="flex-1">
+          <div className="flex-1 py-2">
             <TabContext value={tabIndex}>
               <Box
                 sx={{

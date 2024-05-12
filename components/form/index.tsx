@@ -113,7 +113,7 @@ const Form = ({
         });
       }}
       autoComplete="off"
-      className="w-full flex flex-col h-full mt-3"
+      className="w-full flex flex-col h-full mt-6"
     >
       <p className="text-xl font-medium text-white font-yekan">
         {QuestionText}
@@ -155,12 +155,10 @@ const Form = ({
                 ></textarea>
               )}
             />
-
           </>
-
         )}
         {QuestionType === 2 && (
-          <div className="grid grid-cols-2 justify-center py-5 gap-4 items-center">
+          <div className="grid grid-cols-2 justify-center py-4 gap-4 items-center">
             {questionRules.map((item) => (
               <div
                 key={item}
@@ -185,11 +183,10 @@ const Form = ({
 
               </div>
             ))}
-
           </div>
         )}
         {QuestionType === 3 && (
-          <div className="w-full grid grid-cols-2 py-6 px-5  items-center justify-center gap-3">
+          <div className="w-full grid grid-cols-2 py-4 px-5  items-center justify-center gap-3">
             {questionRules?.map((item, index) => (
               <div className="w-11/12 mx-auto" key={index}>
                 <Controller
@@ -311,7 +308,7 @@ const Form = ({
           </>
         )}
       </div>
-      <div>
+      <div className="mt-3">
         {
           isAttach &&
           <Controller
@@ -342,7 +339,7 @@ const Form = ({
           />
         }
       </div>
-      <div className="w-full flex items-center justify-between mt-5 mb-3">
+      <div className="w-full flex items-center justify-between mt-6 ">
         <div>
           <Btn
             className=""

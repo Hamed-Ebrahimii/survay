@@ -1,5 +1,6 @@
 import { DetailedHTMLProps, useState } from "react";
 import BoxFile from "./components/boxFile";
+import Btn from "../form/components/btn";
 interface InputProps
     extends DetailedHTMLProps<
         React.InputHTMLAttributes<HTMLInputElement>,
@@ -38,7 +39,17 @@ const InputFile = (props: InputProps) => {
     };
     return (
         <div className="col-span-2 flex flex-col">
-            <label htmlFor="attach" className="text-white text-sm font-medium">فایل ضمیمه</label>
+            <p className="text-white text-sm font-medium">فایل ضمیمه</p>
+            <label htmlFor="attach" className={`flex  p-2 w-full rounded-lg bg-white border items-center border-orange-secondary gap-2 ${file.length > 0 && 'rounded-b-none border-b-0'}`}>
+                <label htmlFor="attach" className="px-2 py-1 bg-blue-400 text-white font-medium  rounded-lg">
+                    انتخاب فایل
+                </label>
+                <p className="text-gray-500 font-medium">
+                    {
+                        file.length <= 0 ? 'فایلی انتخاب نشده است' : `تعداد فایل های انتخاب شده : ${file.length}`
+                    }
+                </p>
+            </label>
             <input
                 type="file"
                 multiple={props.multiple}
@@ -48,15 +59,11 @@ const InputFile = (props: InputProps) => {
                     const files = Array.from(e.target.files || []);
                     setFile(files);
                 }}
-
                 accept={acceptType[props.accept || "all"]}
-                className={`${file.length > 0 ? "rounded-t-lg rounded-b-0" : "rounded-lg"
-                    } border w-full bg-gray-100   py-1  outline-none placeholder:text-gray-400 text-gray-500 placeholder:text-xs placeholder:font-semibold file:mr-1 file:rounded-md file:border-0 file:ml-4  file:bg-blue-500 file:py-1 file:px-4 file:text-sm file:font-semibold file:text-white hover:file:bg-primary-700 ${props.type === "file" ? "px-1" : "px-5"
-                    } ${props.error ? "border-red-400" : "border-gray-200"}`}
+                className={`hidden`}
             />
-
             {file.length > 0 && (
-                <div className="w-full relative bottom-0 z-30 bg-gray-100 rounded-b-lg border p-3 grid grid-cols-2 gap-3 max-h-32 overflow-auto">
+                <div className={`w-full relative bottom-0 z-30 bg-white rounded-b-lg border p-3 grid grid-cols-2 gap-3 max-h-32 overflow-auto  border-orange-secondary border-t-gray-300`}>
                     {file.map((item) => (
                         <BoxFile
                             file={item}
