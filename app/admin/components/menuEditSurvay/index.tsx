@@ -119,8 +119,7 @@ const MenuEditSurvay = ({ open, setOpen, survay, setSurvay }: { open: boolean, s
                     <Controller rules={{ required: false }} control={control} name="typeAttatchFile" render={({ field }) => (
                         <select {...field} className="select select-bordered w-full max-w-xs"  >
                             {
-                                typeFile.map(item => <option key={item} value={item}>{item}</option>
-                                )
+                                typeFile.map(item => <option key={item} value={item}>{item}</option>)
                             }
                         </select>
                     )} />
