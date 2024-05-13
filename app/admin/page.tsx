@@ -6,13 +6,18 @@ import MenuEditSurvay from "./components/menuEditSurvay"
 import { Survay } from "@/types/survay"
 import { TbBrush } from "react-icons/tb";
 import { SiTestcafe } from "react-icons/si";
+import SurvayBox from "./components/survayBox"
+import Footer from "./components/footer"
 const Admin = () => {
     const [showEditSurvayMenu, setShowEditSurvayMenu] = useState(false)
     const [survay, setSurvay] = useState<Survay[]>([])
     const [index, setIndex] = useState(0)
-    const onRemove = (value: Survay) => {
+    const onDelete = (value: Survay) => {
         setSurvay(survay.filter(item => item.QuestionID !== value.QuestionID))
-
+    }
+    const onEdit = (index: number) => {
+        setIndex(index)
+        setShowEditSurvayMenu(true)
     }
     return (
         <div className="w-full bg-white min-h-screen font-yekan">
@@ -21,9 +26,10 @@ const Admin = () => {
             {
                 showEditSurvayMenu && <MenuEditSurvay survay={survay[index]} setSurvay={setSurvay} open={showEditSurvayMenu} setOpen={setShowEditSurvayMenu} />
             }
-            <div className="w-full fixed bottom-0 py-4 px-3 bg-gray-100 shadow-md ">
-
+            <div className="w-full h-screen flex items-center justify-around flex-col">
+            <SurvayBox survay={survay[0]} onDelete={onDelete} onEdit={onEdit}/>
             </div>
+            <Footer/>
         </div>
     )
 }

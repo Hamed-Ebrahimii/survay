@@ -72,11 +72,11 @@ const MenuCreateSurvey = ({ setSorvay, survay }: { setSorvay: (value: Survay[]) 
         }
     } , [createSurvey])
     return (
-        <div className="fixed menu translate-x-[250px] transition-all">
+        <div className="fixed menu translate-x-[250px] transition-all max-h-screen  z-20">
+            <BtnShowDrawer isOpen={createSurvey} onClick={() => setCreateSurvey(!createSurvey)} />
            
                 <Box  sx={{ width: '250px', backgroundColor: '#7ABA78', paddingY: '30px', paddingX: '15px' , borderRadius : '20px' }}>
                     <div className="space-y-5 relative ">
-            <BtnShowDrawer isOpen={createSurvey} onClick={() => setCreateSurvey(!createSurvey)} />
                         {
                             listSurvey.map((item, index) => (
                                 <div key={index}>

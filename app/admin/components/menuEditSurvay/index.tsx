@@ -18,7 +18,7 @@ const MenuEditSurvay = ({ open, setOpen, survay, setSurvay }: { open: boolean, s
     const { mutate } = useMutation({
         mutationFn: (data: Survay) => addSurvay(data)
     })
-    const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+    const onChange = (event: SelectChangeEvent<typeof personName>) => {
         const {
             target: { value },
         } = event;
@@ -59,25 +59,27 @@ const MenuEditSurvay = ({ open, setOpen, survay, setSurvay }: { open: boolean, s
 
         <Box sx={{
             width: '350px',
-            backgroundColor: 'white',
-            borderRadius: '30px'
+            backgroundColor: '#7ABA78',
+            borderRadius: '30px',
+            position: 'absolute',
+            left: 0
         }}>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="w-full py-4 border-b px-2 ">
-                    <p className="text-lg font-medium text-gray-700">
+                    <p className="text-lg font-medium text-white">
                         نوع سوال : {converTypeToPersian(survay.QuestionType)}
                     </p>
                 </div>
                 <div className="w-full py-4 border-b px-2 space-y-3 ">
-                    <p className="text-lg font-medium text-gray-400 ">
+                    <p className="text-lg font-medium text-white ">
                         متن سوال
                     </p>
                     <Controller name="QuestionText" control={control} render={({ field }) => (
-                        <input type="text" {...field} className="py-1 px-3 rounded-lg outline-none bg-gray-100 border text-gray-400 w-full" placeholder="سوال خود را وارد کنید" />
+                        <input type="text" {...field} className="py-1 px-3 rounded-lg outline-none bg-gray-100 border text-white w-full" placeholder="سوال خود را وارد کنید" />
                     )} />
                 </div>
                 <div className="w-full py-4 border-b px-2  flex items-center justify-between">
-                    <p className="text-lg font-medium text-gray-400 ">
+                    <p className="text-lg font-medium text-white ">
                         پاسخ دادن به سوال اجباری باشد ؟
                     </p>
                     <Controller control={control} name="QuestionRequired" render={({ field }) => (
@@ -85,7 +87,7 @@ const MenuEditSurvay = ({ open, setOpen, survay, setSurvay }: { open: boolean, s
                     )} />
                 </div>
                 <div className="w-full py-4 border-b px-2  flex items-center justify-between">
-                    <p className="text-lg font-medium text-gray-400 ">
+                    <p className="text-lg font-medium text-white ">
                         فایل ضمیمه داشته باشد ؟
                     </p>
                     <Controller control={control} name="isAttach" render={({ field }) => (
@@ -93,7 +95,7 @@ const MenuEditSurvay = ({ open, setOpen, survay, setSurvay }: { open: boolean, s
                     )} />
                 </div>
                 <div className="w-full py-4 border-b px-2  flex items-center justify-between">
-                    <p className="text-lg font-medium text-gray-400 ">
+                    <p className="text-lg font-medium text-white ">
                         وارد کردن فایل ضمیمه اجباری باشد ؟
                     </p>
                     <Controller rules={{ required: false }} control={control} name="requierdAttach" render={({ field }) => (
@@ -101,7 +103,7 @@ const MenuEditSurvay = ({ open, setOpen, survay, setSurvay }: { open: boolean, s
                     )} />
                 </div>
                 <div className="w-full py-4 border-b px-2  flex items-center justify-between">
-                    <p className="text-lg font-medium text-gray-400 ">
+                    <p className="text-lg font-medium text-white ">
                         تعداد فایل های ضمیمه را وارد کنید
                     </p>
                     <Controller rules={{ required: false }} control={control} name="numberAttatchFile" render={({ field }) => (
@@ -113,11 +115,11 @@ const MenuEditSurvay = ({ open, setOpen, survay, setSurvay }: { open: boolean, s
                     )} />
                 </div>
                 <div className="w-full py-4 border-b px-2  space-y-4">
-                    <p className="text-lg font-medium text-gray-400 ">
+                    <p className="text-lg font-medium text-white ">
                         نوع فایل ضمیمه چگونه باشد ؟
                     </p>
                     <Controller rules={{ required: false }} control={control} name="typeAttatchFile" render={({ field }) => (
-                        <select {...field} className="select select-bordered w-full max-w-xs"  >
+                        <select {...field} className="outline-none rounded-md w-full max-w-xs"  >
                             {
                                 typeFile.map(item => <option key={item} value={item}>{item}</option>)
                             }
@@ -126,18 +128,16 @@ const MenuEditSurvay = ({ open, setOpen, survay, setSurvay }: { open: boolean, s
                 </div>
                 {
                     survay.QuestionType === 3 || survay.QuestionType === 2 && <div className="w-full py-4 border-b px-2 space-y-3 ">
-                        <p className="text-lg font-medium text-gray-400 ">
+                        <p className="text-lg font-medium text-white ">
                             وارد کردن گزینه ها
                         </p>
                         <Controller rules={{ required: false }} control={control} name="QuestionRules" render={({ field }) => (
-                            <input type="text" {...field} className="py-1 px-2 rounded-lg outline-none border placeholder:text-sm placeholder:text-gray-400 w-full" placeholder='برای جداکردن گزینه ها از "," استفاده کنید' />
+                            <input type="text" {...field} className="py-1 px-2 rounded-lg outline-none border placeholder:text-sm placeholder:text-white w-full" placeholder='برای جداکردن گزینه ها از "," استفاده کنید' />
                         )} />
 
                     </div>
                 }
-                <Button type="submit" color="green" className="mt-2 mr-3" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-                    ذخیره
-                </Button>
+
             </form>
         </Box>
 
