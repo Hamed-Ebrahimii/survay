@@ -8,6 +8,7 @@ import { TbBrush } from "react-icons/tb";
 import { SiTestcafe } from "react-icons/si";
 import SurvayBox from "./components/survayBox"
 import Footer from "./components/footer"
+import Header from "./components/header"
 const Admin = () => {
     const [showEditSurvayMenu, setShowEditSurvayMenu] = useState(false)
     const [survay, setSurvay] = useState<Survay[]>([])
@@ -21,7 +22,7 @@ const Admin = () => {
     }
     return (
         <div className="w-full bg-white min-h-screen font-yekan">
-            
+            <Header/>
             <MenuCreateSurvey setSorvay={setSurvay} survay={survay} />
             {
                 showEditSurvayMenu && <MenuEditSurvay survay={survay[index]} setSurvay={setSurvay} open={showEditSurvayMenu} setOpen={setShowEditSurvayMenu} />

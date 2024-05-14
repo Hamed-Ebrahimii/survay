@@ -52,58 +52,58 @@ const MenuCreateSurvey = ({ setSorvay, survay }: { setSorvay: (value: Survay[]) 
         setCreateSurvey(false)
         setSorvay([...survay, newSurvay])
     }
-    useDidUpdate(()=>{
-        if(createSurvey){
-                anime({
-                    targets : '.menu',
-                    translateX: 0,
-                    duration : 800,
-                    
-                }).play()
+    useDidUpdate(() => {
+        if (createSurvey) {
+            anime({
+                targets: '.menu',
+                translateX: 0,
+                duration: 800,
+
+            }).play()
         }
         else {
 
             anime({
-                targets : '.menu',
+                targets: '.menu',
                 translateX: 250,
-                duration : 800,
-                
+                duration: 800,
+
             }).play()
         }
-    } , [createSurvey])
+    }, [createSurvey])
     return (
         <div className="fixed menu translate-x-[250px] transition-all max-h-screen  z-20">
             <BtnShowDrawer isOpen={createSurvey} onClick={() => setCreateSurvey(!createSurvey)} />
-           
-                <Box  sx={{ width: '250px', backgroundColor: '#7ABA78', paddingY: '30px', paddingX: '15px' , borderRadius : '20px' }}>
-                    <div className="space-y-5 relative ">
-                        {
-                            listSurvey.map((item, index) => (
-                                <div key={index}>
-                                    <p className="text-white font-medium text-lg">
-                                        {item.title}
-                                    </p>
-                                    <hr />
-                                    <div className="space-y-4 mt-3">
-                                        {
-                                            item.value.map(item => (
-                                                <ButtonMenu key={item} onClick={() => onSurvey(item)}>
-                                                    {
-                                                        converTypeToPersian(item)
-                                                    }
-                                                </ButtonMenu>
-                                                ))
-                                        }
 
-                                    </div>
+            <Box sx={{ width: '250px', backgroundColor: '#7ABA78', paddingY: '30px', paddingX: '15px', borderRadius: '20px' }}>
+                <div className="space-y-5 relative ">
+                    {
+                        listSurvey.map((item, index) => (
+                            <div key={index}>
+                                <p className="text-white font-medium text-lg">
+                                    {item.title}
+                                </p>
+                                <hr />
+                                <div className="space-y-4 mt-3">
+                                    {
+                                        item.value.map(item => (
+                                            <ButtonMenu key={item} onClick={() => onSurvey(item)}>
+                                                {
+                                                    converTypeToPersian(item)
+                                                }
+                                            </ButtonMenu>
+                                        ))
+                                    }
+
                                 </div>
-                            )
-                            )
-                        }
+                            </div>
+                        )
+                        )
+                    }
 
-                    </div>
-                </Box>
-           
+                </div>
+            </Box>
+
         </div>
     )
 }
