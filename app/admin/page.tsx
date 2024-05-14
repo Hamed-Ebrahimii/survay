@@ -28,7 +28,9 @@ const Admin = () => {
                 showEditSurvayMenu && <MenuEditSurvay survay={survay[index]} setSurvay={setSurvay} open={showEditSurvayMenu} setOpen={setShowEditSurvayMenu} />
             }
             <div className="w-full h-screen flex items-center justify-around flex-col">
-            <SurvayBox survay={survay[0]} onDelete={onDelete} onEdit={onEdit}/>
+            {
+                survay.map(item => <SurvayBox key={item.QuestionID} survay={item} onDelete={onDelete} onEdit={onEdit}/>)
+            }
             </div>
             <Footer/>
         </div>
