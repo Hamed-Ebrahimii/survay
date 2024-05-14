@@ -40,7 +40,7 @@ const MenuEditSurvay = ({ open, setOpen, survay, setSurvay }: { open: boolean, s
         //@ts-ignore
         const newSurvay: Survay = {
             ...survay,
-
+            QuestionRules : data.QuestionRules?.trim() || '',
             ...data
         }
         mutate(newSurvay)
@@ -51,20 +51,19 @@ const MenuEditSurvay = ({ open, setOpen, survay, setSurvay }: { open: boolean, s
             return prev
         })
     }
-    useDidUpdate(() => {
-        console.log(errors);
-
-    }, [errors])
+   
     return (
 
         <Box sx={{
             width: '350px',
             backgroundColor: '#7ABA78',
-            borderRadius: '30px',
+            borderTopRightRadius: '30px',
+            borderBottomRightRadius: '30px',
             position: 'absolute',
-            left: 0
+            left: 0,
+            height : '80vh'
         }}>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
                 <div className="w-full py-4 border-b px-2 ">
                     <p className="text-lg font-medium text-white">
                         نوع سوال : {converTypeToPersian(survay.QuestionType)}
@@ -75,7 +74,7 @@ const MenuEditSurvay = ({ open, setOpen, survay, setSurvay }: { open: boolean, s
                         متن سوال
                     </p>
                     <Controller name="QuestionText" control={control} render={({ field }) => (
-                        <input type="text" {...field} className="py-1 px-3 rounded-lg outline-none bg-gray-100 border text-white w-full" placeholder="سوال خود را وارد کنید" />
+                        <input type="text" {...field} className="py-1 px-3 rounded-lg outline-none bg-gray-100 border text-gray-400 placeholder:text-sm w-full" placeholder="سوال خود را وارد کنید" />
                     )} />
                 </div>
                 <div className="w-full py-4 border-b px-2  flex items-center justify-between">
@@ -127,17 +126,19 @@ const MenuEditSurvay = ({ open, setOpen, survay, setSurvay }: { open: boolean, s
                     )} />
                 </div>
                 {
-                    survay.QuestionType === 3 || survay.QuestionType === 2 && <div className="w-full py-4 border-b px-2 space-y-3 ">
+                    (survay.QuestionType === 3 || survay.QuestionType === 2 )&& <div className="w-full py-4 border-b px-2 space-y-3 ">
                         <p className="text-lg font-medium text-white ">
                             وارد کردن گزینه ها
                         </p>
                         <Controller rules={{ required: false }} control={control} name="QuestionRules" render={({ field }) => (
-                            <input type="text" {...field} className="py-1 px-2 rounded-lg outline-none border placeholder:text-sm placeholder:text-white w-full" placeholder='برای جداکردن گزینه ها از "," استفاده کنید' />
+                            <input type="text" {...field} className="py-1 px-2 rounded-lg outline-none border placeholder:text-sm placeholder:text-gray-500 w-full" placeholder='برای جداکردن گزینه ها از "," استفاده کنید' />
                         )} />
 
                     </div>
                 }
-
+                <Button color="green" className="mt-3" type="submit" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} >
+                        ثبت تغییرات
+                </Button>
             </form>
         </Box>
 

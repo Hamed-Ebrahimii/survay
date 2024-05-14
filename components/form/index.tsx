@@ -51,7 +51,7 @@ const Form = ({
       answer: QuestionAnwseredValue,
     },
   });
-  const questionRules = QuestionRules.split(",");
+  const questionRules = QuestionRules?.split(",") || [''];
   const onSubmit = (data: SurveyValidationType) => {
     const newState: Survay = {
       QuestionType,
